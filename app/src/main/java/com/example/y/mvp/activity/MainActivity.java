@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.MenuItemAdapter;
@@ -27,13 +26,14 @@ import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.rxBindingUtils;
 import com.example.y.mvp.utils.theme.ReplaceThemeUtils;
 import com.example.y.mvp.utils.theme.SharedPreferencesMgr;
+import com.example.y.mvp.utils.theme.widget.ThemeImageView;
 import com.example.y.mvp.utils.theme.widget.ThemeListView;
 import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
 
 import butterknife.Bind;
 
 public class MainActivity extends BaseActivity
-        implements BaseView.MainView, rxBindingUtils.RxBinding {
+        implements BaseView.MainView, rxBindingUtils.RxBinding ,AdapterView.OnItemClickListener{
 
 
     @SuppressWarnings("unused")
@@ -47,7 +47,8 @@ public class MainActivity extends BaseActivity
     ThemeListView listMenu;
 
     private BasePresenter.MainViewPresenter mainViewPresenter;
-    private ImageView imageView;
+    private ThemeImageView imageView;
+    private MenuItemAdapter adapter;
 
 
     @Override
@@ -70,32 +71,16 @@ public class MainActivity extends BaseActivity
         mainViewPresenter.rxBus();
         switchNews();
         setUpDrawer();
-//        rxBindingUtils.clicks(imageView, this);
+        rxBindingUtils.clicks(imageView, this);
     }
 
 
     private void setUpDrawer() {
-        final MenuItemAdapter adapter = new MenuItemAdapter();
+        adapter = new MenuItemAdapter();
         listMenu.addHeaderView(LayoutInflater.from(this).inflate(R.layout.list_header, listMenu, false));
         listMenu.setAdapter(adapter);
-        imageView = (ImageView) listMenu.findViewById(R.id.iv);
-        listMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LogUtils.i("____position", position + "");
-                if (position!=0){
-                    toolBar.setTitle((CharSequence) adapter.getItem(position-1));
-                    mainViewPresenter.switchPosition(position);
-                    drawerLayout.closeDrawers();
-                }
-            }
-        });
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ReplaceThemeUtils.theme();
-            }
-        });
+        imageView = (ThemeImageView) listMenu.findViewById(R.id.iv);
+        listMenu.setOnItemClickListener(this);
     }
 
     @Override
@@ -166,7 +151,16 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void clicks() {
-        ReplaceThemeUtils.theme();
+        ReplaceThemeUtils.theme(this);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        LogUtils.i("____position", position + "");
+        if (position!=0){
+            toolBar.setTitle((CharSequence) adapter.getItem(position-1));
+            mainViewPresenter.switchPosition(position);
+            drawerLayout.closeDrawers();
+        }
+    }
 }

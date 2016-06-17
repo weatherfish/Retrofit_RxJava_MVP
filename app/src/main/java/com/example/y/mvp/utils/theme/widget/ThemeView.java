@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.example.y.mvp.utils.theme.ThemeUIInterface;
 import com.example.y.mvp.utils.theme.ViewAttributeUtils;
@@ -12,7 +11,7 @@ import com.example.y.mvp.utils.theme.ViewAttributeUtils;
 /**
  * by y on 2016/6/16.
  */
-public class ThemeView extends ImageView implements ThemeUIInterface {
+public class ThemeView extends View implements ThemeUIInterface {
 
     private int attr_img = -1;
 

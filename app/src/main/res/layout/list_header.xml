@@ -7,7 +7,7 @@
     tools:ignore="Overdraw">
 
 
-    <ImageView
+    <com.example.y.mvp.utils.theme.widget.ThemeImageView
         android:id="@+id/iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

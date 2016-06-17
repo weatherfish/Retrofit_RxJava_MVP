@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/main_bg">
 
-        <ImageView
+        <com.example.y.mvp.utils.theme.widget.ThemeImageView
             android:id="@+id/image"
             android:layout_width="@dimen/news_image_width"
             android:layout_height="@dimen/news_image_height"

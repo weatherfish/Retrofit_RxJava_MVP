@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.mvp.Bean.NewsListInfo;
@@ -14,6 +13,7 @@ import com.example.y.mvp.network.Api;
 import com.example.y.mvp.utils.ImageLoaderUtils;
 import com.example.y.mvp.utils.TimeUtils;
 import com.example.y.mvp.utils.UIUtils;
+import com.example.y.mvp.utils.theme.widget.ThemeImageView;
 import com.example.y.mvp.utils.theme.widget.ThemeTextView;
 
 import java.util.List;
@@ -58,7 +58,7 @@ public class NewsListAdapter extends BaseRecyclerViewAdapter<NewsListInfo> {
     class ViewHolder extends BaseRecyclerViewHolder {
 
         @Bind(R.id.image)
-        ImageView image;
+        ThemeImageView image;
         @Bind(R.id.tv_fromname)
         ThemeTextView tvFromname;
         @Bind(R.id.tv_time)
