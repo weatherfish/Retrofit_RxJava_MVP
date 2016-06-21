@@ -1,22 +1,10 @@
 package com.example.y.mvp.adapter;
 
-import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
 import com.example.y.mvp.R;
 import com.example.y.mvp.mvp.Bean.JokePicBean;
 import com.example.y.mvp.utils.ImageLoaderUtils;
-import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeTextView;
 
 import java.util.List;
-
-import butterknife.Bind;
 
 /**
  * by y on 2016/5/30.
@@ -29,47 +17,14 @@ public class JokePicAdapter extends BaseRecyclerViewAdapter<JokePicBean.JokePicI
     }
 
     @Override
-    protected void onBind(RecyclerView.ViewHolder holder, int position, JokePicBean.JokePicInfo data) {
-        if (holder instanceof ViewHolder) {
-            ((ViewHolder) holder).setData(data);
-        }
+    protected int getItemLayoutId() {
+        return R.layout.joke_pic_list_item;
     }
 
     @Override
-    protected BaseRecyclerViewHolder onCreate(ViewGroup parent, int viewType) {
-
-        if (viewType == TYPE_ITEM) {
-
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.joke_pic_list_item, parent, false);
-            return new ViewHolder(view);
-
-        } else if (viewType == TYPE_FOOTER) {
-
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_foot, parent, false);
-            return new BaseRecyclerViewHolder(view);
-        }
-
-        return null;
+    protected void onBind(ViewHolder holder, int position, JokePicBean.JokePicInfo data) {
+        ImageLoaderUtils.display(context, holder.getImageView(R.id.image), data.getImg());
+        holder.setTextView(R.id.tv_time,data.getTitle());
     }
 
-    @SuppressWarnings("unused")
-    class ViewHolder extends BaseRecyclerViewHolder {
-
-        @Bind(R.id.tv_time)
-        ThemeTextView tvTime;
-        @Bind(R.id.image)
-        ImageView image;
-        
-        public ViewHolder(View itemView) {
-            super(itemView);
-        }
-
-        @SuppressLint("SetTextI18n")
-        @Override
-        protected void setData(@NonNull JokePicBean.JokePicInfo data) {
-            super.setData(data);
-            tvTime.setText(data.getTitle());
-            ImageLoaderUtils.display(UIUtils.getContext(), image, data.getImg());
-        }
-    }
 }

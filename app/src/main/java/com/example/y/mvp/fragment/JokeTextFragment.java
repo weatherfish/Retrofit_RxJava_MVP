@@ -62,6 +62,7 @@ public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout
 
         adapter = new JokeTextAdapter(jokeTextInfo);
         adapter.setOnLongClickListener(this);
+        adapter.setFootLayout(Constant.FOOT_LAYOUT);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLoadingData(this);
@@ -122,12 +123,12 @@ public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void showFoot() {
-        adapter.isShowFooter(true);
+        adapter.setFoot(true);
     }
 
     @Override
     public void hideFoot() {
-        adapter.isShowFooter(false);
+        adapter.setFoot(false);
     }
 
     @Override

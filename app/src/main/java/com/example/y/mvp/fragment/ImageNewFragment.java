@@ -27,7 +27,8 @@ import butterknife.OnClick;
 /**
  * by 12406 on 2016/5/1.
  */
-public class ImageNewFragment extends BaseFragment implements BaseView.ImageNewView, SwipeRefreshLayout.OnRefreshListener, ThemeRecyclerView.LoadingData, BaseRecyclerViewAdapter.OnItemClickListener<ImageNewInfo> {
+public class ImageNewFragment extends BaseFragment implements
+        BaseView.ImageNewView, SwipeRefreshLayout.OnRefreshListener, ThemeRecyclerView.LoadingData, BaseRecyclerViewAdapter.OnItemClickListener<ImageNewInfo> {
 
 
     @SuppressWarnings("unused")

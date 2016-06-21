@@ -66,7 +66,7 @@ public class NewsMainFragment extends BaseFragment implements SwipeRefreshLayout
         LinkedList<NewsListInfo> list = new LinkedList<>();
         adapter = new NewsListAdapter(list);
         adapter.setOnItemClickListener(this);
-
+        adapter.setFootLayout(Constant.FOOT_LAYOUT);
         srfLayout.setOnRefreshListener(this);
 
         recyclerView.setHasFixedSize(true);
@@ -131,11 +131,11 @@ public class NewsMainFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void showFoot() {
-        adapter.isShowFooter(true);
+        adapter.setFoot(true);
     }
 
     public void hideFoot() {
-        adapter.isShowFooter(false);
+        adapter.setFoot(false);
     }
 
     @Override

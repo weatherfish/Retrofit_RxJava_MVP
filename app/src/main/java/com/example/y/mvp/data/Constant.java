@@ -1,5 +1,7 @@
 package com.example.y.mvp.data;
 
+import com.example.y.mvp.R;
+
 /**
  * by y on 2016/4/28.
  */
@@ -17,5 +19,11 @@ public class Constant {
 
     //夜间日间判断
     public static final String IS_NIGHT = "night";
+
+    //recyclerview foot
+    public static final int FOOT_LAYOUT = R.layout.item_foot;
+
+    //recyclerview head
+    public static final int HEAD_LAYOUT = 0;
 
 }

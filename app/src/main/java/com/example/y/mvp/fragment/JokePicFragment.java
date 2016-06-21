@@ -59,7 +59,7 @@ public class JokePicFragment extends BaseFragment
         srfLayout.setOnRefreshListener(this);
 
         adapter = new JokePicAdapter(jokePicInfos);
-
+        adapter.setFootLayout(Constant.FOOT_LAYOUT);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLoadingData(this);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(Constant.RECYCLERVIEW_LINEAR, LinearLayoutManager.VERTICAL));
@@ -119,12 +119,12 @@ public class JokePicFragment extends BaseFragment
 
     @Override
     public void showFoot() {
-        adapter.isShowFooter(true);
+        adapter.setFoot(true);
     }
 
     @Override
     public void hideFoot() {
-        adapter.isShowFooter(false);
+        adapter.setFoot(false);
     }
 
 }

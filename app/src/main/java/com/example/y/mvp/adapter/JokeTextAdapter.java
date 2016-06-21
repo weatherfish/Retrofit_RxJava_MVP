@@ -1,21 +1,12 @@
 package com.example.y.mvp.adapter;
 
-import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.mvp.Bean.JokeTextBean;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeTextView;
 
 import java.util.List;
-
-import butterknife.Bind;
 
 /**
  * by y on 2016/5/30.
@@ -28,47 +19,14 @@ public class JokeTextAdapter extends BaseRecyclerViewAdapter<JokeTextBean.JokeTe
     }
 
     @Override
-    protected void onBind(RecyclerView.ViewHolder holder, int position, JokeTextBean.JokeTextInfo data) {
-        if (holder instanceof ViewHolder) {
-            ((ViewHolder) holder).setData(data);
-        }
+    protected int getItemLayoutId() {
+        return R.layout.joke_text_list_item;
     }
 
     @Override
-    protected BaseRecyclerViewHolder onCreate(ViewGroup parent, int viewType) {
-
-        if (viewType == TYPE_ITEM) {
-
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.joke_text_list_item, parent, false);
-            return new ViewHolder(view);
-
-        } else if (viewType == TYPE_FOOTER) {
-
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_foot, parent, false);
-            return new BaseRecyclerViewHolder(view);
-        }
-
-        return null;
+    protected void onBind(ViewHolder holder, int position, JokeTextBean.JokeTextInfo data) {
+        holder.setTextView(R.id.tv_time,UIUtils.getString(R.string.news_time) + data.getCt());
+        holder.setTextView(R.id.tv_text,Html.fromHtml(data.getText()));
     }
 
-    @SuppressWarnings("unused")
-    class ViewHolder extends BaseRecyclerViewHolder {
-
-        @Bind(R.id.tv_time)
-        ThemeTextView tvTime;
-        @Bind(R.id.tv_text)
-        ThemeTextView tvText;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-        }
-
-        @SuppressLint("SetTextI18n")
-        @Override
-        protected void setData(@NonNull JokeTextBean.JokeTextInfo data) {
-            super.setData(data);
-            tvTime.setText(UIUtils.getString(R.string.news_time) + data.getCt());
-            tvText.setText(Html.fromHtml(data.getText()));
-        }
-    }
 }

@@ -70,11 +70,12 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
 
         adapter = new ImageListAdapter(list);
         adapter.setOnItemClickListener(this);
-
+        adapter.setFootLayout(Constant.FOOT_LAYOUT);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLoadingData(this);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(Constant.RECYCLERVIEW_GRIDVIEW, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
+
 
         srfLayout.post(new Runnable() {
             @Override
@@ -134,11 +135,11 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
 
     @Override
     public void showFoot() {
-        adapter.isShowFooter(true);
+        adapter.setFoot(true);
     }
 
     public void hideFoot() {
-        adapter.isShowFooter(false);
+        adapter.setFoot(false);
     }
 
     @Override
