@@ -2,6 +2,8 @@
 <resources>
     <attr name="main_bg" format="reference|color" />
     <attr name="main_textcolor" format="reference|color" />
-    <attr name="second_bg" format="reference|color" />
-    <attr name="second_textcolor" format="reference|color" />
+    <attr name="toolbar_bg" format="reference|color" />
+    <attr name="tab_bg" format="reference|color" />
+    <attr name="head_view_color" format="reference|color" />
+    <attr name="head_bg" format="reference|color" />
 </resources>

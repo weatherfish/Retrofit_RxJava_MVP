@@ -18,18 +18,22 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <style name="theme_1">
-        <item name="main_bg">@color/bg_main_normal</item>
-        <item name="main_textcolor">@color/textcolor_main_normal</item>
-        <item name="second_bg">@color/bg_second_normal</item>
-        <item name="second_textcolor">@color/textcolor_second_normal</item>
+    <style name="Theme_Day">
+        <item name="main_bg">@color/bg_main_day</item>
+        <item name="main_textcolor">@color/textcolor_main_day</item>
+        <item name="toolbar_bg">@color/bg_toolbar_day</item>
+        <item name="tab_bg">@color/bg_tab_day</item>
+        <item name="head_bg">@color/bg_head_day</item>
+        <item name="head_view_color">@color/color_view_head_day</item>
     </style>
 
-    <style name="theme_2">
-        <item name="main_bg">@color/bg_main_dark</item>
-        <item name="main_textcolor">@color/textcolor_main_dark</item>
-        <item name="second_bg">@color/bg_second_dark</item>
-        <item name="second_textcolor">@color/textcolor_second_dark</item>
+    <style name="Theme_Night">
+        <item name="main_bg">@color/bg_main_night</item>
+        <item name="main_textcolor">@color/textcolor_main_night</item>
+        <item name="toolbar_bg">@color/bg_toolbar_night</item>
+        <item name="tab_bg">@color/bg_tab_night</item>
+        <item name="head_bg">@color/bg_head_night</item>
+        <item name="head_view_color">@color/color_view_head_night</item>
     </style>
 
 </resources>

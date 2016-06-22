@@ -10,8 +10,8 @@
 
     <com.example.y.mvp.utils.theme.widget.ThemeCoordinatorLayout
         android:layout_width="match_parent"
-        app:statusBarBackground="?attr/main_bg"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:statusBarBackground="?attr/main_bg">
 
         <include layout="@layout/toolbar" />
 
@@ -25,13 +25,12 @@
 
     </com.example.y.mvp.utils.theme.widget.ThemeCoordinatorLayout>
 
-    <com.example.y.mvp.utils.theme.widget.ThemeListView
-        android:id="@+id/list_menu"
+    <com.example.y.mvp.utils.theme.widget.ThemeRecyclerView
+        android:id="@+id/recyclerView_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="?attr/main_bg"
-        android:divider="@null" />
+        android:background="?attr/main_bg" />
 
 
 </android.support.v4.widget.DrawerLayout>

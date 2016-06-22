@@ -25,7 +25,7 @@ public class ImageDetailAdapter extends BasePagerAdapter<ImageDetailInfo> {
     @Override
     protected Object instantiate(ViewGroup container, final int position, ImageDetailInfo data) {
         final ImageView imageView = new ImageView(UIUtils.getContext());
-        ImageLoaderUtils.display(UIUtils.getActivity(), imageView, Api.IMAGER_URL + data.getSrc());
+        ImageLoaderUtils.display(UIUtils.getContext(), imageView, Api.IMAGER_URL + data.getSrc());
         container.addView(imageView);
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

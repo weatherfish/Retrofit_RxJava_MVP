@@ -9,6 +9,7 @@ import com.example.y.mvp.mvp.Bean.TabNewsInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.TabNewsPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeTabLayout;
 
@@ -58,7 +59,7 @@ public class NewsViewPagerFragment extends BaseFragment implements BaseView.TabN
 
     @Override
     public void netWorkError() {
-        Toast(UIUtils.getContext().getResources().getString(R.string.network_error));
+        ActivityUtils.Toast(UIUtils.getContext().getResources().getString(R.string.network_error));
     }
 
     @Override

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.y.mvp.utils.theme.widget.ThemeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/main_bg"
     android:orientation="vertical">
 
 
     <include layout="@layout/toolbar" />
 
-    <FrameLayout
+    <com.example.y.mvp.utils.theme.widget.ThemeFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?attr/main_bg">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/srf_layout"
@@ -22,5 +24,5 @@
                 android:layout_height="match_parent" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
-    </FrameLayout>
-</LinearLayout>
+    </com.example.y.mvp.utils.theme.widget.ThemeFrameLayout>
+</com.example.y.mvp.utils.theme.widget.ThemeLinearLayout>

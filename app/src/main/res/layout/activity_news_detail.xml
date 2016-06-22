@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:statusBarBackground="?attr/main_bg"
-    >
+    app:statusBarBackground="?attr/main_bg">
 
 
     <com.example.y.mvp.utils.theme.widget.ThemeAppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="256dp"
+        android:layout_height="240dp"
         android:background="?attr/main_bg"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -24,7 +23,7 @@
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <ImageView
+            <com.example.y.mvp.utils.theme.widget.ThemeImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

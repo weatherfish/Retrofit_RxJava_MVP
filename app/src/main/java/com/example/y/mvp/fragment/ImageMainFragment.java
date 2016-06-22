@@ -15,6 +15,7 @@ import com.example.y.mvp.mvp.Bean.ImageListInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.ImageListPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
 
@@ -116,7 +117,7 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
 
     @Override
     public void netWorkError() {
-        Toast(UIUtils.getString(R.string.network_error));
+        ActivityUtils.Toast(UIUtils.getString(R.string.network_error));
     }
 
     @Override

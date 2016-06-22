@@ -5,13 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.widget.AdapterView;
 
 import com.example.y.mvp.R;
+import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.MenuItemAdapter;
 import com.example.y.mvp.data.Constant;
+import com.example.y.mvp.data.Datas;
 import com.example.y.mvp.fragment.AboutFragment;
 import com.example.y.mvp.fragment.ImageNewFragment;
 import com.example.y.mvp.fragment.ImageViewPagerFragment;
@@ -21,19 +23,19 @@ import com.example.y.mvp.fragment.TestFragment;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.MainViewPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
-import com.example.y.mvp.utils.LogUtils;
+import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.rxBindingUtils;
-import com.example.y.mvp.utils.theme.ReplaceThemeUtils;
-import com.example.y.mvp.utils.theme.SharedPreferencesMgr;
-import com.example.y.mvp.utils.theme.widget.ThemeImageView;
-import com.example.y.mvp.utils.theme.widget.ThemeListView;
+import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
 import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import butterknife.Bind;
 
 public class MainActivity extends BaseActivity
-        implements BaseView.MainView, rxBindingUtils.RxBinding ,AdapterView.OnItemClickListener{
+        implements BaseView.MainView,
+        BaseRecyclerViewAdapter.OnItemClickListener<String>, ThemeRecyclerView.LoadingData {
 
 
     @SuppressWarnings("unused")
@@ -43,45 +45,41 @@ public class MainActivity extends BaseActivity
     @Bind(R.id.dl_layout)
     DrawerLayout drawerLayout;
     @SuppressWarnings("unused")
-    @Bind(R.id.list_menu)
-    ThemeListView listMenu;
+    @Bind(R.id.recyclerView_menu)
+    ThemeRecyclerView recyclerViewMenu;
 
     private BasePresenter.MainViewPresenter mainViewPresenter;
-    private ThemeImageView imageView;
-    private MenuItemAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        toolBar.setTitle(UIUtils.getString(R.string.list_menu_news));
+        setSupportActionBar(toolBar);
+        mainViewPresenter = new MainViewPresenterImpl(this);
+        setUpDrawer();
         init();
-
-        if (SharedPreferencesMgr.getIsNight()) {
-            setDay();
-        } else {
-            setNight();
-        }
     }
 
 
     private void init() {
-        toolBar.setTitle(UIUtils.getString(R.string.list_menu_news));
-        setSupportActionBar(toolBar);
-        mainViewPresenter = new MainViewPresenterImpl(this);
-        mainViewPresenter.rxBus();
         switchNews();
-        setUpDrawer();
-        rxBindingUtils.clicks(imageView, this);
     }
 
 
     private void setUpDrawer() {
-        adapter = new MenuItemAdapter();
-        listMenu.addHeaderView(LayoutInflater.from(this).inflate(R.layout.list_header, listMenu, false));
-        listMenu.setAdapter(adapter);
-        imageView = (ThemeImageView) listMenu.findViewById(R.id.iv);
-        listMenu.setOnItemClickListener(this);
+        List<String> menuItem = new LinkedList<>();
+        Datas.setMenuData(menuItem);
+        MenuItemAdapter adapter = new MenuItemAdapter(menuItem);
+        adapter.setOnItemClickListener(this);
+        adapter.setHead(true);
+        adapter.setHeadLayout(Constant.HEAD_LAYOUT);
+        recyclerViewMenu.setHasFixedSize(true);
+        recyclerViewMenu.setLoadingData(this);
+        recyclerViewMenu.setLayoutManager(new StaggeredGridLayoutManager(Constant.RECYCLERVIEW_LINEAR, LinearLayoutManager.VERTICAL));
+        recyclerViewMenu.setAdapter(adapter);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -93,7 +91,7 @@ public class MainActivity extends BaseActivity
                 return;
             }
             Constant.BACK_EXIT = true;
-            Toast(UIUtils.getString(R.string.exit_app));
+            ActivityUtils.Toast(UIUtils.getString(R.string.exit_app));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -140,27 +138,14 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void setDay() {
-        imageView.setBackgroundResource(R.drawable.day);
+    public void onItemClick(View view, int position, String info) {
+        toolBar.setTitle(info);
+        mainViewPresenter.switchPosition(position);
+        drawerLayout.closeDrawers();
     }
 
     @Override
-    public void setNight() {
-        imageView.setBackgroundResource(R.drawable.night);
+    public void onLoadMore() {
     }
 
-    @Override
-    public void clicks() {
-        ReplaceThemeUtils.theme(this);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        LogUtils.i("____position", position + "");
-        if (position!=0){
-            toolBar.setTitle((CharSequence) adapter.getItem(position-1));
-            mainViewPresenter.switchPosition(position);
-            drawerLayout.closeDrawers();
-        }
-    }
 }

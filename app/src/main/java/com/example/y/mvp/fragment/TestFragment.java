@@ -6,10 +6,11 @@ import android.widget.EditText;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.network.MySubscriber;
-import com.example.y.mvp.utils.LogUtils;
+import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.rxBindingUtils;
+import com.example.y.mvp.utils.RxBindingUtils;
 import com.jakewharton.rxbinding.widget.RxTextView;
+import com.socks.library.KLog;
 
 import butterknife.Bind;
 import rx.Observable;
@@ -21,7 +22,7 @@ import static android.text.TextUtils.isEmpty;
  * by y on 2016/5/17.
  */
 @SuppressWarnings("ALL")
-public class TestFragment extends BaseFragment implements rxBindingUtils.RxBinding, Func3Interface {
+public class TestFragment extends BaseFragment implements RxBindingUtils.RxBinding, Func3Interface {
 
 
     @Bind(R.id.et1)
@@ -50,7 +51,7 @@ public class TestFragment extends BaseFragment implements rxBindingUtils.RxBindi
         oneEditText = RxTextView.textChanges(et1).skip(1);
         twoEditText = RxTextView.textChanges(et2).skip(1);
         threeEditText = RxTextView.textChanges(et3).skip(1);
-        rxBindingUtils.clicks(btn, this);
+        RxBindingUtils.clicks(btn, this);
         test(this);
     }
 
@@ -67,7 +68,7 @@ public class TestFragment extends BaseFragment implements rxBindingUtils.RxBindi
                 }).subscribe(new MySubscriber<Boolean>() {
             @Override
             public void onNext(Boolean aBoolean) {
-                LogUtils.i("TestFragment", aBoolean + "");
+                KLog.i("TestFragment", aBoolean + "");
                 if (aBoolean) {
                     btn.setEnabled(true);
                 } else {
@@ -79,8 +80,8 @@ public class TestFragment extends BaseFragment implements rxBindingUtils.RxBindi
 
     @Override
     public void clicks() {
-        LogUtils.i("TestFragment", "被点击了");
-        Toast(et1.getText().toString() + "+" + et2.getText().toString() + "+" + et3.getText().toString());
+        KLog.i("TestFragment", "被点击了");
+        ActivityUtils.Toast(et1.getText().toString() + "+" + et2.getText().toString() + "+" + et3.getText().toString());
     }
 
     @Override
@@ -97,9 +98,9 @@ public class TestFragment extends BaseFragment implements rxBindingUtils.RxBindi
         if (!et3Text) {
             et3.setHint("不能为空");
         }
-        LogUtils.i("TestFragment", "et1Text   " + et1.getText().toString().trim());
-        LogUtils.i("TestFragment", "et2Text   " + et2.getText().toString().trim());
-        LogUtils.i("TestFragment", "et3Text   " + et3.getText().toString().trim());
+        KLog.i("TestFragment", "et1Text   " + et1.getText().toString().trim());
+        KLog.i("TestFragment", "et2Text   " + et2.getText().toString().trim());
+        KLog.i("TestFragment", "et3Text   " + et3.getText().toString().trim());
         return et1Text && et2Text && et3Text;
     }
 

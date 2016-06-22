@@ -23,9 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/image_list_padding"
-            android:textColor="?attr/second_textcolor" />
+            android:textColor="?attr/main_textcolor" />
 
-        <ImageView
+        <com.example.y.mvp.utils.theme.widget.ThemeImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="450dp"

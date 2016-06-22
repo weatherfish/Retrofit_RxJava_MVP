@@ -59,7 +59,6 @@ public class ImageDetailActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        hideStatusBar();
         toolBar.setTitle(UIUtils.getString(R.string.image_detail));
         setSupportActionBar(toolBar);
         CompetenceUtils.Storage();
@@ -116,7 +115,7 @@ public class ImageDetailActivity extends BaseActivity
 
     @Override
     public void netWorkError() {
-        Toast(UIUtils.getString(R.string.network_error));
+        ActivityUtils.Toast(UIUtils.getString(R.string.network_error));
     }
 
     @Override

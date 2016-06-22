@@ -7,10 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.y.mvp.utils.LogUtils;
-import com.example.y.mvp.utils.UIUtils;
+import com.socks.library.KLog;
 
 import butterknife.ButterKnife;
 import rx.Subscription;
@@ -44,7 +42,7 @@ public abstract class BaseFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = initView();
         ButterKnife.bind(this, view);
-        LogUtils.i("BaseFragment", getClass().getSimpleName());
+        KLog.i(getClass().getSimpleName());
         return view;
     }
 
@@ -66,11 +64,6 @@ public abstract class BaseFragment extends Fragment {
             onInvisible();
         }
     }
-
-    void Toast(String content) {
-        Toast.makeText(UIUtils.getContext(), content, Toast.LENGTH_LONG).show();
-    }
-
 
     private void onVisible() {
         initData();

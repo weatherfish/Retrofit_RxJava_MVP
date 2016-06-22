@@ -45,6 +45,8 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         }
     }
 
+    
+
 
     public interface OnItemClickListener<T> {
         void onItemClick(View view, int position, T info);

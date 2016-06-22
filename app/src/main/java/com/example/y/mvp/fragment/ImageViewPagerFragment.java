@@ -10,6 +10,7 @@ import com.example.y.mvp.mvp.Bean.TabNameInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.TabNamePresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeTabLayout;
 
@@ -61,7 +62,7 @@ public class ImageViewPagerFragment extends BaseFragment implements BaseView.Tab
 
     @Override
     public void netWorkError() {
-        Toast(UIUtils.getContext().getResources().getString(R.string.network_error));
+        ActivityUtils.Toast(UIUtils.getString(R.string.network_error));
     }
 
     @Override

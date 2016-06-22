@@ -104,7 +104,7 @@ public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void netWorkError() {
-        Toast(UIUtils.getString(R.string.network_error));
+        ActivityUtils.Toast(UIUtils.getString(R.string.network_error));
     }
 
     @Override

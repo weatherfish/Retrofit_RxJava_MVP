@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.y.mvp.utils.theme.widget.ThemeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:background="?attr/main_bg"
     tools:ignore="UnusedResources">
 
     <TextView
@@ -15,4 +16,4 @@
         android:textSize="30sp"
         tools:ignore="HardcodedText" />
 
-</LinearLayout>
+</com.example.y.mvp.utils.theme.widget.ThemeLinearLayout>

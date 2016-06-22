@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/loading"
-        android:textColor="?attr/second_textcolor" />
+        android:textColor="?attr/main_textcolor" />
 
 
 </com.example.y.mvp.utils.theme.widget.ThemeLinearLayout>

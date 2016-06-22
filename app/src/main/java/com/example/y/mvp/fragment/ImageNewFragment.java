@@ -14,6 +14,7 @@ import com.example.y.mvp.mvp.Bean.ImageNewInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.ImageNewPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -94,7 +95,7 @@ public class ImageNewFragment extends BaseFragment implements
 
     @Override
     public void netWorkError() {
-        Toast(UIUtils.getString(R.string.network_error));
+        ActivityUtils.Toast(UIUtils.getString(R.string.network_error));
     }
 
     @Override

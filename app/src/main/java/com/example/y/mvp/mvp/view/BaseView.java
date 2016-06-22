@@ -79,10 +79,6 @@ public interface BaseView<T> {
 
         void switchTest();
 
-        void setDay();
-
-        void setNight();
-
     }
 
     interface ToolBarItemView {

@@ -24,6 +24,9 @@ public class Constant {
     public static final int FOOT_LAYOUT = R.layout.item_foot;
 
     //recyclerview head
-    public static final int HEAD_LAYOUT = 0;
+    public static final int HEAD_LAYOUT = R.layout.recyclerview_header;
+
+    //KLog
+    public static final String K_LOG = "K_Log -- >   ";
 
 }

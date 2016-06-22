@@ -18,7 +18,7 @@
         android:background="?attr/main_bg">
 
 
-        <ImageView
+        <com.example.y.mvp.utils.theme.widget.ThemeImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_list_iamge_height"

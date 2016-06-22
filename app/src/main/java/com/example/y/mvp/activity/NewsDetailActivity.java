@@ -6,7 +6,6 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.y.mvp.R;
@@ -20,6 +19,7 @@ import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.ImageLoaderUtils;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeCollapsingToolbarLayout;
+import com.example.y.mvp.utils.theme.widget.ThemeImageView;
 import com.example.y.mvp.utils.theme.widget.ThemeTextView;
 import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
 
@@ -33,7 +33,7 @@ public class NewsDetailActivity extends BaseActivity
 
     @SuppressWarnings("unused")
     @Bind(R.id.image)
-    ImageView image;
+    ThemeImageView image;
     @SuppressWarnings("unused")
     @Bind(R.id.collapsing_toolbar)
     ThemeCollapsingToolbarLayout collapsingToolbar;
@@ -110,7 +110,7 @@ public class NewsDetailActivity extends BaseActivity
 
     @Override
     public void netWorkError() {
-        Toast(UIUtils.getString(R.string.network_error));
+        ActivityUtils.Toast(UIUtils.getString(R.string.network_error));
     }
 
     @Override

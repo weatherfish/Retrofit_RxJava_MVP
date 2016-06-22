@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="tab_text_color_normal" tools:ignore="UnusedResources">#ff737373</color>
-    <color name="white" tools:ignore="UnusedResources">#ffffff</color>
-    <color name="main_color" tools:ignore="UnusedResources">#4387F0</color>
+    <color name="white">#ffffff</color>
+    <color name="main_color">#4387F0</color>
     <color name="black">#000000</color>
 
-    <color name="bg_main_normal">#ffffff</color>
-    <color name="textcolor_main_normal">#ff737373</color>
+    <color name="bg_main_day">#ffffff</color>
+    <color name="textcolor_main_day">#ff737373</color>
+    <color name="bg_toolbar_day">#3F51B5</color>
+    <color name="bg_tab_day">#3F51B5</color>
+    <color name="bg_head_day">#3F51B5</color>
+    <color name="color_view_head_day">#ff737373</color>
 
-    <color name="bg_main_dark">#ff737373</color>
-    <color name="textcolor_main_dark">#ffffff</color>
-
-    <color name="bg_second_normal">#3F51B5</color>
-    <color name="textcolor_second_normal">#4387F0</color>
-
-    <color name="bg_second_dark">#ff737373</color>
-    <color name="textcolor_second_dark">#ffffff</color>
+    <color name="bg_main_night">#ff737373</color>
+    <color name="textcolor_main_night">#ffffff</color>
+    <color name="bg_toolbar_night">#303F9F</color>
+    <color name="bg_tab_night">#303F9F</color>
+    <color name="bg_head_night">#ff737373</color>
+    <color name="color_view_head_night">#3F51B5</color>
 </resources>

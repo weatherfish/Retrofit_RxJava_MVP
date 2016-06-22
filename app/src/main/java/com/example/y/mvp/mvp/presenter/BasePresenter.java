@@ -31,8 +31,6 @@ public interface BasePresenter {
 
     interface MainViewPresenter {
         void switchPosition(int position);
-
-        void rxBus();
     }
 
     interface ToolBarItemPresenter {

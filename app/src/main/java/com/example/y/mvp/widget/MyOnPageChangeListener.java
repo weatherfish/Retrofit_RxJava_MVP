@@ -2,7 +2,7 @@ package com.example.y.mvp.widget;
 
 import android.support.v4.view.ViewPager;
 
-import com.example.y.mvp.utils.LogUtils;
+import com.socks.library.KLog;
 
 /**
  * by y on 2016/6/12.
@@ -19,7 +19,7 @@ public class MyOnPageChangeListener
 
     @Override
     public void onPageSelected(int position) {
-        LogUtils.i(TAG, "滑动到了" + position);
+        KLog.i(TAG, "滑动到了" + position);
     }
 
     @Override

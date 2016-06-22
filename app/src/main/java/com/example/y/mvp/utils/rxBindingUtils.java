@@ -12,19 +12,20 @@ import rx.functions.Action1;
  * by y on 2016/5/17.
  */
 @SuppressWarnings("ALL")
-public class rxBindingUtils {
+public class RxBindingUtils {
 
 
     //防手抖
     public static void clicks(View view, final RxBinding rxBinding) {
-        RxView.clicks(view)
-                .throttleFirst(600, TimeUnit.MILLISECONDS)
-                .subscribe(new Action1<Void>() {
-                    @Override
-                    public void call(Void aVoid) {
-                        rxBinding.clicks();
-                    }
-                });
+        if (view != null)
+            RxView.clicks(view)
+                    .throttleFirst(600, TimeUnit.MILLISECONDS)
+                    .subscribe(new Action1<Void>() {
+                        @Override
+                        public void call(Void aVoid) {
+                            rxBinding.clicks();
+                        }
+                    });
 
     }
 
