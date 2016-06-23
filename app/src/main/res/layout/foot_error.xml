@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.y.mvp.utils.theme.widget.ThemeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="?attr/main_bg">
 
-    <com.example.y.mvp.utils.theme.widget.ThemeTextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorAccent"
@@ -14,4 +14,4 @@
         android:textSize="30sp"
         tools:ignore="HardcodedText" />
 
-</com.example.y.mvp.utils.theme.widget.ThemeLinearLayout>
+</LinearLayout>

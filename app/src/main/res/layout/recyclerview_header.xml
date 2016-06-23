@@ -7,7 +7,7 @@
     tools:ignore="Overdraw">
 
 
-    <com.example.y.mvp.utils.theme.widget.ThemeImageView
+    <ImageView
         android:id="@+id/iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:background="@drawable/day"
         tools:ignore="ContentDescription,RtlHardcoded" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerInParent="true"

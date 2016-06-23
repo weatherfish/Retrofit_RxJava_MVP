@@ -10,6 +10,7 @@ import com.example.y.mvp.BuildConfig;
 import com.example.y.mvp.R;
 import com.example.y.mvp.data.Constant;
 import com.example.y.mvp.utils.ActivityCollector;
+import com.example.y.mvp.utils.StatusBarUtil;
 import com.example.y.mvp.utils.theme.SharedPreferencesMgr;
 import com.socks.library.KLog;
 
@@ -27,8 +28,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         init();
         setContentView(getLayoutId());
         initById();
+        setStatusBar();
         KLog.i(getClass().getSimpleName());
         ActivityCollector.addActivity(this);
+    }
+
+    public void setStatusBar() {
     }
 
     protected abstract void initById();

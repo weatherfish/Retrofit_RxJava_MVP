@@ -1,12 +1,15 @@
 package com.example.y.mvp.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.mvp.Bean.NewsDetailInfo;
@@ -18,10 +21,6 @@ import com.example.y.mvp.network.Api;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.ImageLoaderUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeCollapsingToolbarLayout;
-import com.example.y.mvp.utils.theme.widget.ThemeImageView;
-import com.example.y.mvp.utils.theme.widget.ThemeTextView;
-import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
 
 /**
  * by 12406 on 2016/5/30.
@@ -29,11 +28,11 @@ import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
 public class NewsDetailActivity extends BaseActivity
         implements BaseView.NewsDetailView, BaseView.ToolBarItemView {
 
-    private ThemeImageView image;
-    private ThemeCollapsingToolbarLayout collapsingToolbar;
+    private ImageView image;
+    private CollapsingToolbarLayout collapsingToolbar;
     private ProgressBar progressBar;
-    private ThemeTextView content;
-    private ThemeToolbar toolbar;
+    private TextView content;
+    private Toolbar toolbar;
 
     private int id;
     private String message;

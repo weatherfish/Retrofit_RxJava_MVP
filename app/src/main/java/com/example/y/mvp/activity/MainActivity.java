@@ -59,6 +59,10 @@ public class MainActivity extends BaseActivity
         recyclerViewMenu = getView(R.id.recyclerView_menu);
     }
 
+    @Override
+    public void setStatusBar() {
+        super.setStatusBar();
+    }
 
     private void init() {
         switchNews();
