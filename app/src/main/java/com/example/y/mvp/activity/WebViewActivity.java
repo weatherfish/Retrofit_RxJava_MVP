@@ -11,8 +11,6 @@ import com.example.y.mvp.R;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
 
-import butterknife.Bind;
-
 /**
  * by y on 2016/5/11.
  */
@@ -20,15 +18,9 @@ import butterknife.Bind;
 public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.webView)
-    WebView webView;
-    @SuppressWarnings("unused")
-    @Bind(R.id.toolBar)
-    ThemeToolbar toolBar;
-    @SuppressWarnings("unused")
-    @Bind(R.id.srf_layout)
-    SwipeRefreshLayout srfLayout;
+    private WebView webView;
+    private ThemeToolbar toolBar;
+    private SwipeRefreshLayout srfLayout;
     private String url;
     private String title;
 
@@ -46,6 +38,13 @@ public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.
         super.onCreate(savedInstanceState);
         getBundle();
         init();
+    }
+
+    @Override
+    protected void initById() {
+        webView = getView(R.id.webView);
+        toolBar = getView(R.id.toolBar);
+        srfLayout = getView(R.id.srf_layout);
     }
 
     @SuppressLint("SetJavaScriptEnabled")

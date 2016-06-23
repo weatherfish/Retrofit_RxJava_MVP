@@ -16,19 +16,13 @@ import com.example.y.mvp.utils.theme.widget.ThemeTabLayout;
 import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.Bind;
-
 /**
  * by 12406 on 2016/5/14.
  */
 public class NewsViewPagerFragment extends BaseFragment implements BaseView.TabNewsView {
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.tab_layout)
-    ThemeTabLayout tabLayout;
-    @SuppressWarnings("unused")
-    @Bind(R.id.viewPager)
-    ViewPager viewPager;
+    private ThemeTabLayout tabLayout;
+    private ViewPager viewPager;
 
     private List<TabNewsInfo> data;
     private TabNewsAdapter tabNewsAdapter;
@@ -36,6 +30,12 @@ public class NewsViewPagerFragment extends BaseFragment implements BaseView.TabN
     @Override
     protected View initView() {
         return View.inflate(UIUtils.getActivity(), R.layout.fragment_viewpager, null);
+    }
+
+    @Override
+    protected void initById() {
+        tabLayout = getView(R.id.tab_layout);
+        viewPager = getView(R.id.viewPager);
     }
 
     @Override

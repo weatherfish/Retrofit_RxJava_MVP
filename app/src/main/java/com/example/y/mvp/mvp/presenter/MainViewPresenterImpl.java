@@ -33,9 +33,6 @@ public class MainViewPresenterImpl extends BasePresenterImpl<BaseView.MainView>
             case 4:
                 view.switchAbout();
                 break;
-            case 5:
-                view.switchTest();
-                break;
         }
     }
 

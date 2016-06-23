@@ -14,17 +14,13 @@ import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-
 /**
  * by 12406 on 2016/5/2.
  */
 public class AboutFragment extends BaseFragment implements ThemeRecyclerView.LoadingData {
 
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.recyclerView)
-    ThemeRecyclerView recyclerView;
+    private ThemeRecyclerView recyclerView;
 
     @Override
     public View initView() {
@@ -32,14 +28,15 @@ public class AboutFragment extends BaseFragment implements ThemeRecyclerView.Loa
     }
 
     @Override
+    protected void initById() {
+        recyclerView = getView(R.id.recyclerView);
+    }
+
+    @Override
     public void initData() {
 
         List<String> list = new ArrayList<>();
-
-        list.add(UIUtils.getString(R.string.about_text1));
-        list.add(UIUtils.getString(R.string.about_text2));
-
-
+        list.add(UIUtils.getString(R.string.about_text));
         AboutAdapter aboutAdapter = new AboutAdapter(list);
 
         recyclerView.setHasFixedSize(true);
@@ -51,6 +48,6 @@ public class AboutFragment extends BaseFragment implements ThemeRecyclerView.Loa
 
     @Override
     public void onLoadMore() {
-        
+
     }
 }

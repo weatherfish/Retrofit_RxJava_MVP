@@ -17,19 +17,13 @@ import com.example.y.mvp.utils.theme.widget.ThemeTabLayout;
 import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.Bind;
-
 /**
  * by 12406 on 2016/5/1.
  */
 public class ImageViewPagerFragment extends BaseFragment implements BaseView.TabNameView {
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.tab_layout)
-    ThemeTabLayout tabLayout;
-    @SuppressWarnings("unused")
-    @Bind(R.id.viewPager)
-    ViewPager viewPager;
+    private ThemeTabLayout tabLayout;
+    private ViewPager viewPager;
 
     private TabNameAdapter tabNameAdapter;
     private List<TabNameInfo> data;
@@ -37,6 +31,12 @@ public class ImageViewPagerFragment extends BaseFragment implements BaseView.Tab
     @Override
     public View initView() {
         return View.inflate(UIUtils.getActivity(), R.layout.fragment_viewpager, null);
+    }
+
+    @Override
+    protected void initById() {
+        tabLayout = getView(R.id.tab_layout);
+        viewPager = getView(R.id.viewPager);
     }
 
     @Override

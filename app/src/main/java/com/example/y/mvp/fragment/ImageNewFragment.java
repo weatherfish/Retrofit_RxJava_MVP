@@ -16,54 +16,44 @@ import com.example.y.mvp.mvp.presenter.ImageNewPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
+import com.example.y.mvp.utils.theme.widget.ThemeButton;
 import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.OnClick;
-
 /**
  * by 12406 on 2016/5/1.
  */
 public class ImageNewFragment extends BaseFragment implements
-        BaseView.ImageNewView, SwipeRefreshLayout.OnRefreshListener, ThemeRecyclerView.LoadingData, BaseRecyclerViewAdapter.OnItemClickListener<ImageNewInfo> {
+        BaseView.ImageNewView, SwipeRefreshLayout.OnRefreshListener,
+        ThemeRecyclerView.LoadingData, View.OnClickListener,
+        BaseRecyclerViewAdapter.OnItemClickListener<ImageNewInfo> {
 
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.et_id)
-    MaterialEditText etId;
-    @SuppressWarnings("unused")
-    @Bind(R.id.et_rows)
-    MaterialEditText etRows;
-    @SuppressWarnings("unused")
-    @Bind(R.id.recyclerView)
-    ThemeRecyclerView recyclerView;
-    @SuppressWarnings("unused")
-    @Bind(R.id.srf_layout)
-    SwipeRefreshLayout srfLayout;
+    private MaterialEditText etId;
+    private MaterialEditText etRows;
+    private ThemeButton button;
+
+    private ThemeRecyclerView recyclerView;
+    private SwipeRefreshLayout srfLayout;
 
     private ImageNewAdapter adapter;
     private BasePresenter.ImageNewPresenter imageNewPresenter;
 
-
-    @SuppressWarnings("unused")
-    @OnClick({R.id.btn_image})
-    public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.btn_image:
-                onRefresh();
-                break;
-        }
-
-    }
-
     @Override
     public View initView() {
         return View.inflate(UIUtils.getActivity(), R.layout.fragment_new_image, null);
+    }
+
+    @Override
+    protected void initById() {
+        etId = getView(R.id.et_id);
+        etRows = getView(R.id.et_rows);
+        recyclerView = getView(R.id.recyclerView);
+        srfLayout = getView(R.id.srf_layout);
+        button = getView(R.id.btn_image);
     }
 
     @Override
@@ -73,7 +63,7 @@ public class ImageNewFragment extends BaseFragment implements
         List<ImageNewInfo> data = new LinkedList<>();
 
         imageNewPresenter = new ImageNewPresenterImpl(this);
-
+        button.setOnClickListener(this);
         srfLayout.setOnRefreshListener(this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLoadingData(this);
@@ -133,4 +123,12 @@ public class ImageNewFragment extends BaseFragment implements
         imageNewPresenter.onClick(info);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_image:
+                onRefresh();
+                break;
+        }
+    }
 }

@@ -23,29 +23,17 @@ import com.example.y.mvp.utils.theme.widget.ThemeImageView;
 import com.example.y.mvp.utils.theme.widget.ThemeTextView;
 import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
 
-import butterknife.Bind;
-
 /**
  * by 12406 on 2016/5/30.
  */
 public class NewsDetailActivity extends BaseActivity
         implements BaseView.NewsDetailView, BaseView.ToolBarItemView {
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.image)
-    ThemeImageView image;
-    @SuppressWarnings("unused")
-    @Bind(R.id.collapsing_toolbar)
-    ThemeCollapsingToolbarLayout collapsingToolbar;
-    @SuppressWarnings("unused")
-    @Bind(R.id.progressBar)
-    ProgressBar progressBar;
-    @SuppressWarnings("unused")
-    @Bind(R.id.content)
-    ThemeTextView content;
-    @SuppressWarnings("unused")
-    @Bind(R.id.toolbar)
-    ThemeToolbar toolbar;
+    private ThemeImageView image;
+    private ThemeCollapsingToolbarLayout collapsingToolbar;
+    private ProgressBar progressBar;
+    private ThemeTextView content;
+    private ThemeToolbar toolbar;
 
     private int id;
     private String message;
@@ -64,6 +52,15 @@ public class NewsDetailActivity extends BaseActivity
         setSupportActionBar(toolbar);
         getBundle();
         init();
+    }
+
+    @Override
+    protected void initById() {
+        image = getView(R.id.image);
+        collapsingToolbar = getView(R.id.collapsing_toolbar);
+        progressBar = getView(R.id.progressBar);
+        content = getView(R.id.content);
+        toolbar = getView(R.id.toolbar);
     }
 
     private void init() {

@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * by 12406 on 2016/6/21.
  */
+@SuppressWarnings("ALL")
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static int IS_ITEM = -1;
@@ -220,7 +221,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         }
     }
 
-    public <T extends View> T getView(View view,int id) {
+    public <T extends View> T getView(View view, int id) {
         return (T) view.findViewById(id);
     }
 

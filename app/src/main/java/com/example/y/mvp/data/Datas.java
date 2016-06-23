@@ -17,7 +17,6 @@ public class Datas {
         menuItem.add(UIUtils.getString(R.string.list_menu_new_image));
         menuItem.add(UIUtils.getString(R.string.list_menu_joke));
         menuItem.add(UIUtils.getString(R.string.list_menu_about));
-        menuItem.add(UIUtils.getString(R.string.test));
     }
 
 }

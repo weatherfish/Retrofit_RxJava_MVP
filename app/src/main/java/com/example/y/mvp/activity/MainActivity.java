@@ -19,7 +19,6 @@ import com.example.y.mvp.fragment.ImageNewFragment;
 import com.example.y.mvp.fragment.ImageViewPagerFragment;
 import com.example.y.mvp.fragment.JokeMainPagerFragment;
 import com.example.y.mvp.fragment.NewsViewPagerFragment;
-import com.example.y.mvp.fragment.TestFragment;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.MainViewPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
@@ -31,22 +30,14 @@ import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
 import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.Bind;
-
 public class MainActivity extends BaseActivity
         implements BaseView.MainView,
         BaseRecyclerViewAdapter.OnItemClickListener<String>, ThemeRecyclerView.LoadingData {
 
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.toolBar)
-    ThemeToolbar toolBar;
-    @SuppressWarnings("unused")
-    @Bind(R.id.dl_layout)
-    DrawerLayout drawerLayout;
-    @SuppressWarnings("unused")
-    @Bind(R.id.recyclerView_menu)
-    ThemeRecyclerView recyclerViewMenu;
+    private ThemeToolbar toolBar;
+    private DrawerLayout drawerLayout;
+    private ThemeRecyclerView recyclerViewMenu;
 
     private BasePresenter.MainViewPresenter mainViewPresenter;
 
@@ -59,6 +50,13 @@ public class MainActivity extends BaseActivity
         mainViewPresenter = new MainViewPresenterImpl(this);
         setUpDrawer();
         init();
+    }
+
+    @Override
+    protected void initById() {
+        toolBar = getView(R.id.toolBar);
+        drawerLayout = getView(R.id.dl_layout);
+        recyclerViewMenu = getView(R.id.recyclerView_menu);
     }
 
 
@@ -130,11 +128,6 @@ public class MainActivity extends BaseActivity
     @Override
     public void switchAbout() {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new AboutFragment()).commit();
-    }
-
-    @Override
-    public void switchTest() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new TestFragment()).commit();
     }
 
     @Override

@@ -49,11 +49,15 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
     protected View initView() {
         if (view == null) {
             view = View.inflate(UIUtils.getActivity(), R.layout.fragment_main, null);
-            recyclerView = (ThemeRecyclerView) view.findViewById(R.id.recyclerView);
-            srfLayout = (SwipeRefreshLayout) view.findViewById(R.id.srf_layout);
             isPrepared = true;
         }
         return view;
+    }
+
+    @Override
+    protected void initById() {
+        recyclerView = getView(R.id.recyclerView);
+        srfLayout = getView(R.id.srf_layout);
     }
 
     @Override
@@ -62,7 +66,7 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
         if (!isPrepared || !isVisible || isLoad) {
             return;
         }
-
+        
         imageListPresenter = new ImageListPresenterImpl(this);
 
         LinkedList<ImageListInfo> list = new LinkedList<>();

@@ -11,23 +11,23 @@ import com.example.y.mvp.utils.theme.widget.ThemeTabLayout;
 import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.Bind;
-
 /**
  * by y on 2016/5/30.
  */
 public class JokeMainPagerFragment extends BaseFragment {
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.tab_layout)
-    ThemeTabLayout tabLayout;
-    @SuppressWarnings("unused")
-    @Bind(R.id.viewPager)
-    ViewPager viewPager;
+    private ThemeTabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected View initView() {
         return View.inflate(UIUtils.getActivity(), R.layout.fragment_joke_viewpager, null);
+    }
+
+    @Override
+    protected void initById() {
+        tabLayout = getView(R.id.tab_layout);
+        viewPager = getView(R.id.viewPager);
     }
 
     @Override

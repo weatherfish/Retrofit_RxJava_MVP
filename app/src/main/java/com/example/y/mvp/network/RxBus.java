@@ -28,6 +28,7 @@ public class RxBus {
     }
 
     public void send(Object object) {
+        //noinspection unchecked
         rxBus.onNext(object);
     }
 
@@ -36,6 +37,7 @@ public class RxBus {
 //    }
 
     public <T> Observable<T> toObserverable(final Class<T> eventType) {
+        //noinspection unchecked
         return rxBus.filter(new Func1<Object, Boolean>() {
             @Override
             public Boolean call(Object object) {

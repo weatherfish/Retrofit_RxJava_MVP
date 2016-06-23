@@ -24,8 +24,6 @@ import com.example.y.mvp.widget.MyOnPageChangeListener;
 import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.Bind;
-
 
 /**
  * by y on 2016/4/29.
@@ -34,13 +32,8 @@ public class ImageDetailActivity extends BaseActivity
         implements BaseView.ImageDetailView, BaseView.ToolBarItemView {
 
 
-    @SuppressWarnings("unused")
-    @Bind(R.id.viewPager)
-    ViewPager viewPager;
-    @SuppressWarnings("unused")
-    @Bind(R.id.toolBar)
-    ThemeToolbar toolBar;
-
+    private ViewPager viewPager;
+    private ThemeToolbar toolBar;
     private int id;
     private int pos;
     private LinkedList<ImageDetailInfo> list;
@@ -64,6 +57,12 @@ public class ImageDetailActivity extends BaseActivity
         CompetenceUtils.Storage();
         getBundle();
         init();
+    }
+
+    @Override
+    protected void initById() {
+        viewPager = getView(R.id.viewPager);
+        toolBar = getView(R.id.toolBar);
     }
 
 

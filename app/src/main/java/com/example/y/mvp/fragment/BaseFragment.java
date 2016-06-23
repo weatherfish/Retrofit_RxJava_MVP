@@ -10,22 +10,17 @@ import android.view.ViewGroup;
 
 import com.socks.library.KLog;
 
-import butterknife.ButterKnife;
-import rx.Subscription;
-
 /**
  * by y on 2016/4/28.
  */
-@SuppressWarnings("ALL")
 public abstract class BaseFragment extends Fragment {
 
-    protected boolean isVisible;
-    protected static final String FRAGMENT_INDEX = "fragment_index";
-    protected int index = 0;
-    protected int page = 1;
-    protected boolean isNull = false;
-    protected Subscription subscription;
-    protected View view;
+    boolean isVisible;
+    static final String FRAGMENT_INDEX = "fragment_index";
+    int index = 0;
+    int page = 1;
+    boolean isNull = false;
+    View view;
 
 
     @Override
@@ -40,9 +35,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = initView();
-        ButterKnife.bind(this, view);
+        view = initView();
         KLog.i(getClass().getSimpleName());
+        initById();
         return view;
     }
 
@@ -61,33 +56,21 @@ public abstract class BaseFragment extends Fragment {
             onVisible();
         } else {
             isVisible = false;
-            onInvisible();
         }
+    }
+
+    <T extends View> T getView(int id) {
+        //noinspection unchecked
+        return (T) view.findViewById(id);
     }
 
     private void onVisible() {
         initData();
     }
 
-    private void onInvisible() {
-    }
-
     protected abstract View initView();
 
+    protected abstract void initById();
+
     protected abstract void initData();
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-        unsubscribe();
-    }
-
-
-    protected void unsubscribe() {
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
-    }
 }
