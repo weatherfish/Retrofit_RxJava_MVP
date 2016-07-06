@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.utils.RxBusUtils;
-import com.example.y.mvp.utils.RxUtils;
+import com.example.y.mvp.utils.RxUtil;
 import com.example.y.mvp.utils.theme.ReplaceThemeUtils;
 import com.example.y.mvp.utils.theme.SharedPreferencesMgr;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * by 12406 on 2016/6/16.
  */
 public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
-        implements RxUtils.RxBinding, RxBusUtils.RxBusTheme {
+        implements RxUtil.RxBinding, RxBusUtils.RxBusTheme {
 
 
     private ImageView imageView;
@@ -30,7 +30,7 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
     protected void getHeadLayoutId(View headView) {
         super.getHeadLayoutId(headView);
         imageView = getView(headView, R.id.iv);
-        RxUtils.clicks(imageView, this);
+        RxUtil.clicks(imageView, this);
         if (SharedPreferencesMgr.getIsNight()) {
             setDay();
         } else {

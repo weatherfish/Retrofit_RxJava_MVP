@@ -10,19 +10,18 @@ import rx.Subscription;
 import rx.functions.Action1;
 
 /**
- * by y on 2016/6/23.
+ * by y on 2016/7/6.
  */
-public class RxUtils {
+public class RxUtil {
 
+    public static Subscription subscription;
 
-    @SuppressWarnings("unused")
-    public static void unsubscribe(Subscription subscription) {
+    public static void unsubscribe() {
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
     }
 
-    //防手抖
     public static void clicks(View view, final RxBinding rxBinding) {
         if (view != null)
             RxView.clicks(view)
