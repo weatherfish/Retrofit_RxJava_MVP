@@ -26,6 +26,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     private static final int TYPE_HEAD = 0;
     private static final int TYPE_ITEM = 1;
     private static final int TYPE_FOOT = 2;
+    private static final int HEAD_AND_FOOT = 3;
     private static final int RESOURCE_ERROR = 0x0;
 
     protected Context context;
@@ -39,14 +40,11 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     private int footLayout;
 
 
-
     public BaseRecyclerViewAdapter(List<T> mDatas) {
         if (!mDatas.isEmpty()) {
             this.mDatas = mDatas;
         }
     }
-
-    
 
 
     public interface OnItemClickListener<T> {
@@ -71,6 +69,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
 
     public void setFootLayout(int footLayout) {
         this.footLayout = footLayout;
+        notifyDataSetChanged();
     }
 
     public int getHeadLayout() {
@@ -79,6 +78,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
 
     public void setHeadLayout(int headLayout) {
         this.headLayout = headLayout;
+        notifyDataSetChanged();
     }
 
     public boolean isFoot() {
@@ -139,6 +139,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     public int getItemCount() {
         int type;
         if (isHead && isFoot) {
+            IS_ITEM = HEAD_AND_FOOT;
             type = 2;
         } else if (isHead || isFoot) {
             if (isHead) {
@@ -201,7 +202,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
             return;
         }
         BaseViewHolder baseViewHolder = (BaseViewHolder) holder;
-        onBind(baseViewHolder.getViewHolder(),position, data);
+        onBind(baseViewHolder.getViewHolder(), position, data);
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -225,19 +226,19 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         return (T) view.findViewById(id);
     }
 
-    protected  void getHeadLayoutId(View headView){
+    protected void getHeadLayoutId(View headView) {
     }
 
     protected abstract int getItemLayoutId();
 
-    protected  void getFootLayoutId(View footView){
+    protected void getFootLayoutId(View footView) {
     }
 
     protected abstract void onBind(ViewHolder holder, int position, T data);
 
     private int getItemPosition(RecyclerView.ViewHolder holder) {
         int pos = holder.getLayoutPosition();
-        if ((isFoot && IS_ITEM == TYPE_FOOT) || ( !isFoot && !isHead && IS_ITEM == TYPE_ITEM)) {
+        if ((isFoot && IS_ITEM == TYPE_FOOT) || (!isFoot && !isHead && IS_ITEM == TYPE_ITEM)) {
             return pos;
         } else {
             return pos - 1;
@@ -337,6 +338,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
             }
             return viewHolder;
         }
+
         public View getConvertView() {
             return view;
         }
@@ -348,6 +350,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         public ImageView getImageView(int id) {
             return get(id);
         }
+
         public void setTextView(int id, CharSequence charSequence) {
             getTextView(id).setText(charSequence);
         }
