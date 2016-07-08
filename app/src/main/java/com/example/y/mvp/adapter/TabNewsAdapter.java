@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.example.y.mvp.fragment.NewsMainFragment;
 import com.example.y.mvp.mvp.Bean.TabNewsInfo;
+import com.example.y.mvp.utils.db.NewsTabDbUtils;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class TabNewsAdapter extends BaseFragmentPagerAdapter<TabNewsInfo> {
 
     @Override
     protected CharSequence getTitle(TabNewsInfo data) {
+        NewsTabDbUtils.addNews(data.getMId(), data.getName());
         return data.getName();
     }
 }

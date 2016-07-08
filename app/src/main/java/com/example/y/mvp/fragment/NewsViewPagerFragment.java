@@ -11,6 +11,7 @@ import com.example.y.mvp.mvp.presenter.TabNewsPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
+import com.example.y.mvp.utils.db.NewsTabDbUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeTabLayout;
 
 import java.util.LinkedList;
@@ -42,18 +43,26 @@ public class NewsViewPagerFragment extends BaseFragment implements BaseView.TabN
     protected void initData() {
 
         BasePresenter.TabNewsPresenter tabNewsPresenter = new TabNewsPresenterImpl(this);
-        tabNewsPresenter.requestNetWork();
 
         data = new LinkedList<>();
+
+        if (NewsTabDbUtils.getNews().isEmpty()) {
+            tabNewsPresenter.requestNetWork();
+        } else {
+            data.addAll(NewsTabDbUtils.getNews());
+        }
+
         tabNewsAdapter = new TabNewsAdapter(getChildFragmentManager(), data);
+        viewPager.setAdapter(tabNewsAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override
     public void setData(List<TabNewsInfo> datas) {
         if (!datas.isEmpty()) {
             data.addAll(datas);
-            viewPager.setAdapter(tabNewsAdapter);
-            tabLayout.setupWithViewPager(viewPager);
+            tabNewsAdapter.notifyDataSetChanged();
         }
     }
 

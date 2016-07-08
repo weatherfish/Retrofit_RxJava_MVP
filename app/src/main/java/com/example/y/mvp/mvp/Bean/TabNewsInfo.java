@@ -6,15 +6,37 @@ package com.example.y.mvp.mvp.Bean;
 @SuppressWarnings("ALL")
 public class TabNewsInfo {
 
-    private int id;
+    private Long id;
+    private Integer mId;
     private String name;
 
-    public int getId() {
+    public TabNewsInfo() {
+    }
+
+    public TabNewsInfo(Long id) {
+        this.id = id;
+    }
+
+    public TabNewsInfo(Long id, Integer mId, String name) {
+        this.id = id;
+        this.mId = mId;
+        this.name = name;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getMId() {
+        return mId;
+    }
+
+    public void setMId(Integer mId) {
+        this.mId = mId;
     }
 
     public String getName() {
