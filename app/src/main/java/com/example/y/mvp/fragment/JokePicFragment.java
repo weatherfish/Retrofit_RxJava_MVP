@@ -5,10 +5,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.example.y.mvp.JokePicInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.JokePicAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.Bean.JokePicBean;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.JokePicPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
@@ -59,7 +59,7 @@ public class JokePicFragment extends BaseFragment
         }
 
         jokePresenter = new JokePicPresenterImpl(this);
-        List<JokePicBean.JokePicInfo> jokePicInfos = new LinkedList<>();
+        List<JokePicInfo> jokePicInfos = new LinkedList<>();
 
         srfLayout.setOnRefreshListener(this);
 
@@ -95,7 +95,7 @@ public class JokePicFragment extends BaseFragment
     }
 
     @Override
-    public void setData(List<JokePicBean.JokePicInfo> datas) {
+    public void setData(List<JokePicInfo> datas) {
         if (datas.isEmpty()) {
             isNull = true;
         } else {

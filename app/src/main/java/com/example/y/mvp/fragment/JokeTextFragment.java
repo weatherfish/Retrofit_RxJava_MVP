@@ -6,11 +6,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Html;
 import android.view.View;
 
+import com.example.y.mvp.JokeTextInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.JokeTextAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.Bean.JokeTextBean;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.JokeTextPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
@@ -25,7 +25,7 @@ import java.util.List;
  * by y on 2016/5/30.
  */
 public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        ThemeRecyclerView.LoadingData, BaseView.JokeTextView, BaseRecyclerViewAdapter.OnItemLongClickListener<JokeTextBean.JokeTextInfo> {
+        ThemeRecyclerView.LoadingData, BaseView.JokeTextView, BaseRecyclerViewAdapter.OnItemLongClickListener<JokeTextInfo> {
 
     private ThemeRecyclerView recyclerView;
     private SwipeRefreshLayout srfLayout;
@@ -60,7 +60,7 @@ public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout
         }
 
         jokePresenter = new JokeTextPresenterImpl(this);
-        List<JokeTextBean.JokeTextInfo> jokeTextInfo = new LinkedList<>();
+        List<JokeTextInfo> jokeTextInfo = new LinkedList<>();
 
         srfLayout.setOnRefreshListener(this);
 
@@ -98,7 +98,7 @@ public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout
     }
 
     @Override
-    public void setData(List<JokeTextBean.JokeTextInfo> datas) {
+    public void setData(List<JokeTextInfo> datas) {
         if (datas.isEmpty()) {
             isNull = true;
         } else {
@@ -136,7 +136,7 @@ public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout
     }
 
     @Override
-    public void onLongClick(View view, int position, JokeTextBean.JokeTextInfo info) {
+    public void onLongClick(View view, int position, JokeTextInfo info) {
         ActivityUtils.share(String.valueOf(Html.fromHtml(info.getText())));
     }
 }

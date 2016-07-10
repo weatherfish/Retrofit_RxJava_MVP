@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.y.mvp.R;
+import com.example.y.mvp.utils.DiaLogUtils;
 import com.example.y.mvp.utils.RxBusUtils;
 import com.example.y.mvp.utils.RxUtil;
 import com.example.y.mvp.utils.theme.ReplaceThemeUtils;
@@ -21,6 +22,7 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
 
 
     private ImageView imageView;
+    private ImageView headImage;
 
     public MenuItemAdapter(List<String> mDatas) {
         super(mDatas);
@@ -30,6 +32,7 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
     protected void getHeadLayoutId(View headView) {
         super.getHeadLayoutId(headView);
         imageView = getView(headView, R.id.iv);
+        headImage = getView(headView, R.id.head_image);
         RxUtil.clicks(imageView, this);
         if (SharedPreferencesMgr.getIsNight()) {
             setDay();
@@ -37,6 +40,12 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
             setNight();
         }
         RxBusUtils.rxTheme(this);
+        headImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DiaLogUtils.clearSql();
+            }
+        });
     }
 
     @Override

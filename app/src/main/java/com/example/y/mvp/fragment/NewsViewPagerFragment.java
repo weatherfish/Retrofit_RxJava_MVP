@@ -3,15 +3,14 @@ package com.example.y.mvp.fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.example.y.mvp.NewsTabNameInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.TabNewsAdapter;
-import com.example.y.mvp.mvp.Bean.TabNewsInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.TabNewsPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.db.NewsTabDbUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeTabLayout;
 
 import java.util.LinkedList;
@@ -25,7 +24,7 @@ public class NewsViewPagerFragment extends BaseFragment implements BaseView.TabN
     private ThemeTabLayout tabLayout;
     private ViewPager viewPager;
 
-    private List<TabNewsInfo> data;
+    private List<NewsTabNameInfo> data;
     private TabNewsAdapter tabNewsAdapter;
 
     @Override
@@ -41,28 +40,20 @@ public class NewsViewPagerFragment extends BaseFragment implements BaseView.TabN
 
     @Override
     protected void initData() {
+        data = new LinkedList<>();
+        tabNewsAdapter = new TabNewsAdapter(getChildFragmentManager(), data);
 
         BasePresenter.TabNewsPresenter tabNewsPresenter = new TabNewsPresenterImpl(this);
-
-        data = new LinkedList<>();
-
-        if (NewsTabDbUtils.getNews().isEmpty()) {
-            tabNewsPresenter.requestNetWork();
-        } else {
-            data.addAll(NewsTabDbUtils.getNews());
-        }
-
-        tabNewsAdapter = new TabNewsAdapter(getChildFragmentManager(), data);
-        viewPager.setAdapter(tabNewsAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        tabNewsPresenter.requestNetWork();
 
     }
 
     @Override
-    public void setData(List<TabNewsInfo> datas) {
+    public void setData(List<NewsTabNameInfo> datas) {
         if (!datas.isEmpty()) {
             data.addAll(datas);
-            tabNewsAdapter.notifyDataSetChanged();
+            viewPager.setAdapter(tabNewsAdapter);
+            tabLayout.setupWithViewPager(viewPager);
         }
     }
 

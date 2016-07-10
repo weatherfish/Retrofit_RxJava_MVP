@@ -1,7 +1,7 @@
 package com.example.y.mvp.adapter;
 
+import com.example.y.mvp.JokePicInfo;
 import com.example.y.mvp.R;
-import com.example.y.mvp.mvp.Bean.JokePicBean;
 import com.example.y.mvp.utils.ImageLoaderUtils;
 import com.example.y.mvp.utils.UIUtils;
 
@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * by y on 2016/5/30.
  */
-public class JokePicAdapter extends BaseRecyclerViewAdapter<JokePicBean.JokePicInfo> {
+public class JokePicAdapter extends BaseRecyclerViewAdapter<JokePicInfo> {
 
 
-    public JokePicAdapter(List<JokePicBean.JokePicInfo> datas) {
+    public JokePicAdapter(List<JokePicInfo> datas) {
         super(datas);
     }
 
@@ -23,9 +23,9 @@ public class JokePicAdapter extends BaseRecyclerViewAdapter<JokePicBean.JokePicI
     }
 
     @Override
-    protected void onBind(ViewHolder holder, int position, JokePicBean.JokePicInfo data) {
+    protected void onBind(ViewHolder holder, int position, JokePicInfo data) {
         ImageLoaderUtils.display(UIUtils.getContext(), holder.getImageView(R.id.image), data.getImg());
-        holder.setTextView(R.id.tv_time,data.getTitle());
+        holder.setTextView(R.id.tv_time, data.getTitle());
     }
 
 }

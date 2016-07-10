@@ -1,6 +1,6 @@
 package com.example.y.mvp.mvp.presenter;
 
-import com.example.y.mvp.mvp.Bean.TabNewsInfo;
+import com.example.y.mvp.NewsTabNameInfo;
 import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.TabNewsModelImpl;
@@ -29,7 +29,7 @@ public class TabNewsPresenterImpl extends BasePresenterImpl<BaseView.TabNewsView
     }
 
     @Override
-    public void addData(List<TabNewsInfo> newsInfo) {
+    public void addData(List<NewsTabNameInfo> newsInfo) {
         view.setData(newsInfo);
     }
 

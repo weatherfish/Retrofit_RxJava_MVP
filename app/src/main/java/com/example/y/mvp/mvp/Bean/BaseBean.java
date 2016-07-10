@@ -1,5 +1,11 @@
 package com.example.y.mvp.mvp.Bean;
 
+import com.example.y.mvp.ImageDetailInfo;
+import com.example.y.mvp.ImageListInfo;
+import com.example.y.mvp.ImageTabNameInfo;
+import com.example.y.mvp.NewsListInfo;
+import com.example.y.mvp.NewsTabNameInfo;
+
 import java.util.List;
 
 /**
@@ -20,10 +26,10 @@ public class BaseBean<T> {
     }
 
 
-    public class TabNewsBean extends BaseBean<TabNewsInfo> {
+    public class TabNewsBean extends BaseBean<NewsTabNameInfo> {
     }
 
-    public class TabNameBean extends BaseBean<TabNameInfo> {
+    public class TabNameBean extends BaseBean<ImageTabNameInfo> {
     }
 
     public class ImageListBean extends BaseBean<ImageListInfo> {

@@ -1,6 +1,6 @@
 package com.example.y.mvp.mvp.model;
 
-import com.example.y.mvp.mvp.Bean.NewsDetailInfo;
+import com.example.y.mvp.NewsDetailInfo;
 import com.example.y.mvp.network.MySubscriber;
 import com.example.y.mvp.network.NetWorkRequest;
 

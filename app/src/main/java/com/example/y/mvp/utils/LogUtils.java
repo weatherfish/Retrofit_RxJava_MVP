@@ -13,63 +13,63 @@ public class LogUtils {
 
     private static final String TAG = "Log_Utils-->:";
 
-    public static void v(String message) {
+    public static void v(Object message) {
         if (DEBUG) {
-            Log.v(TAG, message);
+            Log.v(TAG, message + "");
         }
     }
 
-    public static void v(String tag, String message) {
+    public static void v(String tag, Object message) {
         if (DEBUG) {
-            Log.v(tag, message);
+            Log.v(tag, message + "");
         }
     }
 
-    public static void d(String message) {
+    public static void d(Object message) {
         if (DEBUG) {
-            Log.d(TAG, message);
+            Log.d(TAG, message + "");
         }
     }
 
-    public static void d(String tag, String message) {
+    public static void d(String tag, Object message) {
         if (DEBUG) {
-            Log.d(tag, message);
+            Log.d(tag, message + "");
         }
     }
 
-    public static void i(String message) {
+    public static void i(Object message) {
         if (DEBUG) {
-            Log.i(TAG, message);
+            Log.i(TAG, message + "");
         }
     }
 
-    public static void i(String tag, String message) {
+    public static void i(String tag, Object message) {
         if (DEBUG) {
-            Log.i(tag, message);
+            Log.i(tag, message + "");
         }
     }
 
-    public static void w(String message) {
+    public static void w(Object message) {
         if (DEBUG) {
-            Log.w(TAG, message);
+            Log.w(TAG, message + "");
         }
     }
 
-    public static void w(String tag, String message) {
+    public static void w(String tag, Object message) {
         if (DEBUG) {
-            Log.w(tag, message);
+            Log.w(tag, message + "");
         }
     }
 
-    public static void e(String message) {
+    public static void e(Object message) {
         if (DEBUG) {
-            Log.e(TAG, message);
+            Log.e(TAG, message + "");
         }
     }
 
-    public static void e(String tag, String message) {
+    public static void e(String tag, Object message) {
         if (DEBUG) {
-            Log.e(tag, message);
+            Log.e(tag, message + "");
         }
     }
 

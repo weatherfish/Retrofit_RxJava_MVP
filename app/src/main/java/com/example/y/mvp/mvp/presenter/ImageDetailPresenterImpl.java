@@ -4,9 +4,9 @@ package com.example.y.mvp.mvp.presenter;
 import android.content.pm.PackageManager;
 import android.widget.Toast;
 
+import com.example.y.mvp.ImageDetailInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.Bean.ImageDetailInfo;
 import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.ImageDetailModelImpl;

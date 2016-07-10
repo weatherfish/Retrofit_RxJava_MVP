@@ -2,8 +2,8 @@ package com.example.y.mvp.adapter;
 
 import android.text.Html;
 
+import com.example.y.mvp.JokeTextInfo;
 import com.example.y.mvp.R;
-import com.example.y.mvp.mvp.Bean.JokeTextBean;
 import com.example.y.mvp.utils.UIUtils;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * by y on 2016/5/30.
  */
-public class JokeTextAdapter extends BaseRecyclerViewAdapter<JokeTextBean.JokeTextInfo> {
+public class JokeTextAdapter extends BaseRecyclerViewAdapter<JokeTextInfo> {
 
 
-    public JokeTextAdapter(List<JokeTextBean.JokeTextInfo> datas) {
+    public JokeTextAdapter(List<JokeTextInfo> datas) {
         super(datas);
     }
 
@@ -24,9 +24,9 @@ public class JokeTextAdapter extends BaseRecyclerViewAdapter<JokeTextBean.JokeTe
     }
 
     @Override
-    protected void onBind(ViewHolder holder, int position, JokeTextBean.JokeTextInfo data) {
-        holder.setTextView(R.id.tv_time,UIUtils.getString(R.string.news_time) + data.getCt());
-        holder.setTextView(R.id.tv_text,Html.fromHtml(data.getText()));
+    protected void onBind(ViewHolder holder, int position, JokeTextInfo data) {
+        holder.setTextView(R.id.tv_time, UIUtils.getString(R.string.news_time) + data.getCt());
+        holder.setTextView(R.id.tv_text, Html.fromHtml(data.getText()));
     }
 
 }

@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">练习</string>
+    <string name="app_name">simple</string>
 
-    <string name="network_error">网络异常</string>
+    <string name="network_error">网络异常,显示缓存数据</string>
     <string name="dialog_ok">确认</string>
     <string name="imageview_message">确认保存图片吗?</string>
 
@@ -49,5 +49,6 @@
     <string name="toolbar_item_share">分享</string>
     <string name="image_detail">图片详情</string>
     <string name="share">分享到平台</string>
+    <string name="clear_sql">清除数据库？</string>
 
 </resources>

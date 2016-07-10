@@ -1,8 +1,8 @@
 package com.example.y.mvp.mvp.presenter;
 
 
+import com.example.y.mvp.ImageListInfo;
 import com.example.y.mvp.activity.ImageDetailActivity;
-import com.example.y.mvp.mvp.Bean.ImageListInfo;
 import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.ImageListModelImpl;

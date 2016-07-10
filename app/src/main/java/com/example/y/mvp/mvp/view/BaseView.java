@@ -1,14 +1,14 @@
 package com.example.y.mvp.mvp.view;
 
-import com.example.y.mvp.mvp.Bean.ImageDetailInfo;
-import com.example.y.mvp.mvp.Bean.ImageListInfo;
+import com.example.y.mvp.ImageDetailInfo;
+import com.example.y.mvp.ImageListInfo;
+import com.example.y.mvp.ImageTabNameInfo;
+import com.example.y.mvp.JokePicInfo;
+import com.example.y.mvp.JokeTextInfo;
+import com.example.y.mvp.NewsDetailInfo;
+import com.example.y.mvp.NewsListInfo;
+import com.example.y.mvp.NewsTabNameInfo;
 import com.example.y.mvp.mvp.Bean.ImageNewInfo;
-import com.example.y.mvp.mvp.Bean.JokePicBean;
-import com.example.y.mvp.mvp.Bean.JokeTextBean;
-import com.example.y.mvp.mvp.Bean.NewsDetailInfo;
-import com.example.y.mvp.mvp.Bean.NewsListInfo;
-import com.example.y.mvp.mvp.Bean.TabNameInfo;
-import com.example.y.mvp.mvp.Bean.TabNewsInfo;
 
 import java.util.List;
 
@@ -30,10 +30,10 @@ public interface BaseView<T> {
 
     void hideFoot();
 
-    interface JokePicView extends BaseView<JokePicBean.JokePicInfo> {
+    interface JokePicView extends BaseView<JokePicInfo> {
     }
 
-    interface JokeTextView extends BaseView<JokeTextBean.JokeTextInfo> {
+    interface JokeTextView extends BaseView<JokeTextInfo> {
     }
 
     interface ImageDetailView extends BaseView<ImageDetailInfo> {
@@ -58,10 +58,10 @@ public interface BaseView<T> {
         void showProgress();
     }
 
-    interface TabNameView extends BaseView<TabNameInfo> {
+    interface TabNameView extends BaseView<ImageTabNameInfo> {
     }
 
-    interface TabNewsView extends BaseView<TabNewsInfo> {
+    interface TabNewsView extends BaseView<NewsTabNameInfo> {
     }
 
     interface MainView {

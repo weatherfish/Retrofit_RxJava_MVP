@@ -7,11 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.example.y.mvp.NewsListInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.NewsListAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.Bean.NewsListInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.NewsListPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
@@ -69,7 +69,7 @@ public class NewsMainFragment extends BaseFragment implements SwipeRefreshLayout
 
         newsListPresenter = new NewsListPresenterImpl(this);
         LinkedList<NewsListInfo> list = new LinkedList<>();
-        adapter = new NewsListAdapter(list);
+        adapter = new NewsListAdapter(list, index + 1);
         adapter.setOnItemClickListener(this);
         adapter.setFootLayout(Constant.FOOT_LAYOUT);
         srfLayout.setOnRefreshListener(this);

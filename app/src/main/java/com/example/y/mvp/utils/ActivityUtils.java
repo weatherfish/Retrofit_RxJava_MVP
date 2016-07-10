@@ -59,8 +59,8 @@ public class ActivityUtils {
         UIUtils.getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
     }
 
-    public static void Toast(String content) {
-        Toast.makeText(UIUtils.getContext(), content, Toast.LENGTH_LONG).show();
+    public static void Toast(Object object) {
+        Toast.makeText(UIUtils.getContext(), object + "", Toast.LENGTH_LONG).show();
     }
 
 

@@ -1,8 +1,8 @@
 package com.example.y.mvp.mvp.presenter;
 
-import com.example.y.mvp.mvp.Bean.ImageListInfo;
+import com.example.y.mvp.ImageListInfo;
+import com.example.y.mvp.NewsListInfo;
 import com.example.y.mvp.mvp.Bean.ImageNewInfo;
-import com.example.y.mvp.mvp.Bean.NewsListInfo;
 
 /**
  * by y on 2016/5/27.

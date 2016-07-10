@@ -1,7 +1,7 @@
 package com.example.y.mvp.mvp.presenter;
 
+import com.example.y.mvp.NewsListInfo;
 import com.example.y.mvp.activity.NewsDetailActivity;
-import com.example.y.mvp.mvp.Bean.NewsListInfo;
 import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.NewsListModelImpl;

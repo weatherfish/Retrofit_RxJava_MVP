@@ -7,11 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.example.y.mvp.ImageListInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.ImageListAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.Bean.ImageListInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.ImageListPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
@@ -66,7 +66,7 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
         if (!isPrepared || !isVisible || isLoad) {
             return;
         }
-        
+
         imageListPresenter = new ImageListPresenterImpl(this);
 
         LinkedList<ImageListInfo> list = new LinkedList<>();

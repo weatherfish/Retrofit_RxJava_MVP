@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.y.mvp.NewsDetailInfo;
 import com.example.y.mvp.R;
-import com.example.y.mvp.mvp.Bean.NewsDetailInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.NewsDetailPresenterImpl;
 import com.example.y.mvp.mvp.presenter.ToolBarItemPresenterImpl;

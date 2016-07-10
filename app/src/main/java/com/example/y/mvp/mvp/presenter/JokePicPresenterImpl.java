@@ -1,6 +1,6 @@
 package com.example.y.mvp.mvp.presenter;
 
-import com.example.y.mvp.mvp.Bean.JokePicBean;
+import com.example.y.mvp.JokePicInfo;
 import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.JokePicModeImpl;
@@ -35,7 +35,7 @@ public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView
     }
 
     @Override
-    public void addData(List<JokePicBean.JokePicInfo> datas) {
+    public void addData(List<JokePicInfo> datas) {
         view.setData(datas);
         view.hideFoot();
         view.hideProgress();

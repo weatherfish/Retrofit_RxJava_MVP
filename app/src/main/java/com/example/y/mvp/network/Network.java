@@ -41,25 +41,32 @@ class Network {
         return baiDuApi;
     }
 
+    private static OkHttpClient getOkHttp() {
+        return new OkHttpClient
+                .Builder()
+                .addInterceptor(new BaseInterceptor())
+                .build();
+    }
+
+
     private static Retrofit getRetrofit(String baseUrl) {
 
         return new Retrofit.Builder()
-                .client(new OkHttpClient.Builder().addInterceptor(new LogInterceptor()).build())
+                .client(getOkHttp())
                 .baseUrl(baseUrl)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJavaCallAdapterFactory)
                 .build();
     }
 
-    private static class LogInterceptor implements Interceptor {
+
+    private static class BaseInterceptor implements Interceptor {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
             KLog.i("request:" + request.toString());
             okhttp3.Response response = chain.proceed(chain.request());
-//            long t1 = System.nanoTime();
-//            long t2 = System.nanoTime();
-//            LogUtils.i("嗷大喵来打印日志咯", String.format(Locale.getDefault(), "Received response for %s in %.1fms%n%s", response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+//            KLog.i(String.format(Locale.getDefault(), "Received response for %s in %.1fms%n%s", response.request().url(), (System.nanoTime() - System.nanoTime()) / 1e6d, response.headers()));
             okhttp3.MediaType mediaType = response.body().contentType();
             String content = response.body().string();
             KLog.json("json", "response body:" + content);

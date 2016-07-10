@@ -1,8 +1,8 @@
 package com.example.y.mvp.adapter;
 
 
+import com.example.y.mvp.ImageListInfo;
 import com.example.y.mvp.R;
-import com.example.y.mvp.mvp.Bean.ImageListInfo;
 import com.example.y.mvp.network.Api;
 import com.example.y.mvp.utils.ImageLoaderUtils;
 import com.example.y.mvp.utils.UIUtils;

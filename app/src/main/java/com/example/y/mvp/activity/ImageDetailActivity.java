@@ -7,9 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.y.mvp.ImageDetailInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.ImageDetailAdapter;
-import com.example.y.mvp.mvp.Bean.ImageDetailInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.ImageDetailPresenterImpl;
 import com.example.y.mvp.mvp.presenter.ToolBarItemPresenterImpl;

@@ -1,14 +1,14 @@
 package com.example.y.mvp.mvp.model;
 
-import com.example.y.mvp.mvp.Bean.ImageDetailInfo;
-import com.example.y.mvp.mvp.Bean.ImageListInfo;
+import com.example.y.mvp.ImageDetailInfo;
+import com.example.y.mvp.ImageListInfo;
+import com.example.y.mvp.ImageTabNameInfo;
+import com.example.y.mvp.JokePicInfo;
+import com.example.y.mvp.JokeTextInfo;
+import com.example.y.mvp.NewsDetailInfo;
+import com.example.y.mvp.NewsListInfo;
+import com.example.y.mvp.NewsTabNameInfo;
 import com.example.y.mvp.mvp.Bean.ImageNewInfo;
-import com.example.y.mvp.mvp.Bean.JokePicBean;
-import com.example.y.mvp.mvp.Bean.JokeTextBean;
-import com.example.y.mvp.mvp.Bean.NewsDetailInfo;
-import com.example.y.mvp.mvp.Bean.NewsListInfo;
-import com.example.y.mvp.mvp.Bean.TabNameInfo;
-import com.example.y.mvp.mvp.Bean.TabNewsInfo;
 
 import java.util.List;
 
@@ -20,6 +20,8 @@ public interface BaseDataBridge<T> {
     void addData(List<T> datas);
 
     void error();
+
+
 
 
     interface ImageDetailData extends BaseDataBridge<ImageDetailInfo> {
@@ -39,15 +41,15 @@ public interface BaseDataBridge<T> {
         void error();
     }
 
-    interface TabNewsData extends BaseDataBridge<TabNewsInfo> {
+    interface TabNewsData extends BaseDataBridge<NewsTabNameInfo> {
     }
 
-    interface TabNameData extends BaseDataBridge<TabNameInfo> {
+    interface TabNameData extends BaseDataBridge<ImageTabNameInfo> {
     }
 
-    interface JokeTextList extends BaseDataBridge<JokeTextBean.JokeTextInfo> {
+    interface JokeTextList extends BaseDataBridge<JokeTextInfo> {
     }
 
-    interface JokePicList extends BaseDataBridge<JokePicBean.JokePicInfo> {
+    interface JokePicList extends BaseDataBridge<JokePicInfo> {
     }
 }

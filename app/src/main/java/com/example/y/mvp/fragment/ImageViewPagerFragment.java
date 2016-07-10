@@ -4,9 +4,9 @@ package com.example.y.mvp.fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.example.y.mvp.ImageTabNameInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.TabNameAdapter;
-import com.example.y.mvp.mvp.Bean.TabNameInfo;
 import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.TabNamePresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
@@ -26,7 +26,7 @@ public class ImageViewPagerFragment extends BaseFragment implements BaseView.Tab
     private ViewPager viewPager;
 
     private TabNameAdapter tabNameAdapter;
-    private List<TabNameInfo> data;
+    private List<ImageTabNameInfo> data;
 
     @Override
     public View initView() {
@@ -41,18 +41,16 @@ public class ImageViewPagerFragment extends BaseFragment implements BaseView.Tab
 
     @Override
     public void initData() {
-
+        data = new LinkedList<>();
+        tabNameAdapter = new TabNameAdapter(getChildFragmentManager(), data);
 
         BasePresenter.TabNamePresenter tabNamePresenter = new TabNamePresenterImpl(this);
         tabNamePresenter.requestNetWork();
-
-        data = new LinkedList<>();
-        tabNameAdapter = new TabNameAdapter(getChildFragmentManager(), data);
     }
 
 
     @Override
-    public void setData(List<TabNameInfo> datas) {
+    public void setData(List<ImageTabNameInfo> datas) {
         if (!datas.isEmpty()) {
             data.addAll(datas);
             viewPager.setAdapter(tabNameAdapter);

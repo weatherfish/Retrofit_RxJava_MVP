@@ -1,7 +1,7 @@
 package com.example.y.mvp.mvp.presenter;
 
 
-import com.example.y.mvp.mvp.Bean.TabNameInfo;
+import com.example.y.mvp.ImageTabNameInfo;
 import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.TabNameModelImpl;
@@ -29,7 +29,7 @@ public class TabNamePresenterImpl extends BasePresenterImpl<BaseView.TabNameView
     }
 
     @Override
-    public void addData(List<TabNameInfo> tabNameInfo) {
+    public void addData(List<ImageTabNameInfo> tabNameInfo) {
         view.setData(tabNameInfo);
     }
 

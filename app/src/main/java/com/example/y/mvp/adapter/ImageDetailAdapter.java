@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.y.mvp.mvp.Bean.ImageDetailInfo;
+import com.example.y.mvp.ImageDetailInfo;
 import com.example.y.mvp.network.Api;
 import com.example.y.mvp.utils.DiaLogUtils;
 import com.example.y.mvp.utils.ImageLoaderUtils;

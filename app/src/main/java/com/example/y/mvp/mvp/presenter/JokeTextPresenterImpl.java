@@ -1,6 +1,6 @@
 package com.example.y.mvp.mvp.presenter;
 
-import com.example.y.mvp.mvp.Bean.JokeTextBean;
+import com.example.y.mvp.JokeTextInfo;
 import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.JokeTextModeImpl;
@@ -34,7 +34,7 @@ public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextVi
     }
 
     @Override
-    public void addData(List<JokeTextBean.JokeTextInfo> datas) {
+    public void addData(List<JokeTextInfo> datas) {
         view.setData(datas);
         view.hideFoot();
         view.hideProgress();

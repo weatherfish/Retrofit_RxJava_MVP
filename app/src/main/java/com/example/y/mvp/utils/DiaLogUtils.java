@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.ImageView;
 
 import com.example.y.mvp.R;
+import com.example.y.mvp.utils.db.GreenDaoUtils;
 
 
 /**
@@ -29,5 +30,16 @@ public class DiaLogUtils {
     }
 
 
+    public static void clearSql() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(UIUtils.getActivity());
+        builder.setMessage(UIUtils.getString(R.string.clear_sql));
+        builder.setPositiveButton(UIUtils.getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                GreenDaoUtils.clearSql();
+            }
+        });
+        builder.create().show();
+    }
 }
 

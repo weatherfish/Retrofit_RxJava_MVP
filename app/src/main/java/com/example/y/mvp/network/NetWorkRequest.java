@@ -1,9 +1,9 @@
 package com.example.y.mvp.network;
 
+import com.example.y.mvp.NewsDetailInfo;
 import com.example.y.mvp.mvp.Bean.BaseBean;
 import com.example.y.mvp.mvp.Bean.JokePicBean;
 import com.example.y.mvp.mvp.Bean.JokeTextBean;
-import com.example.y.mvp.mvp.Bean.NewsDetailInfo;
 import com.example.y.mvp.utils.RxUtil;
 
 import rx.Subscriber;
