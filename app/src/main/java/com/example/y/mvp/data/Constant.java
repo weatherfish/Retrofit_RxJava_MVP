@@ -29,4 +29,14 @@ public class Constant {
     //KLog
     public static final String K_LOG = "K_Log -- >   ";
 
+    //SQL name
+    public static final String NEWS_TAB_NAME_INFO = "NewsTabNameInfo";
+    public static final String NEWS_LIST_INFO = "NewsListInfo";
+    public static final String NEWS_DETAIL_INFO = "NewsDetailInfo";
+    public static final String IMAGE_TAB_NAME_INFO = "ImageTabNameInfo";
+    public static final String IMAGE_LIST_INFO = "ImageListInfo";
+    public static final String IMAGE_DETAIL_INFO = "ImageDetailInfo";
+    public static final String JOKE_PIC_INFO = "JokePicInfo";
+    public static final String JOKE_TEXT_INFO = "JokeTextInfo";
+
 }

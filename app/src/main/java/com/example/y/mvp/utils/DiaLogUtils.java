@@ -6,7 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.ImageView;
 
 import com.example.y.mvp.R;
-import com.example.y.mvp.utils.db.GreenDaoUtils;
+import com.example.y.mvp.utils.db.GreenDaoDbUtils;
 
 
 /**
@@ -36,7 +36,7 @@ public class DiaLogUtils {
         builder.setPositiveButton(UIUtils.getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                GreenDaoUtils.clearSql();
+                GreenDaoDbUtils.clearAll();
             }
         });
         builder.create().show();

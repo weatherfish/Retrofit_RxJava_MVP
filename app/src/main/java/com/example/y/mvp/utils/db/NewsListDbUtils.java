@@ -12,20 +12,20 @@ public class NewsListDbUtils {
 
     public static void addNewsList(int id, int type, String title, String img, String fromurl, Long time) {
         if (searchNewsList(id)) {
-            GreenDaoUtils.getNewsListInfoDb().insert(new NewsListInfo(id, type, null, null, null, null, title, img, fromurl, time, null));
+            GreenDaoDbUtils.getNewsListInfoDb().insert(new NewsListInfo(id, type, null, null, null, null, title, img, fromurl, time, null));
         }
     }
 
     public static void deleteNewsList() {
-        GreenDaoUtils.getNewsListInfoDb().deleteAll();
+        GreenDaoDbUtils.getNewsListInfoDb().deleteAll();
     }
 
     public static List<NewsListInfo> getNewsList() {
-        return GreenDaoUtils.getNewsListInfoDb().loadAll();
+        return GreenDaoDbUtils.getNewsListInfoDb().loadAll();
     }
 
     public static boolean searchNewsList(int id) {
-        return GreenDaoUtils.getNewsListInfoDb().queryBuilder().where(NewsListInfoDao.Properties.Id.eq(id)).unique() == null;
+        return GreenDaoDbUtils.getNewsListInfoDb().queryBuilder().where(NewsListInfoDao.Properties.Id.eq(id)).unique() == null;
     }
 
 }

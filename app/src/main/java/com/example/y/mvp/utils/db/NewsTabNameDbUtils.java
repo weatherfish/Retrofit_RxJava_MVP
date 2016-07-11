@@ -13,24 +13,24 @@ public class NewsTabNameDbUtils {
 
     public static void addNewsTabName(int id, String name) {
         if (searchNewsTabName(id)) {
-            GreenDaoUtils.getNewsTabNameDb().insert(new NewsTabNameInfo(id, name));
+            GreenDaoDbUtils.getNewsTabNameDb().insert(new NewsTabNameInfo(id, name));
         }
     }
 
     public static void deleteNewsTabName() {
-        GreenDaoUtils.getNewsTabNameDb().deleteAll();
+        GreenDaoDbUtils.getNewsTabNameDb().deleteAll();
     }
 
     public static List<NewsTabNameInfo> getNewsTabName() {
-        return GreenDaoUtils.getNewsTabNameDb().loadAll();
+        return GreenDaoDbUtils.getNewsTabNameDb().loadAll();
     }
 
     public static String getNewsTabName(int position) {
-        return GreenDaoUtils.getNewsTabNameDb().loadAll().get(position).getName();
+        return GreenDaoDbUtils.getNewsTabNameDb().loadAll().get(position).getName();
     }
 
     public static boolean searchNewsTabName(int id) {
-        return GreenDaoUtils.getNewsTabNameDb().queryBuilder().where(NewsTabNameInfoDao.Properties.Id.eq(id)).unique() == null;
+        return GreenDaoDbUtils.getNewsTabNameDb().queryBuilder().where(NewsTabNameInfoDao.Properties.Id.eq(id)).unique() == null;
     }
 
 }

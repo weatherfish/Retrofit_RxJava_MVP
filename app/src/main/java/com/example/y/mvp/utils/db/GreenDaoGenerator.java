@@ -1,5 +1,7 @@
 package com.example.y.mvp.utils.db;
 
+import com.example.y.mvp.data.Constant;
+
 import java.io.IOException;
 
 import de.greenrobot.daogenerator.DaoGenerator;
@@ -15,16 +17,6 @@ public class GreenDaoGenerator {
     private static DaoGenerator daoGenerator;
     private static final String PACKAGE = "com.example.y.mvp";
     private static final String ID = "id";
-    //SQL name
-    private static final String NEWS_TAB_NAME_INFO = "NewsTabNameInfo";
-    private static final String NEWS_LIST_INFO = "NewsListInfo";
-    private static final String NEWS_DETAIL_INFO = "NewsDetailInfo";
-    private static final String IMAGE_TAB_NAME_INFO = "ImageTabNameInfo";
-    private static final String IMAGE_LIST_INFO = "ImageListInfo";
-    private static final String IMAGE_DETAIL_INFO = "ImageDetailInfo";
-    private static final String JOKE_PIC_INFO = "JokePicInfo";
-    private static final String JOKE_TEXT_INFO = "JokeTextInfo";
-
     //news tab name
     private static final String NEWS_TAB_NAME = "name";
     //news list
@@ -113,14 +105,14 @@ public class GreenDaoGenerator {
 
 
     private static void initNewsTab() throws Exception {
-        initEntity(NEWS_TAB_NAME_INFO);
+        initEntity(Constant.NEWS_TAB_NAME_INFO);
         entity.addIntProperty(ID);
         entity.addStringProperty(NEWS_TAB_NAME);
         startGreenDao();
     }
 
     private static void initNewsList() throws Exception {
-        initEntity(NEWS_LIST_INFO);
+        initEntity(Constant.NEWS_LIST_INFO);
         entity.addIntProperty(ID);
         entity.addIntProperty(NEWS_LIST_TYPE);
         entity.addIntProperty(NEWS_LIST_COUNT);
@@ -137,7 +129,7 @@ public class GreenDaoGenerator {
 
 
     private static void initNewsDetail() throws Exception {
-        initEntity(NEWS_DETAIL_INFO);
+        initEntity(Constant.NEWS_DETAIL_INFO);
         entity.addIntProperty(ID);
         entity.addIntProperty(NEWS_DETAIL_COUNT);
         entity.addStringProperty(NEWS_DETAIL_DESCRIPTION);
@@ -156,14 +148,14 @@ public class GreenDaoGenerator {
 
 
     private static void initImageTab() throws Exception {
-        initEntity(IMAGE_TAB_NAME_INFO);
+        initEntity(Constant.IMAGE_TAB_NAME_INFO);
         entity.addIntProperty(ID);
         entity.addStringProperty(IMAGE_TAB_NAME);
         startGreenDao();
     }
 
     private static void initImageList() throws Exception {
-        initEntity(IMAGE_LIST_INFO);
+        initEntity(Constant.IMAGE_LIST_INFO);
         entity.addIntProperty(ID);
         entity.addIntProperty(IMAGE_LIST_GALLERY_CLASS);
         entity.addStringProperty(IMAGE_LIST_TITLE);
@@ -176,7 +168,7 @@ public class GreenDaoGenerator {
     }
 
     private static void initImageDetail() throws Exception {
-        initEntity(IMAGE_DETAIL_INFO);
+        initEntity(Constant.IMAGE_DETAIL_INFO);
         entity.addIntProperty(ID);
         entity.addIntProperty(GALLERY);
         entity.addStringProperty(IMAGE_DETAIL_SRC);
@@ -184,7 +176,7 @@ public class GreenDaoGenerator {
     }
 
     private static void initJokePic() throws Exception {
-        initEntity(JOKE_PIC_INFO);
+        initEntity(Constant.JOKE_PIC_INFO);
         entity.addStringProperty(JOKE_PIC_CT);
         entity.addStringProperty(ID);
         entity.addStringProperty(JOKE_PIC_TITLE);
@@ -194,7 +186,7 @@ public class GreenDaoGenerator {
     }
 
     private static void initJokeText() throws Exception {
-        initEntity(JOKE_TEXT_INFO);
+        initEntity(Constant.JOKE_TEXT_INFO);
         entity.addStringProperty(ID);
         entity.addStringProperty(JOKE_TEXT_CT);
         entity.addStringProperty(JOKE_TEXT_TEXT);
