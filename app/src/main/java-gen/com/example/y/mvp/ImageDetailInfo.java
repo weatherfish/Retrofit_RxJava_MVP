@@ -6,6 +6,7 @@ package com.example.y.mvp;
  */
 public class ImageDetailInfo {
 
+    private Integer tag;
     private Integer id;
     private Integer gallery;
     private String src;
@@ -13,10 +14,23 @@ public class ImageDetailInfo {
     public ImageDetailInfo() {
     }
 
-    public ImageDetailInfo(Integer id, Integer gallery, String src) {
+    public ImageDetailInfo(Integer tag) {
+        this.tag = tag;
+    }
+
+    public ImageDetailInfo(Integer tag, Integer id, Integer gallery, String src) {
+        this.tag = tag;
         this.id = id;
         this.gallery = gallery;
         this.src = src;
+    }
+
+    public Integer getTag() {
+        return tag;
+    }
+
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 
     public Integer getId() {

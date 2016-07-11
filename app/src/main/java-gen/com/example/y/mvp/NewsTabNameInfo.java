@@ -6,15 +6,29 @@ package com.example.y.mvp;
  */
 public class NewsTabNameInfo {
 
+    private Integer tag;
     private Integer id;
     private String name;
 
     public NewsTabNameInfo() {
     }
 
-    public NewsTabNameInfo(Integer id, String name) {
+    public NewsTabNameInfo(Integer tag) {
+        this.tag = tag;
+    }
+
+    public NewsTabNameInfo(Integer tag, Integer id, String name) {
+        this.tag = tag;
         this.id = id;
         this.name = name;
+    }
+
+    public Integer getTag() {
+        return tag;
+    }
+
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 
     public Integer getId() {

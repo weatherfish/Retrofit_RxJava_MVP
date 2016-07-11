@@ -6,6 +6,7 @@ package com.example.y.mvp;
  */
 public class ImageListInfo {
 
+    private Integer tag;
     private Integer id;
     private Integer galleryclass;
     private String title;
@@ -18,7 +19,12 @@ public class ImageListInfo {
     public ImageListInfo() {
     }
 
-    public ImageListInfo(Integer id, Integer galleryclass, String title, String img, Integer count, Integer rcount, Integer fcount, Integer size) {
+    public ImageListInfo(Integer tag) {
+        this.tag = tag;
+    }
+
+    public ImageListInfo(Integer tag, Integer id, Integer galleryclass, String title, String img, Integer count, Integer rcount, Integer fcount, Integer size) {
+        this.tag = tag;
         this.id = id;
         this.galleryclass = galleryclass;
         this.title = title;
@@ -27,6 +33,14 @@ public class ImageListInfo {
         this.rcount = rcount;
         this.fcount = fcount;
         this.size = size;
+    }
+
+    public Integer getTag() {
+        return tag;
+    }
+
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 
     public Integer getId() {

@@ -14,7 +14,7 @@ import com.example.y.mvp.NewsListInfo;
 /** 
  * DAO for table "NEWS_LIST_INFO".
 */
-public class NewsListInfoDao extends AbstractDao<NewsListInfo, Void> {
+public class NewsListInfoDao extends AbstractDao<NewsListInfo, Integer> {
 
     public static final String TABLENAME = "NEWS_LIST_INFO";
 
@@ -23,17 +23,18 @@ public class NewsListInfoDao extends AbstractDao<NewsListInfo, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Integer.class, "id", false, "ID");
-        public final static Property Type = new Property(1, Integer.class, "type", false, "TYPE");
-        public final static Property Count = new Property(2, Integer.class, "count", false, "COUNT");
-        public final static Property Description = new Property(3, String.class, "description", false, "DESCRIPTION");
-        public final static Property Fcount = new Property(4, Integer.class, "fcount", false, "FCOUNT");
-        public final static Property Fromname = new Property(5, String.class, "fromname", false, "FROMNAME");
-        public final static Property Title = new Property(6, String.class, "title", false, "TITLE");
-        public final static Property Img = new Property(7, String.class, "img", false, "IMG");
-        public final static Property Fromurl = new Property(8, String.class, "fromurl", false, "FROMURL");
-        public final static Property Time = new Property(9, Long.class, "time", false, "TIME");
-        public final static Property Keywords = new Property(10, String.class, "keywords", false, "KEYWORDS");
+        public final static Property Tag = new Property(0, Integer.class, "tag", true, "TAG");
+        public final static Property Id = new Property(1, Integer.class, "id", false, "ID");
+        public final static Property Type = new Property(2, Integer.class, "type", false, "TYPE");
+        public final static Property Count = new Property(3, Integer.class, "count", false, "COUNT");
+        public final static Property Description = new Property(4, String.class, "description", false, "DESCRIPTION");
+        public final static Property Fcount = new Property(5, Integer.class, "fcount", false, "FCOUNT");
+        public final static Property Fromname = new Property(6, String.class, "fromname", false, "FROMNAME");
+        public final static Property Title = new Property(7, String.class, "title", false, "TITLE");
+        public final static Property Img = new Property(8, String.class, "img", false, "IMG");
+        public final static Property Fromurl = new Property(9, String.class, "fromurl", false, "FROMURL");
+        public final static Property Time = new Property(10, Long.class, "time", false, "TIME");
+        public final static Property Keywords = new Property(11, String.class, "keywords", false, "KEYWORDS");
     };
 
 
@@ -49,17 +50,18 @@ public class NewsListInfoDao extends AbstractDao<NewsListInfo, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"NEWS_LIST_INFO\" (" + //
-                "\"ID\" INTEGER," + // 0: id
-                "\"TYPE\" INTEGER," + // 1: type
-                "\"COUNT\" INTEGER," + // 2: count
-                "\"DESCRIPTION\" TEXT," + // 3: description
-                "\"FCOUNT\" INTEGER," + // 4: fcount
-                "\"FROMNAME\" TEXT," + // 5: fromname
-                "\"TITLE\" TEXT," + // 6: title
-                "\"IMG\" TEXT," + // 7: img
-                "\"FROMURL\" TEXT," + // 8: fromurl
-                "\"TIME\" INTEGER," + // 9: time
-                "\"KEYWORDS\" TEXT);"); // 10: keywords
+                "\"TAG\" INTEGER PRIMARY KEY ," + // 0: tag
+                "\"ID\" INTEGER," + // 1: id
+                "\"TYPE\" INTEGER," + // 2: type
+                "\"COUNT\" INTEGER," + // 3: count
+                "\"DESCRIPTION\" TEXT," + // 4: description
+                "\"FCOUNT\" INTEGER," + // 5: fcount
+                "\"FROMNAME\" TEXT," + // 6: fromname
+                "\"TITLE\" TEXT," + // 7: title
+                "\"IMG\" TEXT," + // 8: img
+                "\"FROMURL\" TEXT," + // 9: fromurl
+                "\"TIME\" INTEGER," + // 10: time
+                "\"KEYWORDS\" TEXT);"); // 11: keywords
     }
 
     /** Drops the underlying database table. */
@@ -73,83 +75,89 @@ public class NewsListInfoDao extends AbstractDao<NewsListInfo, Void> {
     protected void bindValues(SQLiteStatement stmt, NewsListInfo entity) {
         stmt.clearBindings();
  
+        Integer tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindLong(1, tag);
+        }
+ 
         Integer id = entity.getId();
         if (id != null) {
-            stmt.bindLong(1, id);
+            stmt.bindLong(2, id);
         }
  
         Integer type = entity.getType();
         if (type != null) {
-            stmt.bindLong(2, type);
+            stmt.bindLong(3, type);
         }
  
         Integer count = entity.getCount();
         if (count != null) {
-            stmt.bindLong(3, count);
+            stmt.bindLong(4, count);
         }
  
         String description = entity.getDescription();
         if (description != null) {
-            stmt.bindString(4, description);
+            stmt.bindString(5, description);
         }
  
         Integer fcount = entity.getFcount();
         if (fcount != null) {
-            stmt.bindLong(5, fcount);
+            stmt.bindLong(6, fcount);
         }
  
         String fromname = entity.getFromname();
         if (fromname != null) {
-            stmt.bindString(6, fromname);
+            stmt.bindString(7, fromname);
         }
  
         String title = entity.getTitle();
         if (title != null) {
-            stmt.bindString(7, title);
+            stmt.bindString(8, title);
         }
  
         String img = entity.getImg();
         if (img != null) {
-            stmt.bindString(8, img);
+            stmt.bindString(9, img);
         }
  
         String fromurl = entity.getFromurl();
         if (fromurl != null) {
-            stmt.bindString(9, fromurl);
+            stmt.bindString(10, fromurl);
         }
  
         Long time = entity.getTime();
         if (time != null) {
-            stmt.bindLong(10, time);
+            stmt.bindLong(11, time);
         }
  
         String keywords = entity.getKeywords();
         if (keywords != null) {
-            stmt.bindString(11, keywords);
+            stmt.bindString(12, keywords);
         }
     }
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Integer readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public NewsListInfo readEntity(Cursor cursor, int offset) {
         NewsListInfo entity = new NewsListInfo( //
-            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // type
-            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // count
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // description
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // fcount
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // fromname
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // title
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // img
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // fromurl
-            cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9), // time
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // keywords
+            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // tag
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // id
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // type
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // count
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // description
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // fcount
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // fromname
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // title
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // img
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // fromurl
+            cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10), // time
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11) // keywords
         );
         return entity;
     }
@@ -157,30 +165,34 @@ public class NewsListInfoDao extends AbstractDao<NewsListInfo, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, NewsListInfo entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
-        entity.setType(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
-        entity.setCount(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
-        entity.setDescription(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setFcount(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setFromname(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setTitle(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setImg(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setFromurl(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setTime(cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9));
-        entity.setKeywords(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setTag(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
+        entity.setId(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setType(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
+        entity.setCount(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setDescription(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setFcount(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setFromname(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setTitle(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setImg(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setFromurl(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setTime(cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10));
+        entity.setKeywords(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
      }
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(NewsListInfo entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Integer updateKeyAfterInsert(NewsListInfo entity, long rowId) {
+        return entity.getTag();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(NewsListInfo entity) {
-        return null;
+    public Integer getKey(NewsListInfo entity) {
+        if(entity != null) {
+            return entity.getTag();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

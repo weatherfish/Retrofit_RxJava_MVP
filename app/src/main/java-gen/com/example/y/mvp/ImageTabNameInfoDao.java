@@ -14,7 +14,7 @@ import com.example.y.mvp.ImageTabNameInfo;
 /** 
  * DAO for table "IMAGE_TAB_NAME_INFO".
 */
-public class ImageTabNameInfoDao extends AbstractDao<ImageTabNameInfo, Void> {
+public class ImageTabNameInfoDao extends AbstractDao<ImageTabNameInfo, Integer> {
 
     public static final String TABLENAME = "IMAGE_TAB_NAME_INFO";
 
@@ -23,8 +23,9 @@ public class ImageTabNameInfoDao extends AbstractDao<ImageTabNameInfo, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Integer.class, "id", false, "ID");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property Tag = new Property(0, Integer.class, "tag", true, "TAG");
+        public final static Property Id = new Property(1, Integer.class, "id", false, "ID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
     };
 
 
@@ -40,8 +41,9 @@ public class ImageTabNameInfoDao extends AbstractDao<ImageTabNameInfo, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IMAGE_TAB_NAME_INFO\" (" + //
-                "\"ID\" INTEGER," + // 0: id
-                "\"NAME\" TEXT);"); // 1: name
+                "\"TAG\" INTEGER PRIMARY KEY ," + // 0: tag
+                "\"ID\" INTEGER," + // 1: id
+                "\"NAME\" TEXT);"); // 2: name
     }
 
     /** Drops the underlying database table. */
@@ -55,29 +57,35 @@ public class ImageTabNameInfoDao extends AbstractDao<ImageTabNameInfo, Void> {
     protected void bindValues(SQLiteStatement stmt, ImageTabNameInfo entity) {
         stmt.clearBindings();
  
+        Integer tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindLong(1, tag);
+        }
+ 
         Integer id = entity.getId();
         if (id != null) {
-            stmt.bindLong(1, id);
+            stmt.bindLong(2, id);
         }
  
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(3, name);
         }
     }
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Integer readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public ImageTabNameInfo readEntity(Cursor cursor, int offset) {
         ImageTabNameInfo entity = new ImageTabNameInfo( //
-            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // name
+            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // tag
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // id
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // name
         );
         return entity;
     }
@@ -85,21 +93,25 @@ public class ImageTabNameInfoDao extends AbstractDao<ImageTabNameInfo, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, ImageTabNameInfo entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
-        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setTag(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
+        entity.setId(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
      }
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(ImageTabNameInfo entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Integer updateKeyAfterInsert(ImageTabNameInfo entity, long rowId) {
+        return entity.getTag();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(ImageTabNameInfo entity) {
-        return null;
+    public Integer getKey(ImageTabNameInfo entity) {
+        if(entity != null) {
+            return entity.getTag();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

@@ -6,15 +6,29 @@ package com.example.y.mvp;
  */
 public class ImageTabNameInfo {
 
+    private Integer tag;
     private Integer id;
     private String name;
 
     public ImageTabNameInfo() {
     }
 
-    public ImageTabNameInfo(Integer id, String name) {
+    public ImageTabNameInfo(Integer tag) {
+        this.tag = tag;
+    }
+
+    public ImageTabNameInfo(Integer tag, Integer id, String name) {
+        this.tag = tag;
         this.id = id;
         this.name = name;
+    }
+
+    public Integer getTag() {
+        return tag;
+    }
+
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 
     public Integer getId() {

@@ -14,7 +14,7 @@ import com.example.y.mvp.ImageDetailInfo;
 /** 
  * DAO for table "IMAGE_DETAIL_INFO".
 */
-public class ImageDetailInfoDao extends AbstractDao<ImageDetailInfo, Void> {
+public class ImageDetailInfoDao extends AbstractDao<ImageDetailInfo, Integer> {
 
     public static final String TABLENAME = "IMAGE_DETAIL_INFO";
 
@@ -23,9 +23,10 @@ public class ImageDetailInfoDao extends AbstractDao<ImageDetailInfo, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Integer.class, "id", false, "ID");
-        public final static Property Gallery = new Property(1, Integer.class, "gallery", false, "GALLERY");
-        public final static Property Src = new Property(2, String.class, "src", false, "SRC");
+        public final static Property Tag = new Property(0, Integer.class, "tag", true, "TAG");
+        public final static Property Id = new Property(1, Integer.class, "id", false, "ID");
+        public final static Property Gallery = new Property(2, Integer.class, "gallery", false, "GALLERY");
+        public final static Property Src = new Property(3, String.class, "src", false, "SRC");
     };
 
 
@@ -41,9 +42,10 @@ public class ImageDetailInfoDao extends AbstractDao<ImageDetailInfo, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IMAGE_DETAIL_INFO\" (" + //
-                "\"ID\" INTEGER," + // 0: id
-                "\"GALLERY\" INTEGER," + // 1: gallery
-                "\"SRC\" TEXT);"); // 2: src
+                "\"TAG\" INTEGER PRIMARY KEY ," + // 0: tag
+                "\"ID\" INTEGER," + // 1: id
+                "\"GALLERY\" INTEGER," + // 2: gallery
+                "\"SRC\" TEXT);"); // 3: src
     }
 
     /** Drops the underlying database table. */
@@ -57,35 +59,41 @@ public class ImageDetailInfoDao extends AbstractDao<ImageDetailInfo, Void> {
     protected void bindValues(SQLiteStatement stmt, ImageDetailInfo entity) {
         stmt.clearBindings();
  
+        Integer tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindLong(1, tag);
+        }
+ 
         Integer id = entity.getId();
         if (id != null) {
-            stmt.bindLong(1, id);
+            stmt.bindLong(2, id);
         }
  
         Integer gallery = entity.getGallery();
         if (gallery != null) {
-            stmt.bindLong(2, gallery);
+            stmt.bindLong(3, gallery);
         }
  
         String src = entity.getSrc();
         if (src != null) {
-            stmt.bindString(3, src);
+            stmt.bindString(4, src);
         }
     }
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Integer readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public ImageDetailInfo readEntity(Cursor cursor, int offset) {
         ImageDetailInfo entity = new ImageDetailInfo( //
-            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // gallery
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // src
+            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // tag
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // id
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // gallery
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // src
         );
         return entity;
     }
@@ -93,22 +101,26 @@ public class ImageDetailInfoDao extends AbstractDao<ImageDetailInfo, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, ImageDetailInfo entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
-        entity.setGallery(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
-        entity.setSrc(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setTag(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
+        entity.setId(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setGallery(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
+        entity.setSrc(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(ImageDetailInfo entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Integer updateKeyAfterInsert(ImageDetailInfo entity, long rowId) {
+        return entity.getTag();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(ImageDetailInfo entity) {
-        return null;
+    public Integer getKey(ImageDetailInfo entity) {
+        if(entity != null) {
+            return entity.getTag();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

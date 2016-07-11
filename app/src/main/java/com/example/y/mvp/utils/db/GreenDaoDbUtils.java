@@ -1,27 +1,30 @@
 package com.example.y.mvp.utils.db;
 
+import com.example.y.mvp.ImageDetailInfo;
 import com.example.y.mvp.ImageDetailInfoDao;
+import com.example.y.mvp.ImageListInfo;
 import com.example.y.mvp.ImageListInfoDao;
+import com.example.y.mvp.ImageTabNameInfo;
 import com.example.y.mvp.ImageTabNameInfoDao;
+import com.example.y.mvp.JokePicInfo;
 import com.example.y.mvp.JokePicInfoDao;
+import com.example.y.mvp.JokeTextInfo;
 import com.example.y.mvp.JokeTextInfoDao;
+import com.example.y.mvp.NewsDetailInfo;
 import com.example.y.mvp.NewsDetailInfoDao;
+import com.example.y.mvp.NewsListInfo;
 import com.example.y.mvp.NewsListInfoDao;
 import com.example.y.mvp.NewsTabNameInfo;
 import com.example.y.mvp.NewsTabNameInfoDao;
 import com.example.y.mvp.data.Constant;
+
+import java.util.List;
 
 /**
  * by y on 2016/7/11.
  */
 public class GreenDaoDbUtils {
 
-
-    public static void addNewsTabName(int id, String name) {
-        if (searchNewsTabName(id)) {
-            getNewsTabNameDb().insert(new NewsTabNameInfo(id, name));
-        }
-    }
 
     public static void deleteSql(String sqlName) {
         switch (sqlName) {
@@ -52,8 +55,55 @@ public class GreenDaoDbUtils {
         }
     }
 
-    public static boolean searchNewsTabName(int id) {
-        return getNewsTabNameDb().queryBuilder().where(NewsTabNameInfoDao.Properties.Id.eq(id)).unique() == null;
+    public static void deleteSql(String sqlName, int id) {
+        switch (sqlName) {
+            case Constant.NEWS_TAB_NAME_INFO:
+                getNewsTabNameDb().deleteByKey(id);
+                break;
+            case Constant.NEWS_LIST_INFO:
+                getNewsListInfoDb().deleteByKey(id);
+                break;
+            case Constant.NEWS_DETAIL_INFO:
+                getNewsDetailDb().deleteByKey(id);
+                break;
+            case Constant.IMAGE_TAB_NAME_INFO:
+                getImageTabNameDb().deleteByKey(id);
+                break;
+            case Constant.IMAGE_LIST_INFO:
+                getImageListInfoDb().deleteByKey(id);
+                break;
+            case Constant.IMAGE_DETAIL_INFO:
+                getImageDetailDb().deleteByKey(id);
+                break;
+            case Constant.JOKE_PIC_INFO:
+                getJokePicDb().deleteByKey(id);
+                break;
+            case Constant.JOKE_TEXT_INFO:
+                getJokeTextDb().deleteByKey(id);
+                break;
+        }
+    }
+
+    public static boolean isEmpty(String sqlName, int id) {
+        switch (sqlName) {
+            case Constant.NEWS_TAB_NAME_INFO:
+                return getNewsTabNameDb().queryBuilder().where(NewsTabNameInfoDao.Properties.Id.eq(id)).unique() == null;
+            case Constant.NEWS_LIST_INFO:
+                return getNewsListInfoDb().queryBuilder().where(NewsListInfoDao.Properties.Id.eq(id)).unique() == null;
+            case Constant.NEWS_DETAIL_INFO:
+                return getNewsDetailDb().queryBuilder().where(NewsDetailInfoDao.Properties.Id.eq(id)).unique() == null;
+            case Constant.IMAGE_TAB_NAME_INFO:
+                return getImageTabNameDb().queryBuilder().where(ImageTabNameInfoDao.Properties.Id.eq(id)).unique() == null;
+            case Constant.IMAGE_LIST_INFO:
+                return getImageListInfoDb().queryBuilder().where(ImageListInfoDao.Properties.Id.eq(id)).unique() == null;
+            case Constant.IMAGE_DETAIL_INFO:
+                return getImageDetailDb().queryBuilder().where(ImageDetailInfoDao.Properties.Id.eq(id)).unique() == null;
+            case Constant.JOKE_PIC_INFO:
+                return getJokePicDb().queryBuilder().where(JokePicInfoDao.Properties.Id.eq(id)).unique() == null;
+            case Constant.JOKE_TEXT_INFO:
+                return getJokeTextDb().queryBuilder().where(JokeTextInfoDao.Properties.Id.eq(id)).unique() == null;
+        }
+        return false;
     }
 
 
@@ -100,5 +150,38 @@ public class GreenDaoDbUtils {
 
     public static JokeTextInfoDao getJokeTextDb() {
         return GreenDaoUtils.getInstance().getJokeTextInfoDao();
+    }
+
+
+    public static List<NewsTabNameInfo> getNewsTabName() {
+        return getNewsTabNameDb().loadAll();
+    }
+
+    public static List<NewsListInfo> getNewsList() {
+        return getNewsListInfoDb().loadAll();
+    }
+
+    public static List<NewsDetailInfo> getNewsDetail() {
+        return getNewsDetailDb().loadAll();
+    }
+
+    public static List<ImageTabNameInfo> getImageTabName() {
+        return getImageTabNameDb().loadAll();
+    }
+
+    public static List<ImageListInfo> getImageList() {
+        return getImageListInfoDb().loadAll();
+    }
+
+    public static List<ImageDetailInfo> getImageDetail() {
+        return getImageDetailDb().loadAll();
+    }
+
+    public static List<JokePicInfo> getJokePic() {
+        return getJokePicDb().loadAll();
+    }
+
+    public static List<JokeTextInfo> getJokeText() {
+        return getJokeTextDb().loadAll();
     }
 }

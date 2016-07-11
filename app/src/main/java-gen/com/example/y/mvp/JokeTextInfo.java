@@ -6,6 +6,7 @@ package com.example.y.mvp;
  */
 public class JokeTextInfo {
 
+    private Integer tag;
     private String id;
     private String ct;
     private String text;
@@ -15,12 +16,25 @@ public class JokeTextInfo {
     public JokeTextInfo() {
     }
 
-    public JokeTextInfo(String id, String ct, String text, String title, String type) {
+    public JokeTextInfo(Integer tag) {
+        this.tag = tag;
+    }
+
+    public JokeTextInfo(Integer tag, String id, String ct, String text, String title, String type) {
+        this.tag = tag;
         this.id = id;
         this.ct = ct;
         this.text = text;
         this.title = title;
         this.type = type;
+    }
+
+    public Integer getTag() {
+        return tag;
+    }
+
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 
     public String getId() {

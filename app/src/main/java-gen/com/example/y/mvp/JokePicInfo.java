@@ -6,8 +6,9 @@ package com.example.y.mvp;
  */
 public class JokePicInfo {
 
-    private String ct;
+    private Integer tag;
     private String id;
+    private String ct;
     private String title;
     private String type;
     private String img;
@@ -15,20 +16,25 @@ public class JokePicInfo {
     public JokePicInfo() {
     }
 
-    public JokePicInfo(String ct, String id, String title, String type, String img) {
-        this.ct = ct;
+    public JokePicInfo(Integer tag) {
+        this.tag = tag;
+    }
+
+    public JokePicInfo(Integer tag, String id, String ct, String title, String type, String img) {
+        this.tag = tag;
         this.id = id;
+        this.ct = ct;
         this.title = title;
         this.type = type;
         this.img = img;
     }
 
-    public String getCt() {
-        return ct;
+    public Integer getTag() {
+        return tag;
     }
 
-    public void setCt(String ct) {
-        this.ct = ct;
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 
     public String getId() {
@@ -37,6 +43,14 @@ public class JokePicInfo {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCt() {
+        return ct;
+    }
+
+    public void setCt(String ct) {
+        this.ct = ct;
     }
 
     public String getTitle() {

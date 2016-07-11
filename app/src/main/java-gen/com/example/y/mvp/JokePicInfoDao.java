@@ -14,7 +14,7 @@ import com.example.y.mvp.JokePicInfo;
 /** 
  * DAO for table "JOKE_PIC_INFO".
 */
-public class JokePicInfoDao extends AbstractDao<JokePicInfo, Void> {
+public class JokePicInfoDao extends AbstractDao<JokePicInfo, Integer> {
 
     public static final String TABLENAME = "JOKE_PIC_INFO";
 
@@ -23,11 +23,12 @@ public class JokePicInfoDao extends AbstractDao<JokePicInfo, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Ct = new Property(0, String.class, "ct", false, "CT");
+        public final static Property Tag = new Property(0, Integer.class, "tag", true, "TAG");
         public final static Property Id = new Property(1, String.class, "id", false, "ID");
-        public final static Property Title = new Property(2, String.class, "title", false, "TITLE");
-        public final static Property Type = new Property(3, String.class, "type", false, "TYPE");
-        public final static Property Img = new Property(4, String.class, "img", false, "IMG");
+        public final static Property Ct = new Property(2, String.class, "ct", false, "CT");
+        public final static Property Title = new Property(3, String.class, "title", false, "TITLE");
+        public final static Property Type = new Property(4, String.class, "type", false, "TYPE");
+        public final static Property Img = new Property(5, String.class, "img", false, "IMG");
     };
 
 
@@ -43,11 +44,12 @@ public class JokePicInfoDao extends AbstractDao<JokePicInfo, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"JOKE_PIC_INFO\" (" + //
-                "\"CT\" TEXT," + // 0: ct
+                "\"TAG\" INTEGER PRIMARY KEY ," + // 0: tag
                 "\"ID\" TEXT," + // 1: id
-                "\"TITLE\" TEXT," + // 2: title
-                "\"TYPE\" TEXT," + // 3: type
-                "\"IMG\" TEXT);"); // 4: img
+                "\"CT\" TEXT," + // 2: ct
+                "\"TITLE\" TEXT," + // 3: title
+                "\"TYPE\" TEXT," + // 4: type
+                "\"IMG\" TEXT);"); // 5: img
     }
 
     /** Drops the underlying database table. */
@@ -61,9 +63,9 @@ public class JokePicInfoDao extends AbstractDao<JokePicInfo, Void> {
     protected void bindValues(SQLiteStatement stmt, JokePicInfo entity) {
         stmt.clearBindings();
  
-        String ct = entity.getCt();
-        if (ct != null) {
-            stmt.bindString(1, ct);
+        Integer tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindLong(1, tag);
         }
  
         String id = entity.getId();
@@ -71,37 +73,43 @@ public class JokePicInfoDao extends AbstractDao<JokePicInfo, Void> {
             stmt.bindString(2, id);
         }
  
+        String ct = entity.getCt();
+        if (ct != null) {
+            stmt.bindString(3, ct);
+        }
+ 
         String title = entity.getTitle();
         if (title != null) {
-            stmt.bindString(3, title);
+            stmt.bindString(4, title);
         }
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(4, type);
+            stmt.bindString(5, type);
         }
  
         String img = entity.getImg();
         if (img != null) {
-            stmt.bindString(5, img);
+            stmt.bindString(6, img);
         }
     }
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Integer readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public JokePicInfo readEntity(Cursor cursor, int offset) {
         JokePicInfo entity = new JokePicInfo( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // ct
+            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // tag
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // id
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // type
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // img
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // ct
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // title
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // type
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // img
         );
         return entity;
     }
@@ -109,24 +117,28 @@ public class JokePicInfoDao extends AbstractDao<JokePicInfo, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, JokePicInfo entity, int offset) {
-        entity.setCt(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setTag(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
         entity.setId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setType(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setImg(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setCt(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setTitle(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setType(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setImg(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(JokePicInfo entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Integer updateKeyAfterInsert(JokePicInfo entity, long rowId) {
+        return entity.getTag();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(JokePicInfo entity) {
-        return null;
+    public Integer getKey(JokePicInfo entity) {
+        if(entity != null) {
+            return entity.getTag();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

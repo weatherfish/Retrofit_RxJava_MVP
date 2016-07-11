@@ -1,5 +1,6 @@
 package com.example.y.mvp.network;
 
+
 import com.example.y.mvp.NewsDetailInfo;
 import com.example.y.mvp.mvp.Bean.BaseBean;
 import com.example.y.mvp.mvp.Bean.JokePicBean;
@@ -16,7 +17,6 @@ import rx.schedulers.Schedulers;
 public class NetWorkRequest {
 
 
-    @SuppressWarnings("unused")
     public static void newsDetail(int id, Subscriber<NewsDetailInfo> subscriber) {
         RxUtil.unsubscribe();
         RxUtil.subscription = Network.getTngouApi().getNewsDetail(id)

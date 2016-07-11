@@ -14,7 +14,7 @@ import com.example.y.mvp.NewsTabNameInfo;
 /** 
  * DAO for table "NEWS_TAB_NAME_INFO".
 */
-public class NewsTabNameInfoDao extends AbstractDao<NewsTabNameInfo, Void> {
+public class NewsTabNameInfoDao extends AbstractDao<NewsTabNameInfo, Integer> {
 
     public static final String TABLENAME = "NEWS_TAB_NAME_INFO";
 
@@ -23,8 +23,9 @@ public class NewsTabNameInfoDao extends AbstractDao<NewsTabNameInfo, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Integer.class, "id", false, "ID");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property Tag = new Property(0, Integer.class, "tag", true, "TAG");
+        public final static Property Id = new Property(1, Integer.class, "id", false, "ID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
     };
 
 
@@ -40,8 +41,9 @@ public class NewsTabNameInfoDao extends AbstractDao<NewsTabNameInfo, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"NEWS_TAB_NAME_INFO\" (" + //
-                "\"ID\" INTEGER," + // 0: id
-                "\"NAME\" TEXT);"); // 1: name
+                "\"TAG\" INTEGER PRIMARY KEY ," + // 0: tag
+                "\"ID\" INTEGER," + // 1: id
+                "\"NAME\" TEXT);"); // 2: name
     }
 
     /** Drops the underlying database table. */
@@ -55,29 +57,35 @@ public class NewsTabNameInfoDao extends AbstractDao<NewsTabNameInfo, Void> {
     protected void bindValues(SQLiteStatement stmt, NewsTabNameInfo entity) {
         stmt.clearBindings();
  
+        Integer tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindLong(1, tag);
+        }
+ 
         Integer id = entity.getId();
         if (id != null) {
-            stmt.bindLong(1, id);
+            stmt.bindLong(2, id);
         }
  
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(3, name);
         }
     }
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Integer readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public NewsTabNameInfo readEntity(Cursor cursor, int offset) {
         NewsTabNameInfo entity = new NewsTabNameInfo( //
-            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // name
+            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // tag
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // id
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // name
         );
         return entity;
     }
@@ -85,21 +93,25 @@ public class NewsTabNameInfoDao extends AbstractDao<NewsTabNameInfo, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, NewsTabNameInfo entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
-        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setTag(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
+        entity.setId(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
      }
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(NewsTabNameInfo entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Integer updateKeyAfterInsert(NewsTabNameInfo entity, long rowId) {
+        return entity.getTag();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(NewsTabNameInfo entity) {
-        return null;
+    public Integer getKey(NewsTabNameInfo entity) {
+        if(entity != null) {
+            return entity.getTag();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

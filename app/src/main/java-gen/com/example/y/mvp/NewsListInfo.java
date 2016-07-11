@@ -6,6 +6,7 @@ package com.example.y.mvp;
  */
 public class NewsListInfo {
 
+    private Integer tag;
     private Integer id;
     private Integer type;
     private Integer count;
@@ -21,7 +22,12 @@ public class NewsListInfo {
     public NewsListInfo() {
     }
 
-    public NewsListInfo(Integer id, Integer type, Integer count, String description, Integer fcount, String fromname, String title, String img, String fromurl, Long time, String keywords) {
+    public NewsListInfo(Integer tag) {
+        this.tag = tag;
+    }
+
+    public NewsListInfo(Integer tag, Integer id, Integer type, Integer count, String description, Integer fcount, String fromname, String title, String img, String fromurl, Long time, String keywords) {
+        this.tag = tag;
         this.id = id;
         this.type = type;
         this.count = count;
@@ -33,6 +39,14 @@ public class NewsListInfo {
         this.fromurl = fromurl;
         this.time = time;
         this.keywords = keywords;
+    }
+
+    public Integer getTag() {
+        return tag;
+    }
+
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 
     public Integer getId() {

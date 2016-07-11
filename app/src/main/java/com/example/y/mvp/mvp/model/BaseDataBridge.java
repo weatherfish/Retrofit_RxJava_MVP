@@ -1,5 +1,6 @@
 package com.example.y.mvp.mvp.model;
 
+
 import com.example.y.mvp.ImageDetailInfo;
 import com.example.y.mvp.ImageListInfo;
 import com.example.y.mvp.ImageTabNameInfo;

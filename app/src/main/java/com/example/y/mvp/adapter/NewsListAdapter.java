@@ -1,5 +1,6 @@
 package com.example.y.mvp.adapter;
 
+
 import com.example.y.mvp.NewsListInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.network.Api;
@@ -29,11 +30,11 @@ public class NewsListAdapter extends BaseRecyclerViewAdapter<NewsListInfo> {
 
     @Override
     protected void onBind(ViewHolder holder, int position, NewsListInfo data) {
-        NewsListDbUtils.addNewsList(data.getId(), i, data.getTitle(), data.getImg(), data.getFromurl(), data.getTime());
         holder.setTextView(R.id.tv_time, UIUtils.getString(R.string.news_time) + TimeUtils.getDateToString(data.getTime()));
         holder.setTextView(R.id.tv_title, data.getTitle());
         holder.setTextView(R.id.tv_url, data.getFromurl());
         ImageLoaderUtils.display(UIUtils.getContext(), holder.getImageView(R.id.image), Api.IMAGER_URL + data.getImg());
+        NewsListDbUtils.addNewsList(data.getId(), i, data.getTitle(), data.getImg(), data.getFromurl(), data.getTime());
     }
 
 }

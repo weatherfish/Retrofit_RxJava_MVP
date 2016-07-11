@@ -1,5 +1,6 @@
 package com.example.y.mvp.mvp.Bean;
 
+
 import com.example.y.mvp.JokePicInfo;
 
 import java.util.List;

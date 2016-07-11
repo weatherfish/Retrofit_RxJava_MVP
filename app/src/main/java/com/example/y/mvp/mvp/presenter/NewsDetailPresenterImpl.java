@@ -1,5 +1,6 @@
 package com.example.y.mvp.mvp.presenter;
 
+
 import com.example.y.mvp.NewsDetailInfo;
 import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;

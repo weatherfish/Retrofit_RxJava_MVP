@@ -1,5 +1,6 @@
 package com.example.y.mvp.activity;
 
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
@@ -23,7 +24,6 @@ import com.example.y.mvp.widget.MyOnPageChangeListener;
 
 import java.util.LinkedList;
 import java.util.List;
-
 
 /**
  * by y on 2016/4/29.
