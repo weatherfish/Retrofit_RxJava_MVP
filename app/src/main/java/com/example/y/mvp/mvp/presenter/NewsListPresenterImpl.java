@@ -2,8 +2,7 @@ package com.example.y.mvp.mvp.presenter;
 
 import com.example.y.mvp.NewsListInfo;
 import com.example.y.mvp.activity.NewsDetailActivity;
-import com.example.y.mvp.mvp.model.BaseDataBridge;
-import com.example.y.mvp.mvp.model.BaseModel;
+import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.model.NewsListModelImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 
@@ -12,16 +11,15 @@ import java.util.List;
 /**
  * by 12406 on 2016/5/15.
  */
-public class NewsListPresenterImpl extends BasePresenterImpl<BaseView.NewsListView>
-        implements BasePresenter.NewsListPresenter, BaseDataBridge.NewsListData {
+public class NewsListPresenterImpl extends BasePresenterImpl<BaseView.NewsListView, NewsListInfo>
+        implements Presenter.NewsListPresenter {
 
-    private final BaseModel.NewsListModel newsListModel;
+    private final Model.NewsListModel newsListModel;
 
     public NewsListPresenterImpl(BaseView.NewsListView view) {
         super(view);
         this.newsListModel = new NewsListModelImpl();
     }
-
 
     @Override
     public void requestNetWork(int id, int page, boolean isNull) {
@@ -32,7 +30,7 @@ public class NewsListPresenterImpl extends BasePresenterImpl<BaseView.NewsListVi
                 view.showFoot();
             }
         }
-        newsListModel.netWorkNewList(id, page, this);
+        newsListModel.netWorkNewList(id, page);
     }
 
     @Override
@@ -40,18 +38,19 @@ public class NewsListPresenterImpl extends BasePresenterImpl<BaseView.NewsListVi
         NewsDetailActivity.startIntent(info.getId());
     }
 
-
     @Override
-    public void addData(List<NewsListInfo> tngou) {
-        view.setData(tngou);
+    protected void onNetWorkSuccess(List<NewsListInfo> data) {
+        view.setData(data);
         view.hideFoot();
         view.hideProgress();
     }
 
+
     @Override
-    public void error() {
+    protected void onNetWorkError() {
         view.hideFoot();
         view.hideProgress();
         view.netWorkError();
     }
+
 }

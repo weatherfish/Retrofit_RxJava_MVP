@@ -10,7 +10,7 @@ import com.example.y.mvp.JokePicInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.JokePicAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.presenter.BasePresenter;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.presenter.JokePicPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
@@ -33,7 +33,7 @@ public class JokePicFragment extends BaseFragment
     private boolean isPrepared;
     private boolean isLoad;
 
-    private BasePresenter.JokePicPresenter jokePresenter;
+    private Presenter.JokePicPresenter jokePresenter;
     private JokePicAdapter adapter;
 
 

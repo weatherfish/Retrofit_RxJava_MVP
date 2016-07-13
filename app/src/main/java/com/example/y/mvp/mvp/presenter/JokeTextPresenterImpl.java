@@ -1,9 +1,8 @@
 package com.example.y.mvp.mvp.presenter;
 
 import com.example.y.mvp.JokeTextInfo;
-import com.example.y.mvp.mvp.model.BaseDataBridge;
-import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.JokeTextModeImpl;
+import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.view.BaseView;
 
 import java.util.List;
@@ -11,10 +10,10 @@ import java.util.List;
 /**
  * by y on 2016/5/30.
  */
-public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextView>
-        implements BasePresenter.JokeTextPresenter, BaseDataBridge.JokeTextList {
+public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextView, JokeTextInfo>
+        implements Presenter.JokeTextPresenter {
 
-    private final BaseModel.JokeTextListModel jokeListModel;
+    private final Model.JokeTextListModel jokeListModel;
 
     public JokeTextPresenterImpl(BaseView.JokeTextView view) {
         super(view);
@@ -30,18 +29,18 @@ public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextVi
                 view.showFoot();
             }
         }
-        jokeListModel.netWorkJoke(page, this);
+        jokeListModel.netWorkJoke(page);
     }
 
     @Override
-    public void addData(List<JokeTextInfo> datas) {
-        view.setData(datas);
+    protected void onNetWorkSuccess(List<JokeTextInfo> data) {
+        view.setData(data);
         view.hideFoot();
         view.hideProgress();
     }
 
     @Override
-    public void error() {
+    protected void onNetWorkError() {
         view.hideFoot();
         view.hideProgress();
         view.netWorkError();

@@ -12,7 +12,7 @@ import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.ImageListAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.presenter.BasePresenter;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.presenter.ImageListPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
@@ -34,7 +34,7 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
     private boolean isPrepared;
     private boolean isLoad;
     private ImageListAdapter adapter;
-    private BasePresenter.ImageListPresenter imageListPresenter;
+    private Presenter.ImageListPresenter imageListPresenter;
 
     public static ImageMainFragment newInstance(int index) {
         Bundle bundle = new Bundle();

@@ -42,7 +42,7 @@ public class BaseBean<T> {
     public class NewsListBean extends BaseBean<NewsListInfo> {
     }
 
-    public class ImageDetailBean extends BaseBean<ImageDetailInfo> {
+    public class ImageDetailBean {
         private List<ImageDetailInfo> list;
 
         public List<ImageDetailInfo> getList() {

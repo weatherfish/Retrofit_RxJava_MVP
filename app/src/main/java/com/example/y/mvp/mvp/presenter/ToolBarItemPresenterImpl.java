@@ -3,14 +3,26 @@ package com.example.y.mvp.mvp.presenter;
 import com.example.y.mvp.R;
 import com.example.y.mvp.mvp.view.BaseView;
 
+import java.util.List;
+
 /**
  * by y on 2016/6/12.
  */
-public class ToolBarItemPresenterImpl extends BasePresenterImpl<BaseView.ToolBarItemView>
-        implements BasePresenter.ToolBarItemPresenter {
+public class ToolBarItemPresenterImpl extends BasePresenterImpl<BaseView.ToolBarItemView, Object>
+        implements Presenter.ToolBarItemPresenter {
 
     public ToolBarItemPresenterImpl(BaseView.ToolBarItemView view) {
         super(view);
+    }
+
+    @Override
+    protected void onNetWorkSuccess(List<Object> data) {
+
+    }
+
+    @Override
+    protected void onNetWorkError() {
+
     }
 
 

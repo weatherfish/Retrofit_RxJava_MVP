@@ -4,29 +4,25 @@ package com.example.y.mvp.mvp.model;
 import com.example.y.mvp.mvp.Bean.BaseBean;
 import com.example.y.mvp.network.MySubscriber;
 import com.example.y.mvp.network.NetWorkRequest;
+import com.example.y.mvp.network.RxBus;
 
 /**
  * by 12406 on 2016/4/29.
  */
-public class ImageNewModelImpl implements BaseModel.ImageNewModel {
+public class ImageNewModelImpl implements Model.ImageNewModel {
 
 
     @Override
-    public void netWorkNew(int id, int rows, final BaseDataBridge.ImageNewData imageNewData) {
+    public void netWorkNew(int id, int rows) {
 
         NetWorkRequest.imageNew(id, rows, new MySubscriber<BaseBean.ImageNewBean>() {
-            @Override
-            public void onError(Throwable e) {
-                imageNewData.error();
-            }
 
-            @SuppressWarnings("unchecked")
             @Override
             public void onNext(BaseBean.ImageNewBean imageNewBean) {
-                imageNewData.addData(imageNewBean.getInfo());
+                RxBus.getInstance().sendNetWork(imageNewBean.getInfo());
             }
         });
     }
 
-   
+
 }

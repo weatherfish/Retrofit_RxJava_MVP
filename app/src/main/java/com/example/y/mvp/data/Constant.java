@@ -29,6 +29,9 @@ public class Constant {
     //KLog
     public static final String K_LOG = "K_Log -- >   ";
 
+
+    public static final String ON_ERROR = "onError";
+
     //SQL name
     public static final String NEWS_TAB_NAME_INFO = "NewsTabNameInfo";
     public static final String NEWS_LIST_INFO = "NewsListInfo";

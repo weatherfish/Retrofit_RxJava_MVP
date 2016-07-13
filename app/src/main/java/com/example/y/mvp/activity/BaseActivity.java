@@ -10,6 +10,7 @@ import com.example.y.mvp.BuildConfig;
 import com.example.y.mvp.R;
 import com.example.y.mvp.data.Constant;
 import com.example.y.mvp.utils.ActivityCollector;
+import com.example.y.mvp.utils.RxUtil;
 import com.example.y.mvp.utils.theme.SharedPreferencesMgr;
 import com.socks.library.KLog;
 
@@ -61,6 +62,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     <T extends View> T getView(int id) {
         //noinspection unchecked
         return (T) findViewById(id);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxUtil.unsubscribe();
     }
 
     protected abstract int getLayoutId();

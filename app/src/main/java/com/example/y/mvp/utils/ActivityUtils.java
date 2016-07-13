@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.y.mvp.R;
-import com.socks.library.KLog;
 
 import java.io.File;
 
@@ -66,11 +65,9 @@ public class ActivityUtils {
 
     // 收起软键盘
     public static void closeSyskeyBroad() {
-        try {
+        if (UIUtils.getContext() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) UIUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(UIUtils.getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        } catch (Exception e) {
-            KLog.i("closeSyskeyBroad", "关闭输入法异常");
         }
     }
 

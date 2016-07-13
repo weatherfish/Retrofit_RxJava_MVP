@@ -20,21 +20,26 @@ public class RxBus {
     }
 
     public static RxBus getInstance() {
-        return rxbusHolder.instance;
+        return RxbusHolder.rxBus;
     }
 
-    public static class rxbusHolder {
-        private static final RxBus instance = new RxBus();
+    public static class RxbusHolder {
+        private static final RxBus rxBus = new RxBus();
     }
 
-    public void send(Object object) {
+    public void sendNetWork(Object data) {
+        //noinspection unchecked
+        rxBus.onNext(data);
+    }
+
+    public void sendTheme(Object object) {
         //noinspection unchecked
         rxBus.onNext(object);
     }
 
-//    public Observable<Object> toObserverable() {
-//        return rxBus;
-//    }
+    public Subject toObserverable() {
+        return rxBus;
+    }
 
     public <T> Observable<T> toObserverable(final Class<T> eventType) {
         //noinspection unchecked

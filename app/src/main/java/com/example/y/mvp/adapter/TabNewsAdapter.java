@@ -27,7 +27,7 @@ public class TabNewsAdapter extends BaseFragmentPagerAdapter<NewsTabNameInfo> {
 
     @Override
     protected CharSequence getTitle(NewsTabNameInfo data) {
-        NewsTabNameDbUtils.addNewsTabName(data.getId(),data.getName());
+        NewsTabNameDbUtils.insert(data.getId(),data.getName());
         return data.getName();
     }
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,14 +13,16 @@ import android.widget.TextView;
 
 import com.example.y.mvp.NewsDetailInfo;
 import com.example.y.mvp.R;
-import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.NewsDetailPresenterImpl;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.presenter.ToolBarItemPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.network.Api;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.ImageLoaderUtils;
+import com.example.y.mvp.utils.StatusBarUtil;
 import com.example.y.mvp.utils.UIUtils;
+import com.example.y.mvp.utils.db.NewsDetailDbUtils;
 
 /**
  * by 12406 on 2016/5/30.
@@ -37,7 +38,7 @@ public class NewsDetailActivity extends BaseActivity
 
     private int id;
     private String message;
-    private BasePresenter.ToolBarItemPresenter toolBarItemPresenter;
+    private Presenter.ToolBarItemPresenter toolBarItemPresenter;
 
 
     public static void startIntent(int id) {
@@ -54,6 +55,13 @@ public class NewsDetailActivity extends BaseActivity
         init();
     }
 
+
+    @Override
+    public void setStatusBar() {
+        super.setStatusBar();
+        StatusBarUtil.setTranslucentForImageView(this, image);
+    }
+
     @Override
     protected void initById() {
         image = getView(R.id.image);
@@ -64,7 +72,7 @@ public class NewsDetailActivity extends BaseActivity
     }
 
     private void init() {
-        BasePresenter.NewsDetailPresenter newsDetailPresenter = new NewsDetailPresenterImpl(this);
+        Presenter.NewsDetailPresenter newsDetailPresenter = new NewsDetailPresenterImpl(this);
         toolBarItemPresenter = new ToolBarItemPresenterImpl(this);
         newsDetailPresenter.requestNetWork(id);
 
@@ -86,18 +94,12 @@ public class NewsDetailActivity extends BaseActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }
-
-
-    @Override
     public void setData(NewsDetailInfo datas) {
         ImageLoaderUtils.display(getApplicationContext(), image, Api.IMAGER_URL + datas.getImg());
         content.setText(Html.fromHtml(datas.getMessage()));
         collapsingToolbar.setTitle(datas.getTitle());
         message = String.valueOf(Html.fromHtml(datas.getMessage()));
+        NewsDetailDbUtils.insert(datas.getId(), datas.getTitle(), datas.getMessage(), datas.getImg());
     }
 
     @Override

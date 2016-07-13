@@ -22,7 +22,6 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
 
 
     private ImageView imageView;
-    private ImageView headImage;
 
     public MenuItemAdapter(List<String> mDatas) {
         super(mDatas);
@@ -32,7 +31,7 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
     protected void getHeadLayoutId(View headView) {
         super.getHeadLayoutId(headView);
         imageView = getView(headView, R.id.iv);
-        headImage = getView(headView, R.id.head_image);
+        ImageView headImage = getView(headView, R.id.head_image);
         RxUtil.clicks(imageView, this);
         if (SharedPreferencesMgr.getIsNight()) {
             setDay();

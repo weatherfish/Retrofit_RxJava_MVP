@@ -11,8 +11,8 @@ import android.view.MenuItem;
 import com.example.y.mvp.ImageDetailInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.ImageDetailAdapter;
-import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.ImageDetailPresenterImpl;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.presenter.ToolBarItemPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.network.Api;
@@ -34,11 +34,10 @@ public class ImageDetailActivity extends BaseActivity
 
     private ViewPager viewPager;
     private ThemeToolbar toolBar;
-    private int id;
     private int pos;
     private LinkedList<ImageDetailInfo> list;
-    private BasePresenter.ImageDetailPresenter imageDetailPresenter;
-    private BasePresenter.ToolBarItemPresenter toolBarItemPresenter;
+    private Presenter.ImageDetailPresenter imageDetailPresenter;
+    private Presenter.ToolBarItemPresenter toolBarItemPresenter;
     private ImageDetailAdapter bigImageAdapter;
 
 
@@ -55,7 +54,6 @@ public class ImageDetailActivity extends BaseActivity
         toolBar.setTitle(UIUtils.getString(R.string.image_detail));
         setSupportActionBar(toolBar);
         CompetenceUtils.Storage();
-        getBundle();
         init();
     }
 
@@ -77,7 +75,7 @@ public class ImageDetailActivity extends BaseActivity
         imageDetailPresenter = new ImageDetailPresenterImpl(this);
         toolBarItemPresenter = new ToolBarItemPresenterImpl(this);
         list = new LinkedList<>();
-        imageDetailPresenter.requestNetWork(id);
+        imageDetailPresenter.requestNetWork(imageDetailPresenter.getBundle());
         bigImageAdapter = new ImageDetailAdapter(list);
 
         toolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -104,37 +102,9 @@ public class ImageDetailActivity extends BaseActivity
         return R.layout.activity_image_detail;
     }
 
-
-    private void getBundle() {
-        Bundle bundle = getIntent().getExtras();
-        if (!bundle.isEmpty()) {
-            id = bundle.getInt("id");
-        }
-    }
-
     @Override
     public void netWorkError() {
         ActivityUtils.Toast(UIUtils.getString(R.string.network_error));
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void showFoot() {
-
-    }
-
-    @Override
-    public void hideFoot() {
-
     }
 
 
@@ -152,7 +122,6 @@ public class ImageDetailActivity extends BaseActivity
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-
 
     @Override
     public void switchShare() {

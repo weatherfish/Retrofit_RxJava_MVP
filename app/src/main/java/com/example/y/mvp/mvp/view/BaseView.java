@@ -37,7 +37,12 @@ public interface BaseView<T> {
     interface JokeTextView extends BaseView<JokeTextInfo> {
     }
 
-    interface ImageDetailView extends BaseView<ImageDetailInfo> {
+    interface ImageDetailView {
+
+        void setData(List<ImageDetailInfo> datas);
+
+        void netWorkError();
+
     }
 
     interface ImageListView extends BaseView<ImageListInfo> {
@@ -84,6 +89,6 @@ public interface BaseView<T> {
 
         void switchShare();
 
-        
+
     }
 }

@@ -7,7 +7,7 @@ import android.view.View;
 import com.example.y.mvp.ImageTabNameInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.TabNameAdapter;
-import com.example.y.mvp.mvp.presenter.BasePresenter;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.presenter.TabNamePresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
@@ -44,7 +44,7 @@ public class ImageViewPagerFragment extends BaseFragment implements BaseView.Tab
         data = new LinkedList<>();
         tabNameAdapter = new TabNameAdapter(getChildFragmentManager(), data);
 
-        BasePresenter.TabNamePresenter tabNamePresenter = new TabNamePresenterImpl(this);
+        Presenter.TabNamePresenter tabNamePresenter = new TabNamePresenterImpl(this);
         tabNamePresenter.requestNetWork();
     }
 

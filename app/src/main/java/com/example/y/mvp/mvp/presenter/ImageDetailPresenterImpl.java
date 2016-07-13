@@ -7,9 +7,8 @@ import android.widget.Toast;
 import com.example.y.mvp.ImageDetailInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.model.BaseDataBridge;
-import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.ImageDetailModelImpl;
+import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.UIUtils;
 
@@ -18,20 +17,19 @@ import java.util.List;
 /**
  * by y on 2016/4/29.
  */
-public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDetailView>
-        implements BasePresenter.ImageDetailPresenter, BaseDataBridge.ImageDetailData {
+public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDetailView, ImageDetailInfo>
+        implements Presenter.ImageDetailPresenter {
 
-    private final BaseModel.ImageDetailModel imageDetailModel;
+    private final Model.ImageDetailModel imageDetailModel;
 
     public ImageDetailPresenterImpl(BaseView.ImageDetailView view) {
         super(view);
         this.imageDetailModel = new ImageDetailModelImpl();
     }
 
-
     @Override
     public void requestNetWork(int id) {
-        imageDetailModel.netWorkDetail(id, this);
+        imageDetailModel.netWorkDetail(id);
     }
 
     @Override
@@ -46,12 +44,18 @@ public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDe
     }
 
     @Override
-    public void addData(List<ImageDetailInfo> imageDetailInfo) {
-        view.setData(imageDetailInfo);
+    public int getBundle() {
+        return UIUtils.getActivity().getIntent().getExtras().getInt("id");
     }
 
     @Override
-    public void error() {
+    protected void onNetWorkSuccess(List<ImageDetailInfo> data) {
+        view.setData(data);
+    }
+
+
+    @Override
+    protected void onNetWorkError() {
         view.netWorkError();
     }
 }

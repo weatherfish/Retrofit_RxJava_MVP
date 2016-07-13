@@ -6,9 +6,8 @@ import android.widget.Toast;
 import com.example.y.mvp.R;
 import com.example.y.mvp.activity.ImageDetailActivity;
 import com.example.y.mvp.mvp.Bean.ImageNewInfo;
-import com.example.y.mvp.mvp.model.BaseDataBridge;
-import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.ImageNewModelImpl;
+import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
@@ -18,17 +17,16 @@ import java.util.List;
 /**
  * by y on 2016/4/29.
  */
-public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewView>
-        implements BasePresenter.ImageNewPresenter, BaseDataBridge.ImageNewData {
+public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewView, ImageNewInfo>
+        implements Presenter.ImageNewPresenter {
 
-    private final BaseModel.ImageNewModel imageNewModel;
+    private final Model.ImageNewModel imageNewModel;
 
 
     public ImageNewPresenterImpl(BaseView.ImageNewView view) {
         super(view);
         this.imageNewModel = new ImageNewModelImpl();
     }
-
 
     @Override
     public void requestNetWork(String id, String rows) {
@@ -44,7 +42,7 @@ public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewVi
                 ActivityUtils.closeSyskeyBroad();
             }
             view.showProgress();
-            imageNewModel.netWorkNew(Integer.valueOf(id), Integer.valueOf(rows), this);
+            imageNewModel.netWorkNew(Integer.valueOf(id), Integer.valueOf(rows));
         }
     }
 
@@ -54,13 +52,14 @@ public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewVi
     }
 
     @Override
-    public void addData(List<ImageNewInfo> imageNewInfo) {
-        view.setData(imageNewInfo);
+    protected void onNetWorkSuccess(List<ImageNewInfo> data) {
+        view.setData(data);
         view.hideProgress();
     }
 
+
     @Override
-    public void error() {
+    protected void onNetWorkError() {
         view.hideProgress();
         view.netWorkError();
     }

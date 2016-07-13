@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.y.mvp.utils.RxUtil;
 import com.socks.library.KLog;
 
 /**
@@ -73,4 +74,10 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initById();
 
     protected abstract void initData();
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        RxUtil.unsubscribe();
+    }
 }

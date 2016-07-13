@@ -2,40 +2,41 @@ package com.example.y.mvp.mvp.presenter;
 
 
 import com.example.y.mvp.NewsDetailInfo;
-import com.example.y.mvp.mvp.model.BaseDataBridge;
-import com.example.y.mvp.mvp.model.BaseModel;
+import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.model.NewsDetailModelImpl;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.utils.RxBusUtils;
 
 /**
  * by 12406 on 2016/5/30.
  */
-public class NewsDetailPresenterImpl extends BasePresenterImpl<BaseView.NewsDetailView>
-        implements BasePresenter.NewsDetailPresenter, BaseDataBridge.NewsDetailData {
+public class NewsDetailPresenterImpl
+        implements Presenter.NewsDetailPresenter, RxBusUtils.RxBusNetWork {
 
-    private final BaseModel.NewsDetailModel newsDetailModel;
+    private final Model.NewsDetailModel newsDetailModel;
+    private final BaseView.NewsDetailView newsDetailView;
 
     public NewsDetailPresenterImpl(BaseView.NewsDetailView view) {
-        super(view);
-        newsDetailModel = new NewsDetailModelImpl();
+        RxBusUtils.rxNetWork(this);
+        this.newsDetailView = view;
+        this.newsDetailModel = new NewsDetailModelImpl();
     }
 
     @Override
     public void requestNetWork(int id) {
-        view.showProgress();
-        newsDetailModel.netWorkNewsDetail(id, this);
+        newsDetailView.showProgress();
+        newsDetailModel.netWorkNewsDetail(id);
     }
 
     @Override
-    public void addData(NewsDetailInfo datas) {
-        view.setData(datas);
-        view.hideProgress();
+    public void onNext(Object o) {
+        newsDetailView.setData((NewsDetailInfo) o);
+        newsDetailView.hideProgress();
     }
 
-
     @Override
-    public void error() {
-        view.hideProgress();
-        view.netWorkError();
+    public void onError() {
+        newsDetailView.hideProgress();
+        newsDetailView.netWorkError();
     }
 }

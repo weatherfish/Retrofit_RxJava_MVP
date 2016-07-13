@@ -9,13 +9,15 @@ import com.example.y.mvp.mvp.Bean.ImageNewInfo;
  * by y on 2016/5/27.
  */
 @SuppressWarnings("ALL")
-public interface BasePresenter {
+public interface Presenter {
 
 
     interface ImageDetailPresenter {
         void requestNetWork(int id);
 
         void competence(int requestCode, int[] grantResults);
+
+        int getBundle();
     }
 
     interface ImageListPresenter {

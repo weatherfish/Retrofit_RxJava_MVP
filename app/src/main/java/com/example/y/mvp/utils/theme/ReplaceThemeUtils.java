@@ -20,14 +20,12 @@ public class ReplaceThemeUtils {
 
     public static void theme(final Activity activity) {
 
-        KLog.i("colorUIUtils", "开始更换主题");
-
         if (SharedPreferencesMgr.getInt() == 1) {
 
             SharedPreferencesMgr.setInt(Constant.THEME, 0);
             activity.setTheme(R.style.Theme_Day);
 
-            RxBus.getInstance().send(new IsNightMode(true));
+            RxBus.getInstance().sendTheme(new IsNightMode(true));
 
             SharedPreferencesMgr.setIsNight(true);
 
@@ -37,7 +35,7 @@ public class ReplaceThemeUtils {
             SharedPreferencesMgr.setInt(Constant.THEME, 1);
             activity.setTheme(R.style.Theme_Night);
 
-            RxBus.getInstance().send(new IsNightMode(false));
+            RxBus.getInstance().sendTheme(new IsNightMode(false));
 
             SharedPreferencesMgr.setIsNight(false);
 

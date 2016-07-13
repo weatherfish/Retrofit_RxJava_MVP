@@ -2,8 +2,7 @@ package com.example.y.mvp.mvp.presenter;
 
 
 import com.example.y.mvp.ImageTabNameInfo;
-import com.example.y.mvp.mvp.model.BaseDataBridge;
-import com.example.y.mvp.mvp.model.BaseModel;
+import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.model.TabNameModelImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 
@@ -12,29 +11,30 @@ import java.util.List;
 /**
  * by y on 2016/4/29.
  */
-public class TabNamePresenterImpl extends BasePresenterImpl<BaseView.TabNameView>
-        implements BasePresenter.TabNamePresenter, BaseDataBridge.TabNameData {
+public class TabNamePresenterImpl extends BasePresenterImpl<BaseView.TabNameView, ImageTabNameInfo>
+        implements Presenter.TabNamePresenter {
 
-    private final BaseModel.TabNameModel tabNameModel;
+    private final Model.TabNameModel tabNameModel;
 
     public TabNamePresenterImpl(BaseView.TabNameView view) {
         super(view);
         this.tabNameModel = new TabNameModelImpl();
     }
 
-
     @Override
     public void requestNetWork() {
-        tabNameModel.netWork(this);
+        tabNameModel.netWork();
     }
 
     @Override
-    public void addData(List<ImageTabNameInfo> tabNameInfo) {
-        view.setData(tabNameInfo);
+    protected void onNetWorkSuccess(List<ImageTabNameInfo> data) {
+        view.setData(data);
     }
 
+
     @Override
-    public void error() {
+    protected void onNetWorkError() {
         view.netWorkError();
     }
+
 }

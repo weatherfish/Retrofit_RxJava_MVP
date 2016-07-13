@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class NewsListDbUtils {
 
-    public static void addNewsList(int id, int type, String title, String img, String fromurl, Long time) {
+    public static void insert(int id, int type, String title, String img, String fromurl, Long time) {
         if (GreenDaoDbUtils.isEmpty(Constant.NEWS_LIST_INFO, id)) {
             GreenDaoDbUtils.getNewsListInfoDb().insert(new NewsListInfo(null, id, type, null, null, null, null, title, img, fromurl, time, null));
         }

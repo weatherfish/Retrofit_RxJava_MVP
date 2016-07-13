@@ -16,30 +16,33 @@ public class DiaLogUtils {
 
 
     public static void iamgeViewDialog(final ImageView imageView, final int id) {
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(UIUtils.getActivity());
-        builder.setMessage(UIUtils.getString(R.string.imageview_message));
-        builder.setPositiveButton(UIUtils.getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                imageView.setDrawingCacheEnabled(true);
-                SaveImageUtils.imageSave(imageView, id);
-            }
-        });
-        builder.create().show();
+        if (UIUtils.getActivity() != null) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(UIUtils.getActivity());
+            builder.setMessage(UIUtils.getString(R.string.imageview_message));
+            builder.setPositiveButton(UIUtils.getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    imageView.setDrawingCacheEnabled(true);
+                    SaveImageUtils.imageSave(imageView, id);
+                }
+            });
+            builder.create().show();
+        }
     }
 
 
     public static void clearSql() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(UIUtils.getActivity());
-        builder.setMessage(UIUtils.getString(R.string.clear_sql));
-        builder.setPositiveButton(UIUtils.getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                GreenDaoDbUtils.clearAll();
-            }
-        });
-        builder.create().show();
+        if (UIUtils.getActivity() != null) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(UIUtils.getActivity());
+            builder.setMessage(UIUtils.getString(R.string.clear_sql));
+            builder.setPositiveButton(UIUtils.getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    GreenDaoDbUtils.clearAll();
+                }
+            });
+            builder.create().show();
+        }
     }
 }
 

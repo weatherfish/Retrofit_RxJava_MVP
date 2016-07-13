@@ -19,10 +19,11 @@ import com.example.y.mvp.fragment.ImageNewFragment;
 import com.example.y.mvp.fragment.ImageViewPagerFragment;
 import com.example.y.mvp.fragment.JokeMainPagerFragment;
 import com.example.y.mvp.fragment.NewsViewPagerFragment;
-import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.MainViewPresenterImpl;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
+import com.example.y.mvp.utils.StatusBarUtil;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
 import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
@@ -39,7 +40,7 @@ public class MainActivity extends BaseActivity
     private DrawerLayout drawerLayout;
     private ThemeRecyclerView recyclerViewMenu;
 
-    private BasePresenter.MainViewPresenter mainViewPresenter;
+    private Presenter.MainViewPresenter mainViewPresenter;
 
 
     @Override
@@ -62,6 +63,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void setStatusBar() {
         super.setStatusBar();
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, drawerLayout, 0);
     }
 
     private void init() {

@@ -1,9 +1,8 @@
 package com.example.y.mvp.mvp.presenter;
 
 import com.example.y.mvp.JokePicInfo;
-import com.example.y.mvp.mvp.model.BaseDataBridge;
-import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.JokePicModeImpl;
+import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.view.BaseView;
 
 import java.util.List;
@@ -11,15 +10,15 @@ import java.util.List;
 /**
  * by y on 2016/5/30.
  */
-public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView>
-        implements BasePresenter.JokePicPresenter, BaseDataBridge.JokePicList {
+public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView, JokePicInfo>
+        implements Presenter.JokePicPresenter {
 
-    private final BaseModel.JokePicListModel jokePicListModel;
+    private final Model.JokePicListModel jokePicListModel;
 
 
     public JokePicPresenterImpl(BaseView.JokePicView view) {
         super(view);
-        jokePicListModel = new JokePicModeImpl();
+        this.jokePicListModel = new JokePicModeImpl();
     }
 
     @Override
@@ -31,18 +30,18 @@ public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView
                 view.showFoot();
             }
         }
-        jokePicListModel.netWorkJoke(page, this);
+        jokePicListModel.netWorkJoke(page);
     }
 
     @Override
-    public void addData(List<JokePicInfo> datas) {
-        view.setData(datas);
+    protected void onNetWorkSuccess(List<JokePicInfo> data) {
+        view.setData(data);
         view.hideFoot();
         view.hideProgress();
     }
 
     @Override
-    public void error() {
+    protected void onNetWorkError() {
         view.hideFoot();
         view.hideProgress();
         view.netWorkError();

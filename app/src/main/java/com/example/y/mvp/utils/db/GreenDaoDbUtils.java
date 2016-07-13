@@ -26,6 +26,14 @@ import java.util.List;
 public class GreenDaoDbUtils {
 
 
+    public static class GreenDaoDBHolder {
+        public static final GreenDaoDbUtils greenDaoDbUtils = new GreenDaoDbUtils();
+    }
+
+    public static GreenDaoDbUtils getInstance() {
+        return GreenDaoDBHolder.greenDaoDbUtils;
+    }
+
     public static void deleteSql(String sqlName) {
         switch (sqlName) {
             case Constant.NEWS_TAB_NAME_INFO:

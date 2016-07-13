@@ -9,10 +9,13 @@ import com.example.y.mvp.data.Constant;
 public class NewsTabNameDbUtils {
 
 
-    public static void addNewsTabName(int id, String name) {
+    public static void insert(int id, String name) {
         if (GreenDaoDbUtils.isEmpty(Constant.NEWS_TAB_NAME_INFO, id)) {
             GreenDaoDbUtils.getNewsTabNameDb().insert(new NewsTabNameInfo(null, id, name));
         }
     }
 
+    public static void upDateSql(int id, String name) {
+        GreenDaoDbUtils.getNewsTabNameDb().update(new NewsTabNameInfo(null, id, name));
+    }
 }

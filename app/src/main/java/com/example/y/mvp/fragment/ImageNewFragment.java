@@ -5,20 +5,20 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.ImageNewAdapter;
 import com.example.y.mvp.data.Constant;
 import com.example.y.mvp.mvp.Bean.ImageNewInfo;
-import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.ImageNewPresenterImpl;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.theme.widget.ThemeButton;
 import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,15 +32,15 @@ public class ImageNewFragment extends BaseFragment implements
         BaseRecyclerViewAdapter.OnItemClickListener<ImageNewInfo> {
 
 
-    private MaterialEditText etId;
-    private MaterialEditText etRows;
+    private EditText etId;
+    private EditText etRows;
     private ThemeButton button;
 
     private ThemeRecyclerView recyclerView;
     private SwipeRefreshLayout srfLayout;
 
     private ImageNewAdapter adapter;
-    private BasePresenter.ImageNewPresenter imageNewPresenter;
+    private Presenter.ImageNewPresenter imageNewPresenter;
 
     @Override
     public View initView() {
