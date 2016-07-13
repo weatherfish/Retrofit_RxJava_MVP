@@ -17,7 +17,7 @@ public class TabNameModelImpl implements Model.TabNameModel {
         NetWorkRequest.tabName(new MySubscriber<BaseBean.TabNameBean>() {
             @Override
             public void onNext(BaseBean.TabNameBean tabNameBean) {
-                RxBus.getInstance().sendNetWork(tabNameBean.getInfo());
+                RxBus.getInstance().sendNetWork(tabNameBean.getTngou());
             }
         });
     }

@@ -37,9 +37,9 @@ public class RxBus {
         rxBus.onNext(object);
     }
 
-    public Subject toObserverable() {
-        return rxBus;
-    }
+//    public Subject toObserverable() {
+//        return rxBus;
+//    }
 
     public <T> Observable<T> toObserverable(final Class<T> eventType) {
         //noinspection unchecked

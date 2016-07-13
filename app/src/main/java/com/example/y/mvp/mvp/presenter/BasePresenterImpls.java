@@ -2,16 +2,14 @@ package com.example.y.mvp.mvp.presenter;
 
 import com.example.y.mvp.utils.RxBusUtils;
 
-import java.util.List;
-
 /**
  * by y on 2016/5/27.
  */
-public abstract class BasePresenterImpl<T, M> implements RxBusUtils.RxBusNetWork {
+public abstract class BasePresenterImpls<T> implements RxBusUtils.RxBusNetWork {
 
     protected final T view;
 
-    public BasePresenterImpl(T view) {
+    public BasePresenterImpls(T view) {
         RxBusUtils.rxNetWork(this);
         this.view = view;
     }
@@ -19,7 +17,7 @@ public abstract class BasePresenterImpl<T, M> implements RxBusUtils.RxBusNetWork
     @Override
     public void onNext(Object o) {
         //noinspection unchecked
-        onNetWorkSuccess((List<M>) o);
+        onNetWorkSuccess(o);
     }
 
     @Override
@@ -27,7 +25,7 @@ public abstract class BasePresenterImpl<T, M> implements RxBusUtils.RxBusNetWork
         onNetWorkError();
     }
 
-    protected abstract void onNetWorkSuccess(List<M> data);
+    protected abstract void onNetWorkSuccess(Object o);
 
     protected abstract void onNetWorkError();
 

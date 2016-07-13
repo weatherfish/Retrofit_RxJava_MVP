@@ -50,5 +50,6 @@
     <string name="share">分享到平台</string>
     <string name="clear_sql">清除数据库？</string>
     <string name="search_null">未查询到数据</string>
+    <string name="closeSyskeyBroad">关闭输入法出现异常</string>
 
 </resources>

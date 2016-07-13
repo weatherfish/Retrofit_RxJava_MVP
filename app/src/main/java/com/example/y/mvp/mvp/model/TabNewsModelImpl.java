@@ -18,7 +18,7 @@ public class TabNewsModelImpl implements Model.TabNewsModel {
         NetWorkRequest.tabNews(new MySubscriber<BaseBean.TabNewsBean>() {
             @Override
             public void onNext(BaseBean.TabNewsBean tabNewsBean) {
-                RxBus.getInstance().sendNetWork(tabNewsBean.getInfo());
+                RxBus.getInstance().sendNetWork(tabNewsBean.getTngou());
             }
         });
 

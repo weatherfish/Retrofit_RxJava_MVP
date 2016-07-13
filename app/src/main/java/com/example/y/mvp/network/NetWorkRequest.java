@@ -85,7 +85,8 @@ public class NetWorkRequest {
     }
 
     public static void jokePicList(int page, Subscriber<JokePicBean> subscriber) {
-        Network.getBaiDuApi().getJokePic(page)
+        RxUtil.unsubscribe();
+        RxUtil.subscription = Network.getBaiDuApi().getJokePic(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);

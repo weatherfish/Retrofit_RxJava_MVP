@@ -18,11 +18,11 @@ public class BaseBean<T> {
     private List<T> tngou;
 
 
-    public List<T> getInfo() {
+    public List<T> getTngou() {
         return tngou;
     }
 
-    public void setInfo(List<T> tngou) {
+    public void setTngou(List<T> tngou) {
         this.tngou = tngou;
     }
 

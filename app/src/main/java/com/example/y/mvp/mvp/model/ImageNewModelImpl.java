@@ -19,7 +19,7 @@ public class ImageNewModelImpl implements Model.ImageNewModel {
 
             @Override
             public void onNext(BaseBean.ImageNewBean imageNewBean) {
-                RxBus.getInstance().sendNetWork(imageNewBean.getInfo());
+                RxBus.getInstance().sendNetWork(imageNewBean.getTngou());
             }
         });
     }

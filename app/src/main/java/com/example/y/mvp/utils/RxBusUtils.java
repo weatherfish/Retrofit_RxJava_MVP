@@ -32,14 +32,13 @@ public class RxBusUtils {
     }
 
     public static void rxNetWork(final RxBusNetWork rxBusNetWork) {
-        //noinspection unchecked
-        RxBus.getInstance().toObserverable().subscribe(new Action1() {
+        RxBus.getInstance().toObserverable(Object.class).subscribe(new Action1<Object>() {
             @Override
             public void call(Object o) {
-                if (o.equals(Constant.ON_ERROR)) {
-                    rxBusNetWork.onError();
-                } else {
+                if (!Constant.ON_ERROR.equals(o)) {
                     rxBusNetWork.onNext(o);
+                } else {
+                    rxBusNetWork.onError();
                 }
             }
         }, new Action1<Throwable>() {
@@ -48,7 +47,9 @@ public class RxBusUtils {
                 KLog.i(throwable.getMessage());
             }
         });
+
     }
+
 
     public interface RxBusTheme {
         void setDay();

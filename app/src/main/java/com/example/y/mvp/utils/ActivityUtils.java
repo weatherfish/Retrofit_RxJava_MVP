@@ -66,8 +66,13 @@ public class ActivityUtils {
     // 收起软键盘
     public static void closeSyskeyBroad() {
         if (UIUtils.getContext() != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) UIUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(UIUtils.getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            try {
+                InputMethodManager inputMethodManager = (InputMethodManager) UIUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(UIUtils.getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }catch (Exception e){
+                Toast(UIUtils.getString(R.string.closeSyskeyBroad));
+            }
+
         }
     }
 

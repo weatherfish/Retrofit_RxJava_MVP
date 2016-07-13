@@ -4,32 +4,41 @@ package com.example.y.mvp.mvp.presenter;
 import android.content.pm.PackageManager;
 import android.widget.Toast;
 
-import com.example.y.mvp.ImageDetailInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.data.Constant;
+import com.example.y.mvp.mvp.Bean.BaseBean;
 import com.example.y.mvp.mvp.model.ImageDetailModelImpl;
 import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.network.MySubscriber;
+import com.example.y.mvp.network.NetWorkRequest;
+import com.example.y.mvp.utils.RxBusUtils;
 import com.example.y.mvp.utils.UIUtils;
-
-import java.util.List;
 
 /**
  * by y on 2016/4/29.
  */
-public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDetailView, ImageDetailInfo>
-        implements Presenter.ImageDetailPresenter {
+public class ImageDetailPresenterImpl
+        implements Presenter.ImageDetailPresenter, RxBusUtils.RxBusNetWork {
 
     private final Model.ImageDetailModel imageDetailModel;
+    private final BaseView.ImageDetailView imageDetailView;
 
     public ImageDetailPresenterImpl(BaseView.ImageDetailView view) {
-        super(view);
+        this.imageDetailView = view;
         this.imageDetailModel = new ImageDetailModelImpl();
     }
 
     @Override
     public void requestNetWork(int id) {
-        imageDetailModel.netWorkDetail(id);
+//        imageDetailModel.netWorkDetail(id);
+        NetWorkRequest.imageDetail(id, new MySubscriber<BaseBean.ImageDetailBean>() {
+            @Override
+            public void onNext(BaseBean.ImageDetailBean imageDetailBean) {
+                super.onNext(imageDetailBean);
+                imageDetailView.setData(imageDetailBean.getList());
+            }
+        });
     }
 
     @Override
@@ -49,13 +58,12 @@ public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDe
     }
 
     @Override
-    protected void onNetWorkSuccess(List<ImageDetailInfo> data) {
-        view.setData(data);
+    public void onNext(Object o) {
+
     }
 
-
     @Override
-    protected void onNetWorkError() {
-        view.netWorkError();
+    public void onError() {
+        imageDetailView.netWorkError();
     }
 }

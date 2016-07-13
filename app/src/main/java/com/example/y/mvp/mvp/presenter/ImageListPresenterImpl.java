@@ -6,6 +6,7 @@ import com.example.y.mvp.activity.ImageDetailActivity;
 import com.example.y.mvp.mvp.model.ImageListModelImpl;
 import com.example.y.mvp.mvp.model.Model;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.utils.ActivityUtils;
 
 import java.util.List;
 

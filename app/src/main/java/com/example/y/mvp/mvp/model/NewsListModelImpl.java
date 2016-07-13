@@ -17,7 +17,7 @@ public class NewsListModelImpl implements Model.NewsListModel {
         NetWorkRequest.newsList(id, page, new MySubscriber<BaseBean.NewsListBean>() {
             @Override
             public void onNext(BaseBean.NewsListBean newsListBean) {
-                RxBus.getInstance().sendNetWork(newsListBean.getInfo());
+                RxBus.getInstance().sendNetWork(newsListBean.getTngou());
             }
         });
     }

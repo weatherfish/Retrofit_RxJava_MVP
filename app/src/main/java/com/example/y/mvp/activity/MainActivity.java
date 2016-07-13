@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void setStatusBar() {
         super.setStatusBar();
-        StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, drawerLayout, 0);
+        StatusBarUtil.setColorForDrawerLayout(this, drawerLayout, 0);
     }
 
     private void init() {

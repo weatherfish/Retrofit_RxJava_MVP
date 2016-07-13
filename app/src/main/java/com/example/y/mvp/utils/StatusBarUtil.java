@@ -9,8 +9,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * by Jaeger on 16/2/14.
@@ -450,13 +454,40 @@ public class StatusBarUtil {
      * @param marginView 需要设置 margin 的 View
      */
     public static void setTranslucentForImageView(Activity act, View marginView) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             act.getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                addTranslucentView(act, DEFAULT_STATUS_BAR_ALPHA);
-            }
             ViewGroup.MarginLayoutParams vmlp = (ViewGroup.MarginLayoutParams) marginView.getLayoutParams();
             vmlp.setMargins(0, -getStatusBarHeight(act), 0, 0);
+        }
+    }
+
+    /**
+     * 改变小米的状态栏字体颜色为黑色, 要求 MIUI6 以上
+     */
+    public static void processMIUI(Activity activity, boolean lightStatusBar) throws Exception {
+        Class<? extends Window> clazz = activity.getWindow().getClass();
+        int darkModeFlag;
+        Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
+        Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
+        darkModeFlag = field.getInt(layoutParams);
+        Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
+        extraFlagField.invoke(activity.getActionBar(), lightStatusBar ? darkModeFlag : 0, darkModeFlag);
+    }
+
+    /**
+     * 改变魅族的状态栏字体为黑色，要求 FlyMe4 以上
+     */
+    public static void processFlyMe(Activity activity, boolean isLightStatusBar) throws Exception {
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        Class<?> instance = Class.forName("android.view.WindowManager$LayoutParams");
+        int value = instance.getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON").getInt(lp);
+        Field field = instance.getDeclaredField("meizuFlags");
+        field.setAccessible(true);
+        int origin = field.getInt(lp);
+        if (isLightStatusBar) {
+            field.set(lp, origin | value);
+        } else {
+            field.set(lp, (~value) & origin);
         }
     }
 }
