@@ -1,7 +1,7 @@
 package com.example.y.mvp.network;
 
-import com.example.y.mvp.mvp.Bean.JokePicBean;
-import com.example.y.mvp.mvp.Bean.JokeTextBean;
+import com.example.y.mvp.mvp.model.JokePicBean;
+import com.example.y.mvp.mvp.model.JokeTextBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Headers;

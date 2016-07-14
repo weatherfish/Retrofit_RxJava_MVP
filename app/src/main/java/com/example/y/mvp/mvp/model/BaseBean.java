@@ -1,4 +1,4 @@
-package com.example.y.mvp.mvp.Bean;
+package com.example.y.mvp.mvp.model;
 
 
 import com.example.y.mvp.ImageDetailInfo;
@@ -52,7 +52,6 @@ public class BaseBean<T> {
         public void setList(List<ImageDetailInfo> list) {
             this.list = list;
         }
-
     }
 
 }

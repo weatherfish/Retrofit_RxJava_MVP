@@ -3,24 +3,21 @@ package com.example.y.mvp.mvp.presenter;
 
 import com.example.y.mvp.ImageListInfo;
 import com.example.y.mvp.activity.ImageDetailActivity;
-import com.example.y.mvp.mvp.model.ImageListModelImpl;
-import com.example.y.mvp.mvp.model.Model;
+import com.example.y.mvp.mvp.model.BaseBean;
 import com.example.y.mvp.mvp.view.BaseView;
-import com.example.y.mvp.utils.ActivityUtils;
-
-import java.util.List;
+import com.example.y.mvp.network.MySubscriber;
+import com.example.y.mvp.network.NetWorkRequest;
+import com.socks.library.KLog;
 
 /**
  * by y on 2016/4/29.
  */
-public class ImageListPresenterImpl extends BasePresenterImpl<BaseView.ImageListView, ImageListInfo>
+public class ImageListPresenterImpl extends BasePresenterImpl<BaseView.ImageListView, BaseBean.ImageListBean>
         implements Presenter.ImageListPresenter {
 
-    private final Model.ImageListModel imageListModel;
 
     public ImageListPresenterImpl(BaseView.ImageListView view) {
         super(view);
-        this.imageListModel = new ImageListModelImpl();
     }
 
     @Override
@@ -32,7 +29,7 @@ public class ImageListPresenterImpl extends BasePresenterImpl<BaseView.ImageList
                 view.showFoot();
             }
         }
-        imageListModel.netWorkList(id, page);
+        NetWorkRequest.imageList(id, page, new MySubscriber<BaseBean.ImageListBean>());
     }
 
     @Override
@@ -41,12 +38,17 @@ public class ImageListPresenterImpl extends BasePresenterImpl<BaseView.ImageList
     }
 
     @Override
-    protected void onNetWorkSuccess(List<ImageListInfo> data) {
-        view.setData(data);
-        view.hideProgress();
-        view.hideFoot();
+    protected void onNetWorkSuccess(BaseBean.ImageListBean imageListBean) {
+        //noinspection unchecked
+        view.setData(imageListBean.getTngou());
     }
 
+    @Override
+    protected void onNetWorkCompleted() {
+        super.onNetWorkCompleted();
+        view.hideFoot();
+        view.hideProgress();
+    }
 
     @Override
     protected void onNetWorkError() {

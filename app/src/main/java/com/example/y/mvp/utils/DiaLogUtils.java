@@ -33,15 +33,19 @@ public class DiaLogUtils {
 
     public static void clearSql() {
         if (UIUtils.getActivity() != null) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(UIUtils.getActivity());
-            builder.setMessage(UIUtils.getString(R.string.clear_sql));
-            builder.setPositiveButton(UIUtils.getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    GreenDaoDbUtils.clearAll();
-                }
-            });
-            builder.create().show();
+            try {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(UIUtils.getActivity());
+                builder.setMessage(UIUtils.getString(R.string.clear_sql));
+                builder.setPositiveButton(UIUtils.getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        GreenDaoDbUtils.clearAll();
+                    }
+                });
+                builder.create().show();
+            } catch (Exception e) {
+                ActivityUtils.Toast(UIUtils.getString(R.string.clearSql_activity_null));
+            }
         }
     }
 }

@@ -5,27 +5,23 @@ import android.widget.Toast;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.activity.ImageDetailActivity;
-import com.example.y.mvp.mvp.Bean.ImageNewInfo;
-import com.example.y.mvp.mvp.model.ImageNewModelImpl;
-import com.example.y.mvp.mvp.model.Model;
+import com.example.y.mvp.mvp.model.BaseBean;
+import com.example.y.mvp.mvp.model.ImageNewInfo;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.network.MySubscriber;
+import com.example.y.mvp.network.NetWorkRequest;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
-
-import java.util.List;
 
 /**
  * by y on 2016/4/29.
  */
-public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewView, ImageNewInfo>
+public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewView, BaseBean.ImageNewBean>
         implements Presenter.ImageNewPresenter {
-
-    private final Model.ImageNewModel imageNewModel;
 
 
     public ImageNewPresenterImpl(BaseView.ImageNewView view) {
         super(view);
-        this.imageNewModel = new ImageNewModelImpl();
     }
 
     @Override
@@ -41,8 +37,7 @@ public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewVi
             if (ActivityUtils.syskeyBroadStatus()) {
                 ActivityUtils.closeSyskeyBroad();
             }
-            view.showProgress();
-            imageNewModel.netWorkNew(Integer.valueOf(id), Integer.valueOf(rows));
+            NetWorkRequest.imageNew(Integer.valueOf(id), Integer.valueOf(rows), new MySubscriber<BaseBean.ImageNewBean>());
         }
     }
 
@@ -52,8 +47,18 @@ public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewVi
     }
 
     @Override
-    protected void onNetWorkSuccess(List<ImageNewInfo> data) {
-        view.setData(data);
+    protected void onNetWorkStart() {
+        view.showProgress();
+    }
+
+    @Override
+    protected void onNetWorkSuccess(BaseBean.ImageNewBean imageNewBean) {
+        //noinspection unchecked
+        view.setData(imageNewBean.getTngou());
+    }
+
+    @Override
+    protected void onNetWorkCompleted() {
         view.hideProgress();
     }
 

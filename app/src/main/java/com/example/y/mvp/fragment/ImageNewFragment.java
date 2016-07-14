@@ -11,7 +11,7 @@ import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.ImageNewAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.Bean.ImageNewInfo;
+import com.example.y.mvp.mvp.model.ImageNewInfo;
 import com.example.y.mvp.mvp.presenter.ImageNewPresenterImpl;
 import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;

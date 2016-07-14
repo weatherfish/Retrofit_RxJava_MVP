@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 /**
  * by Jaeger on 16/2/14.
  */
+@SuppressWarnings("ALL")
 public class StatusBarUtil {
 
     public static class StatusBarView extends View {

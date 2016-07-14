@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
-import com.example.y.mvp.data.Constant;
-
 /**
  * SharedPreferences管理类
  */
@@ -14,6 +12,7 @@ import com.example.y.mvp.data.Constant;
 public class SharedPreferencesMgr {
 
     private static SharedPreferences sharedPreferences;
+    private static final String THEME = "theme";
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private static void initSharePreferences(Context context) {
@@ -27,11 +26,11 @@ public class SharedPreferencesMgr {
     public static String fileName;
 
     public static int getInt() {
-        return sharedPreferences.getInt(Constant.THEME, 0);
+        return sharedPreferences.getInt(THEME, 0);
     }
 
-    public static void setInt(String key, int value) {
-        sharedPreferences.edit().putInt(key, value).apply();
+    public static void setInt(int value) {
+        sharedPreferences.edit().putInt(THEME, value).apply();
     }
 
     public static boolean getBoolean(String key, boolean defaultValue) {
@@ -62,14 +61,5 @@ public class SharedPreferencesMgr {
         }
         sharedPreferences.edit().clear().apply();
     }
-
-    public static boolean getIsNight() {
-        return sharedPreferences.getBoolean(Constant.IS_NIGHT, true);
-    }
-
-    public static void setIsNight(boolean value) {
-        sharedPreferences.edit().putBoolean(Constant.IS_NIGHT, value).apply();
-    }
-
 
 }

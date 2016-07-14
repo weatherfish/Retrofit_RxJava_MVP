@@ -1,25 +1,38 @@
 package com.example.y.mvp.mvp.presenter;
 
 import com.example.y.mvp.utils.RxBusUtils;
-
-import java.util.List;
+import com.socks.library.KLog;
 
 /**
  * by y on 2016/5/27.
  */
-public abstract class BasePresenterImpl<T, M> implements RxBusUtils.RxBusNetWork {
+public abstract class BasePresenterImpl<V, M>
+        implements RxBusUtils.RxBusNetWork {
 
-    protected final T view;
+    final V view;
 
-    public BasePresenterImpl(T view) {
+    BasePresenterImpl(V view) {
         RxBusUtils.rxNetWork(this);
         this.view = view;
     }
 
     @Override
+    public void onStart() {
+        onNetWorkStart();
+    }
+
+    @Override
+    public void onCompleted() {
+        onNetWorkCompleted();
+    }
+
+    @Override
     public void onNext(Object o) {
-        //noinspection unchecked
-        onNetWorkSuccess((List<M>) o);
+        try {
+            onNetWorkSuccess((M) o);
+        } catch (Exception e) {
+            KLog.i(e.getMessage());
+        }
     }
 
     @Override
@@ -27,7 +40,13 @@ public abstract class BasePresenterImpl<T, M> implements RxBusUtils.RxBusNetWork
         onNetWorkError();
     }
 
-    protected abstract void onNetWorkSuccess(List<M> data);
+    void onNetWorkStart() {
+    }
+
+    protected abstract void onNetWorkSuccess(M m);
+
+    void onNetWorkCompleted() {
+    }
 
     protected abstract void onNetWorkError();
 

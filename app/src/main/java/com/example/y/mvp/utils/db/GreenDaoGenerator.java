@@ -73,10 +73,12 @@ public class GreenDaoGenerator {
         public static final Schema schema = new Schema(1, PACKAGE);
     }
 
+    @SuppressWarnings("SameReturnValue")
     private static Schema getSchema() {
         return SchemaHolder.schema;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private static Entity initEntity(String sqlName) {
         entity = getSchema().addEntity(sqlName);
         return entity;
@@ -106,14 +108,14 @@ public class GreenDaoGenerator {
     }
 
 
-    private static void initNewsTab() throws Exception {
+    private static void initNewsTab() {
         initEntity(Constant.NEWS_TAB_NAME_INFO);
         entity.addIntProperty(TAG).primaryKey();
         entity.addIntProperty(ID);
         entity.addStringProperty(NEWS_TAB_NAME);
     }
 
-    private static void initNewsList() throws Exception {
+    private static void initNewsList() {
         initEntity(Constant.NEWS_LIST_INFO);
         entity.addIntProperty(TAG).primaryKey();
         entity.addIntProperty(ID);
@@ -130,7 +132,7 @@ public class GreenDaoGenerator {
     }
 
 
-    private static void initNewsDetail() throws Exception {
+    private static void initNewsDetail() {
         initEntity(Constant.NEWS_DETAIL_INFO);
         entity.addIntProperty(TAG).primaryKey();
         entity.addIntProperty(ID);
@@ -149,14 +151,14 @@ public class GreenDaoGenerator {
     }
 
 
-    private static void initImageTab() throws Exception {
+    private static void initImageTab() {
         initEntity(Constant.IMAGE_TAB_NAME_INFO);
         entity.addIntProperty(TAG).primaryKey();
         entity.addIntProperty(ID);
         entity.addStringProperty(IMAGE_TAB_NAME);
     }
 
-    private static void initImageList() throws Exception {
+    private static void initImageList() {
         initEntity(Constant.IMAGE_LIST_INFO);
         entity.addIntProperty(TAG).primaryKey();
         entity.addIntProperty(ID);
@@ -169,7 +171,7 @@ public class GreenDaoGenerator {
         entity.addIntProperty(IMAGE_LIST_SIZE);
     }
 
-    private static void initImageDetail() throws Exception {
+    private static void initImageDetail() {
         initEntity(Constant.IMAGE_DETAIL_INFO);
         entity.addIntProperty(TAG).primaryKey();
         entity.addIntProperty(ID);
@@ -177,7 +179,7 @@ public class GreenDaoGenerator {
         entity.addStringProperty(IMAGE_DETAIL_SRC);
     }
 
-    private static void initJokePic() throws Exception {
+    private static void initJokePic() {
         initEntity(Constant.JOKE_PIC_INFO);
         entity.addIntProperty(TAG).primaryKey();
         entity.addStringProperty(ID);
@@ -187,7 +189,7 @@ public class GreenDaoGenerator {
         entity.addStringProperty(JOKE_PIC_IMG);
     }
 
-    private static void initJokeText() throws Exception {
+    private static void initJokeText() {
         initEntity(Constant.JOKE_TEXT_INFO);
         entity.addIntProperty(TAG).primaryKey();
         entity.addStringProperty(ID);

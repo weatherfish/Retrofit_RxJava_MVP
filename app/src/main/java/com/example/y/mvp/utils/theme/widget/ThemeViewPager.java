@@ -9,15 +9,16 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.y.mvp.utils.theme.ThemeUIInterface;
+import com.example.y.mvp.utils.theme.ViewAttributeUtils;
 
 /**
  * by y on 2016/4/28.
  */
 @SuppressWarnings("ALL")
-public class ThemeViewPager extends ViewPager implements ThemeUIInterface{
+public class ThemeViewPager extends ViewPager implements ThemeUIInterface {
 
     private boolean isScroll = true;
-
+    private int attr_img = -1;
 
     public ThemeViewPager(Context context) {
         super(context);
@@ -25,7 +26,13 @@ public class ThemeViewPager extends ViewPager implements ThemeUIInterface{
 
     public ThemeViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(attrs);
     }
+
+    private void init(AttributeSet attrs) {
+        attr_img = ViewAttributeUtils.getBackgroundAttibute(attrs);
+    }
+
 
     public void setScanScroll(boolean isCanScroll) {
         this.isScroll = isCanScroll;
@@ -40,7 +47,6 @@ public class ThemeViewPager extends ViewPager implements ThemeUIInterface{
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         return isScroll && super.onInterceptTouchEvent(ev);
-
     }
 
     @Override
@@ -50,6 +56,8 @@ public class ThemeViewPager extends ViewPager implements ThemeUIInterface{
 
     @Override
     public void setTheme(Resources.Theme themeId) {
-
+        if (attr_img != -1) {
+            ViewAttributeUtils.applyImageDrawable(this, themeId, attr_img);
+        }
     }
 }

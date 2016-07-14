@@ -30,7 +30,7 @@ public class ThemeView extends View implements ThemeUIInterface {
     }
 
     private void init(AttributeSet attrs) {
-        attr_img = ViewAttributeUtils.getSrcAttribute(attrs);
+        attr_img = ViewAttributeUtils.getBackgroundAttibute(attrs);
     }
 
     @Override

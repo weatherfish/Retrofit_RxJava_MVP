@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.y.mvp.R;
+import com.example.y.mvp.data.Constant;
 import com.example.y.mvp.utils.DiaLogUtils;
-import com.example.y.mvp.utils.RxBusUtils;
 import com.example.y.mvp.utils.RxUtil;
 import com.example.y.mvp.utils.theme.ReplaceThemeUtils;
 import com.example.y.mvp.utils.theme.SharedPreferencesMgr;
@@ -18,7 +18,7 @@ import java.util.List;
  * by 12406 on 2016/6/16.
  */
 public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
-        implements RxUtil.RxBinding, RxBusUtils.RxBusTheme {
+        implements RxUtil.RxBinding, ReplaceThemeUtils.ThemeInterface {
 
 
     private ImageView imageView;
@@ -33,12 +33,11 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
         imageView = getView(headView, R.id.iv);
         ImageView headImage = getView(headView, R.id.head_image);
         RxUtil.clicks(imageView, this);
-        if (SharedPreferencesMgr.getIsNight()) {
+        if (SharedPreferencesMgr.getInt() == Constant.DAY) {
             setDay();
         } else {
             setNight();
         }
-        RxBusUtils.rxTheme(this);
         headImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +58,7 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
 
     @Override
     public void clicks() {
-        ReplaceThemeUtils.theme((Activity) context);
+        ReplaceThemeUtils.theme((Activity) context, this);
     }
 
     @Override

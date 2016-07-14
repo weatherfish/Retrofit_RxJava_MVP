@@ -3,8 +3,6 @@ package com.example.y.mvp.mvp.presenter;
 
 import com.example.y.mvp.mvp.view.BaseView;
 
-import java.util.List;
-
 /**
  * by 12406 on 2016/5/1.
  */
@@ -39,13 +37,11 @@ public class MainViewPresenterImpl extends BasePresenterImpl<BaseView.MainView, 
     }
 
     @Override
-    protected void onNetWorkSuccess(List<Object> data) {
-
+    protected void onNetWorkSuccess(Object o) {
     }
 
     @Override
     protected void onNetWorkError() {
-
     }
 
 }

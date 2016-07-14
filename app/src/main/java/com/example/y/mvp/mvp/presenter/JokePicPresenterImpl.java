@@ -1,24 +1,19 @@
 package com.example.y.mvp.mvp.presenter;
 
-import com.example.y.mvp.JokePicInfo;
-import com.example.y.mvp.mvp.model.JokePicModeImpl;
-import com.example.y.mvp.mvp.model.Model;
+import com.example.y.mvp.mvp.model.JokePicBean;
 import com.example.y.mvp.mvp.view.BaseView;
-
-import java.util.List;
+import com.example.y.mvp.network.MySubscriber;
+import com.example.y.mvp.network.NetWorkRequest;
 
 /**
  * by y on 2016/5/30.
  */
-public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView, JokePicInfo>
+public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView, JokePicBean>
         implements Presenter.JokePicPresenter {
-
-    private final Model.JokePicListModel jokePicListModel;
 
 
     public JokePicPresenterImpl(BaseView.JokePicView view) {
         super(view);
-        this.jokePicListModel = new JokePicModeImpl();
     }
 
     @Override
@@ -30,12 +25,16 @@ public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView
                 view.showFoot();
             }
         }
-        jokePicListModel.netWorkJoke(page);
+        NetWorkRequest.jokePicList(page, new MySubscriber<JokePicBean>());
     }
 
     @Override
-    protected void onNetWorkSuccess(List<JokePicInfo> data) {
-        view.setData(data);
+    protected void onNetWorkSuccess(JokePicBean jokePicBean) {
+        view.setData(jokePicBean.getShowapi_res_body().getContentlist());
+    }
+
+    @Override
+    protected void onNetWorkCompleted() {
         view.hideFoot();
         view.hideProgress();
     }

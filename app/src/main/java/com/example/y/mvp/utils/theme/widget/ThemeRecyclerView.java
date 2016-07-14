@@ -70,6 +70,7 @@ public class ThemeRecyclerView extends RecyclerView implements ThemeUIInterface 
 
     public ThemeRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init(attrs);
     }
 
     private void init(AttributeSet attrs) {

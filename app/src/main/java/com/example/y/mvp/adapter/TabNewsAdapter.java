@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.example.y.mvp.NewsTabNameInfo;
-import com.example.y.mvp.fragment.NewsMainFragment;
+import com.example.y.mvp.fragment.NewsListFragment;
 import com.example.y.mvp.utils.db.NewsTabNameDbUtils;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class TabNewsAdapter extends BaseFragmentPagerAdapter<NewsTabNameInfo> {
 
     @Override
     protected Fragment getFragmentItem(int position) {
-        return NewsMainFragment.newInstance(position);
+        return NewsListFragment.newInstance(position);
     }
 
     @Override

@@ -140,23 +140,23 @@ public class GreenDaoDbUtils {
         return GreenDaoUtils.getInstance().getNewsDetailInfoDao();
     }
 
-    public static ImageTabNameInfoDao getImageTabNameDb() {
+    private static ImageTabNameInfoDao getImageTabNameDb() {
         return GreenDaoUtils.getInstance().getImageTabNameInfoDao();
     }
 
-    public static ImageListInfoDao getImageListInfoDb() {
+    private static ImageListInfoDao getImageListInfoDb() {
         return GreenDaoUtils.getInstance().getImageListInfoDao();
     }
 
-    public static ImageDetailInfoDao getImageDetailDb() {
+    private static ImageDetailInfoDao getImageDetailDb() {
         return GreenDaoUtils.getInstance().getImageDetailInfoDao();
     }
 
-    public static JokePicInfoDao getJokePicDb() {
+    private static JokePicInfoDao getJokePicDb() {
         return GreenDaoUtils.getInstance().getJokePicInfoDao();
     }
 
-    public static JokeTextInfoDao getJokeTextDb() {
+    private static JokeTextInfoDao getJokeTextDb() {
         return GreenDaoUtils.getInstance().getJokeTextInfoDao();
     }
 

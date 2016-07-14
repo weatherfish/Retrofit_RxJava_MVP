@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.example.y.mvp.ImageTabNameInfo;
-import com.example.y.mvp.fragment.ImageMainFragment;
+import com.example.y.mvp.fragment.ImageListFragment;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class TabNameAdapter extends BaseFragmentPagerAdapter<ImageTabNameInfo> {
 
     @Override
     protected Fragment getFragmentItem(int position) {
-        return ImageMainFragment.newInstance(position);
+        return ImageListFragment.newInstance(position);
     }
 
     @Override

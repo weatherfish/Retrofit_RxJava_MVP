@@ -96,7 +96,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
 
     public void setHead(boolean head) {
         this.isHead = head;
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 
     public void addAll(List<T> datas) {

@@ -29,11 +29,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         initById();
         setStatusBar();
-        KLog.i(getClass().getSimpleName());
+//        KLog.i(getClass().getSimpleName());
         ActivityCollector.addActivity(this);
     }
 
-    public void setStatusBar() {
+    protected void setStatusBar() {
     }
 
     protected abstract void initById();
@@ -43,10 +43,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         context = getApplicationContext();
         activity = this;
         SharedPreferencesMgr.init(context);
-        if (SharedPreferencesMgr.getInt() == 1) {
-            setTheme(R.style.Theme_Night);
-        } else {
+        if (SharedPreferencesMgr.getInt() == Constant.DAY) {
             setTheme(R.style.Theme_Day);
+        } else {
+            setTheme(R.style.Theme_Night);
         }
         KLog.init(BuildConfig.LOG_DEBUG, Constant.K_LOG);
     }

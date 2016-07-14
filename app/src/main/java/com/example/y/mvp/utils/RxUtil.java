@@ -3,7 +3,6 @@ package com.example.y.mvp.utils;
 import android.view.View;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.socks.library.KLog;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,8 +18,8 @@ public class RxUtil {
 
     public static void unsubscribe() {
         if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-            KLog.i("unsubscribe");
+//            subscription.unsubscribe();
+//            KLog.i("unsubscribe");
         }
     }
 

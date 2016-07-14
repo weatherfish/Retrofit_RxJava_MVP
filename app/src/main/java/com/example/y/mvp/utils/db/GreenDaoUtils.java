@@ -15,35 +15,36 @@ public class GreenDaoUtils {
     private static SQLiteDatabase sqLiteDatabase;
     private static DaoMaster daoMaster;
 
-    private static final String SQL_NAME = "simple";
+    public static final String SQL_NAME = "simple";
 
     private static class SessionHolder {
         public static final DaoSession daoSession = getDaoMaster().newSession();
     }
 
+    @SuppressWarnings("SameReturnValue")
     public static DaoSession getInstance() {
         return SessionHolder.daoSession;
     }
 
-    public static DaoMaster getDaoMaster() {
+    private static DaoMaster getDaoMaster() {
         if (daoMaster == null) {
             daoMaster = new DaoMaster(getSQLiteDatabase());
         }
         return daoMaster;
     }
 
-    public static SQLiteDatabase getSQLiteDatabase() {
+    private static SQLiteDatabase getSQLiteDatabase() {
         if (sqLiteDatabase == null) {
             sqLiteDatabase = getDevOpenHelper().getWritableDatabase();
         }
         return sqLiteDatabase;
     }
 
-    public static DaoMaster.DevOpenHelper getDevOpenHelper() {
+    private static DaoMaster.DevOpenHelper getDevOpenHelper() {
         if (devOpenHelper == null) {
-            devOpenHelper = new DaoMaster.DevOpenHelper(UIUtils.getContext(), SQL_NAME, null);
+            devOpenHelper = new DaoMaster.DevOpenHelper(UIUtils.getContext());
         }
         return devOpenHelper;
     }
-    
+
 }

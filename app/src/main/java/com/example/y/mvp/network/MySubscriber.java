@@ -14,10 +14,12 @@ public class MySubscriber<T> extends Subscriber<T> {
     @Override
     public void onStart() {
         super.onStart();
+        RxBus.getInstance().sendNetWork(Constant.ON_START);
     }
 
     @Override
     public void onCompleted() {
+        RxBus.getInstance().sendNetWork(Constant.ON_COMPLETED);
     }
 
     @Override
@@ -28,6 +30,7 @@ public class MySubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onNext(T t) {
+        RxBus.getInstance().sendNetWork(t);
     }
 
 

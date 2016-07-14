@@ -1,34 +1,32 @@
 package com.example.y.mvp.mvp.presenter;
 
 
-import com.example.y.mvp.ImageTabNameInfo;
-import com.example.y.mvp.mvp.model.Model;
-import com.example.y.mvp.mvp.model.TabNameModelImpl;
+import com.example.y.mvp.mvp.model.BaseBean;
 import com.example.y.mvp.mvp.view.BaseView;
-
-import java.util.List;
+import com.example.y.mvp.network.MySubscriber;
+import com.example.y.mvp.network.NetWorkRequest;
 
 /**
  * by y on 2016/4/29.
  */
-public class TabNamePresenterImpl extends BasePresenterImpl<BaseView.TabNameView, ImageTabNameInfo>
+public class TabNamePresenterImpl extends BasePresenterImpl<BaseView.TabNameView, BaseBean.TabNameBean>
         implements Presenter.TabNamePresenter {
 
-    private final Model.TabNameModel tabNameModel;
 
     public TabNamePresenterImpl(BaseView.TabNameView view) {
         super(view);
-        this.tabNameModel = new TabNameModelImpl();
     }
 
     @Override
     public void requestNetWork() {
-        tabNameModel.netWork();
+        NetWorkRequest.tabName(new MySubscriber<BaseBean.TabNameBean>());
     }
 
+
     @Override
-    protected void onNetWorkSuccess(List<ImageTabNameInfo> data) {
-        view.setData(data);
+    protected void onNetWorkSuccess(BaseBean.TabNameBean tabNameBean) {
+        //noinspection unchecked
+        view.setData(tabNameBean.getTngou());
     }
 
 

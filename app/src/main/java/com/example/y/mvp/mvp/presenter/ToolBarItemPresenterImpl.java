@@ -3,8 +3,6 @@ package com.example.y.mvp.mvp.presenter;
 import com.example.y.mvp.R;
 import com.example.y.mvp.mvp.view.BaseView;
 
-import java.util.List;
-
 /**
  * by y on 2016/6/12.
  */
@@ -16,15 +14,14 @@ public class ToolBarItemPresenterImpl extends BasePresenterImpl<BaseView.ToolBar
     }
 
     @Override
-    protected void onNetWorkSuccess(List<Object> data) {
-
+    protected void onNetWorkSuccess(Object object) {
+        
     }
 
     @Override
     protected void onNetWorkError() {
 
     }
-
 
     @Override
     public void switchId(int id) {

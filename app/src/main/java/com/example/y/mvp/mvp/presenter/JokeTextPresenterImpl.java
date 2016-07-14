@@ -1,23 +1,19 @@
 package com.example.y.mvp.mvp.presenter;
 
-import com.example.y.mvp.JokeTextInfo;
-import com.example.y.mvp.mvp.model.JokeTextModeImpl;
-import com.example.y.mvp.mvp.model.Model;
+import com.example.y.mvp.mvp.model.JokeTextBean;
 import com.example.y.mvp.mvp.view.BaseView;
-
-import java.util.List;
+import com.example.y.mvp.network.MySubscriber;
+import com.example.y.mvp.network.NetWorkRequest;
 
 /**
  * by y on 2016/5/30.
  */
-public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextView, JokeTextInfo>
+public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextView, JokeTextBean>
         implements Presenter.JokeTextPresenter {
 
-    private final Model.JokeTextListModel jokeListModel;
 
     public JokeTextPresenterImpl(BaseView.JokeTextView view) {
         super(view);
-        this.jokeListModel = new JokeTextModeImpl();
     }
 
     @Override
@@ -29,12 +25,16 @@ public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextVi
                 view.showFoot();
             }
         }
-        jokeListModel.netWorkJoke(page);
+        NetWorkRequest.jokeTextList(page, new MySubscriber<JokeTextBean>());
     }
 
     @Override
-    protected void onNetWorkSuccess(List<JokeTextInfo> data) {
-        view.setData(data);
+    protected void onNetWorkSuccess(JokeTextBean jokeTextBean) {
+        view.setData(jokeTextBean.getShowapi_res_body().getContentlist());
+    }
+
+    @Override
+    protected void onNetWorkCompleted() {
         view.hideFoot();
         view.hideProgress();
     }

@@ -2,7 +2,7 @@ package com.example.y.mvp.adapter;
 
 
 import com.example.y.mvp.R;
-import com.example.y.mvp.mvp.Bean.ImageNewInfo;
+import com.example.y.mvp.mvp.model.ImageNewInfo;
 import com.example.y.mvp.network.Api;
 import com.example.y.mvp.utils.ImageLoaderUtils;
 import com.example.y.mvp.utils.UIUtils;

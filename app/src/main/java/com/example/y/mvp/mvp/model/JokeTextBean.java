@@ -1,4 +1,4 @@
-package com.example.y.mvp.mvp.Bean;
+package com.example.y.mvp.mvp.model;
 
 import com.example.y.mvp.JokeTextInfo;
 

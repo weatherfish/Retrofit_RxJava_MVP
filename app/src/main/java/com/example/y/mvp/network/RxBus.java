@@ -32,15 +32,6 @@ public class RxBus {
         rxBus.onNext(data);
     }
 
-    public void sendTheme(Object object) {
-        //noinspection unchecked
-        rxBus.onNext(object);
-    }
-
-//    public Subject toObserverable() {
-//        return rxBus;
-//    }
-
     public <T> Observable<T> toObserverable(final Class<T> eventType) {
         //noinspection unchecked
         return rxBus.filter(new Func1<Object, Boolean>() {

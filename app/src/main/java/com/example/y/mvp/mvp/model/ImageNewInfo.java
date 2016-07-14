@@ -1,4 +1,4 @@
-package com.example.y.mvp.mvp.Bean;
+package com.example.y.mvp.mvp.model;
 
 /**
  * by 12406 on 2016/4/29.
