@@ -5,13 +5,13 @@
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay">
 
-    <com.example.y.mvp.utils.theme.widget.ThemeToolbar
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/toolbar_bg"
+        android:background="?attr/toolbarbackgroundColor"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextColor="@color/white" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="?attr/toolbarTextColor" />
 
 </android.support.design.widget.AppBarLayout>

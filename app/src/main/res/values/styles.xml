@@ -18,22 +18,57 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <style name="Theme_Day">
-        <item name="main_bg">@color/bg_main_day</item>
-        <item name="main_textcolor">@color/textcolor_main_day</item>
-        <item name="toolbar_bg">@color/bg_toolbar_day</item>
-        <item name="tab_bg">@color/bg_tab_day</item>
-        <item name="head_bg">@color/bg_head_day</item>
-        <item name="head_view_color">@color/color_view_head_day</item>
+    <style name="AppTheme.Day" parent="AppTheme.NoActionBar">
+        <item name="textColor">@color/text_color_day</item>
+        <item name="backgroundColor">@color/background_color_day</item>
+        <item name="toolbarTextColor">@color/toolbar_text_color_day</item>
+        <item name="toolbarbackgroundColor">@color/toolbar_background_color_day</item>
+        <item name="tab_TextColor">@color/tab_text_color_day</item>
+        <item name="tab_BackgroundColor">@color/tab_background_color_day</item>
+        <item name="tab_SelectedTextColor">@color/tab_selected_color_day</item>
+        <item name="tab_IndicatroColor">@color/tab_indicatro_color_day</item>
+        <item name="headViewColor">@color/head_view_color_day</item>
     </style>
 
-    <style name="Theme_Night">
-        <item name="main_bg">@color/bg_main_night</item>
-        <item name="main_textcolor">@color/textcolor_main_night</item>
-        <item name="toolbar_bg">@color/bg_toolbar_night</item>
-        <item name="tab_bg">@color/bg_tab_night</item>
-        <item name="head_bg">@color/bg_head_night</item>
-        <item name="head_view_color">@color/color_view_head_night</item>
+
+    <style name="AppTheme.Night" parent="AppTheme.NoActionBar">
+        <item name="textColor">@color/text_color_night</item>
+        <item name="backgroundColor">@color/background_color_night</item>
+        <item name="toolbarTextColor">@color/toolbar_text_color_night</item>
+        <item name="toolbarbackgroundColor">@color/toolbar_background_color_night</item>
+        <item name="tab_TextColor">@color/tab_text_color_night</item>
+        <item name="tab_BackgroundColor">@color/tab_background_color_night</item>
+        <item name="tab_SelectedTextColor">@color/tab_selected_color_night</item>
+        <item name="tab_IndicatroColor">@color/tab_indicatro_color_night</item>
+        <item name="headViewColor">@color/head_view_color_night</item>
+    </style>
+
+    <style name="SwipeBackLayout">
+        <item name="edge_size">50dip</item>
+        <item name="shadow_left">@drawable/shadow_left</item>
+        <item name="shadow_right">@drawable/shadow_right</item>
+        <item name="shadow_bottom">@drawable/shadow_bottom</item>
+    </style>
+
+    <style name="Theme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@style/noAnimation</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="noAnimation">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@null</item>
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+        <item name="android:taskToFrontExitAnimation">@null</item>
+        <item name="android:taskToBackEnterAnimation">@null</item>
+        <item name="android:taskToBackExitAnimation">@null</item>
+
     </style>
 
 </resources>

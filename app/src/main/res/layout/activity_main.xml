@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dl_layout"
+    android:id="@+id/framelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".activity.MainActivity">
 
-    <include
-        layout="@layout/app_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.example.y.mvp.utils.theme.widget.ThemeRecyclerView
-        android:id="@+id/recyclerView_menu"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/dl_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="?attr/main_bg" />
+        android:background="?attr/backgroundColor"
+        android:fitsSystemWindows="true">
 
-</android.support.v4.widget.DrawerLayout>
+        <include
+            layout="@layout/app_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.example.y.mvp.widget.MRecyclerView
+            android:id="@+id/recyclerView_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="?attr/backgroundColor" />
+    </android.support.v4.widget.DrawerLayout>
+
+</FrameLayout>

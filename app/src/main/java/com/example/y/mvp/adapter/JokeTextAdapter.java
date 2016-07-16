@@ -5,6 +5,7 @@ import android.text.Html;
 import com.example.y.mvp.JokeTextInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.utils.UIUtils;
+import com.example.y.mvp.utils.db.JokeTextDbUtils;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class JokeTextAdapter extends BaseRecyclerViewAdapter<JokeTextInfo> {
     protected void onBind(ViewHolder holder, int position, JokeTextInfo data) {
         holder.setTextView(R.id.tv_time, UIUtils.getString(R.string.news_time) + data.getCt());
         holder.setTextView(R.id.tv_text, Html.fromHtml(data.getText()));
+        JokeTextDbUtils.insert(data.getId(), data.getText(), data.getCt());
     }
 
 }

@@ -19,8 +19,6 @@ import com.example.y.mvp.network.Api;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.CompetenceUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
-import com.example.y.mvp.widget.MyOnPageChangeListener;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,12 +26,13 @@ import java.util.List;
 /**
  * by y on 2016/4/29.
  */
-public class ImageDetailActivity extends BaseActivity
-        implements BaseView.ImageDetailView, BaseView.ToolBarItemView {
+public class ImageDetailActivity extends DarkViewActivity
+        implements BaseView.ImageDetailView, BaseView.ToolBarItemView
+        , Toolbar.OnMenuItemClickListener, ViewPager.OnPageChangeListener {
 
 
     private ViewPager viewPager;
-    private ThemeToolbar toolBar;
+    private Toolbar toolBar;
     private int pos;
     private LinkedList<ImageDetailInfo> list;
     private Presenter.ImageDetailPresenter imageDetailPresenter;
@@ -51,7 +50,6 @@ public class ImageDetailActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        toolBar.setTitle(UIUtils.getString(R.string.image_detail));
         setSupportActionBar(toolBar);
         CompetenceUtils.Storage();
         init();
@@ -77,23 +75,8 @@ public class ImageDetailActivity extends BaseActivity
         list = new LinkedList<>();
         imageDetailPresenter.requestNetWork(imageDetailPresenter.getBundle());
         bigImageAdapter = new ImageDetailAdapter(list);
-
-        toolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                toolBarItemPresenter.switchId(item.getItemId());
-                return true;
-            }
-        });
-
-        viewPager.addOnPageChangeListener(new MyOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                pos = position;
-            }
-        });
-
+        toolBar.setOnMenuItemClickListener(this);
+        viewPager.addOnPageChangeListener(this);
     }
 
 
@@ -126,5 +109,29 @@ public class ImageDetailActivity extends BaseActivity
     @Override
     public void switchShare() {
         ActivityUtils.share(Api.IMAGER_URL + list.get(pos).getSrc());
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        toolBarItemPresenter.switchId(item.getItemId());
+        return true;
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (position != 0) {
+            setSwipeBackEnable(false);
+        } else {
+            setSwipeBackEnable(true);
+        }
+        pos = position;
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
     }
 }

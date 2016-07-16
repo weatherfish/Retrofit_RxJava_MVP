@@ -18,7 +18,7 @@ import com.example.y.mvp.mvp.presenter.NewsListPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
+import com.example.y.mvp.widget.MRecyclerView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,10 +27,10 @@ import java.util.List;
  * by 12406 on 2016/5/14.
  */
 public class NewsListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        ThemeRecyclerView.LoadingData, BaseView.NewsListView, BaseRecyclerViewAdapter.OnItemClickListener<NewsListInfo> {
+        MRecyclerView.LoadingData, BaseView.NewsListView, BaseRecyclerViewAdapter.OnItemClickListener<NewsListInfo> {
 
     private SwipeRefreshLayout srfLayout;
-    private ThemeRecyclerView recyclerView;
+    private MRecyclerView recyclerView;
 
     private boolean isPrepared;
     private boolean isLoad;

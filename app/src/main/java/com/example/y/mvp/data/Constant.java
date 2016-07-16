@@ -13,10 +13,17 @@ public class Constant {
 
     public static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 0;
 
-    public static final int DAY = 0;
-    public static final int NIGHT = 1;
 
     public static boolean BACK_EXIT = false;
+
+    public static final boolean DAY = true;
+    public static final boolean NIGHT = false;
+
+    public static final String BITMAP_CACHE_KEY = "key";
+
+
+    public static final int DAY_STYLES = R.style.AppTheme_Day;
+    public static final int NIGHT_STYLES = R.style.AppTheme_Night;
 
     //recyclerview foot
     public static final int FOOT_LAYOUT = R.layout.item_foot;

@@ -5,11 +5,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.y.mvp.R;
+import com.example.y.mvp.activity.TransitionActivity;
 import com.example.y.mvp.data.Constant;
+import com.example.y.mvp.utils.ActivityUtils;
+import com.example.y.mvp.utils.CacheUitls;
 import com.example.y.mvp.utils.DiaLogUtils;
 import com.example.y.mvp.utils.RxUtil;
-import com.example.y.mvp.utils.theme.ReplaceThemeUtils;
-import com.example.y.mvp.utils.theme.SharedPreferencesMgr;
+import com.example.y.mvp.utils.SpfUtils;
+import com.example.y.mvp.widget.MImageView;
 
 import java.util.List;
 
@@ -18,7 +21,7 @@ import java.util.List;
  * by 12406 on 2016/6/16.
  */
 public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
-        implements RxUtil.RxBinding, ReplaceThemeUtils.ThemeInterface {
+        implements RxUtil.RxBinding {
 
 
     private ImageView imageView;
@@ -31,13 +34,13 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
     protected void getHeadLayoutId(View headView) {
         super.getHeadLayoutId(headView);
         imageView = getView(headView, R.id.iv);
-        ImageView headImage = getView(headView, R.id.head_image);
-        RxUtil.clicks(imageView, this);
-        if (SharedPreferencesMgr.getInt() == Constant.DAY) {
-            setDay();
+        MImageView headImage = getView(headView, R.id.head_image);
+        if (SpfUtils.isTheme(Constant.DAY)) {
+            getImageViewDay();
         } else {
-            setNight();
+            getImageViewNight();
         }
+        RxUtil.clicks(imageView, this);
         headImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,18 +59,28 @@ public class MenuItemAdapter extends BaseRecyclerViewAdapter<String>
         holder.setTextView(R.id.tv_menu_item, data);
     }
 
-    @Override
-    public void clicks() {
-        ReplaceThemeUtils.theme((Activity) context, this);
-    }
-
-    @Override
-    public void setDay() {
+    public void getImageViewDay() {
         imageView.setBackgroundResource(R.drawable.day);
     }
 
-    @Override
-    public void setNight() {
+    public void getImageViewNight() {
         imageView.setBackgroundResource(R.drawable.night);
     }
+
+    @Override
+    public void clicks() {
+        Activity activity = (Activity) context;
+        if (SpfUtils.isTheme(Constant.DAY)) {
+            activity.setTheme(Constant.NIGHT_STYLES);
+            getImageViewNight();
+            SpfUtils.setTheme(Constant.NIGHT);
+        } else {
+            activity.setTheme(Constant.DAY_STYLES);
+            getImageViewDay();
+            SpfUtils.setTheme(Constant.DAY);
+        }
+        CacheUitls.getInstance().put(Constant.BITMAP_CACHE_KEY, ActivityUtils.captureContent(activity));
+        TransitionActivity.startIntent();
+    }
+
 }

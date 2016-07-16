@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.y.mvp.R;
@@ -22,23 +23,23 @@ import com.example.y.mvp.fragment.NewsViewPagerFragment;
 import com.example.y.mvp.mvp.presenter.MainViewPresenterImpl;
 import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;
+import com.example.y.mvp.utils.ActivityCollector;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.StatusBarUtil;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
-import com.example.y.mvp.utils.theme.widget.ThemeToolbar;
+import com.example.y.mvp.widget.MRecyclerView;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity
+public class MainActivity extends DarkViewActivity
         implements BaseView.MainView,
-        BaseRecyclerViewAdapter.OnItemClickListener<String>, ThemeRecyclerView.LoadingData {
+        BaseRecyclerViewAdapter.OnItemClickListener<String>, MRecyclerView.LoadingData {
 
 
-    private ThemeToolbar toolBar;
+    private Toolbar toolBar;
     private DrawerLayout drawerLayout;
-    private ThemeRecyclerView recyclerViewMenu;
+    private MRecyclerView recyclerViewMenu;
 
     private Presenter.MainViewPresenter mainViewPresenter;
 
@@ -67,6 +68,7 @@ public class MainActivity extends BaseActivity
     }
 
     private void init() {
+        setSwipeBackEnable(false);
         switchNews();
     }
 
@@ -92,6 +94,7 @@ public class MainActivity extends BaseActivity
         } else {
             if (Constant.BACK_EXIT) {
                 super.onBackPressed();
+                ActivityCollector.removeAllActivity();
                 return;
             }
             Constant.BACK_EXIT = true;

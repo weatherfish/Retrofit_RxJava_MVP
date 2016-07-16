@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.y.mvp.R;
@@ -17,8 +18,7 @@ import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeButton;
-import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
+import com.example.y.mvp.widget.MRecyclerView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,15 +28,15 @@ import java.util.List;
  */
 public class ImageNewFragment extends BaseFragment implements
         BaseView.ImageNewView, SwipeRefreshLayout.OnRefreshListener,
-        ThemeRecyclerView.LoadingData, View.OnClickListener,
+        MRecyclerView.LoadingData, View.OnClickListener,
         BaseRecyclerViewAdapter.OnItemClickListener<ImageNewInfo> {
 
 
     private EditText etId;
     private EditText etRows;
-    private ThemeButton button;
+    private Button button;
 
-    private ThemeRecyclerView recyclerView;
+    private MRecyclerView recyclerView;
     private SwipeRefreshLayout srfLayout;
 
     private ImageNewAdapter adapter;

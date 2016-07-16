@@ -83,12 +83,6 @@ public class GreenDaoDbUtils {
             case Constant.IMAGE_DETAIL_INFO:
                 getImageDetailDb().deleteByKey(id);
                 break;
-            case Constant.JOKE_PIC_INFO:
-                getJokePicDb().deleteByKey(id);
-                break;
-            case Constant.JOKE_TEXT_INFO:
-                getJokeTextDb().deleteByKey(id);
-                break;
         }
     }
 
@@ -106,10 +100,6 @@ public class GreenDaoDbUtils {
                 return getImageListInfoDb().queryBuilder().where(ImageListInfoDao.Properties.Id.eq(id)).unique() == null;
             case Constant.IMAGE_DETAIL_INFO:
                 return getImageDetailDb().queryBuilder().where(ImageDetailInfoDao.Properties.Id.eq(id)).unique() == null;
-            case Constant.JOKE_PIC_INFO:
-                return getJokePicDb().queryBuilder().where(JokePicInfoDao.Properties.Id.eq(id)).unique() == null;
-            case Constant.JOKE_TEXT_INFO:
-                return getJokeTextDb().queryBuilder().where(JokeTextInfoDao.Properties.Id.eq(id)).unique() == null;
         }
         return false;
     }
@@ -140,23 +130,23 @@ public class GreenDaoDbUtils {
         return GreenDaoUtils.getInstance().getNewsDetailInfoDao();
     }
 
-    private static ImageTabNameInfoDao getImageTabNameDb() {
+    public static ImageTabNameInfoDao getImageTabNameDb() {
         return GreenDaoUtils.getInstance().getImageTabNameInfoDao();
     }
 
-    private static ImageListInfoDao getImageListInfoDb() {
+    public static ImageListInfoDao getImageListInfoDb() {
         return GreenDaoUtils.getInstance().getImageListInfoDao();
     }
 
-    private static ImageDetailInfoDao getImageDetailDb() {
+    public static ImageDetailInfoDao getImageDetailDb() {
         return GreenDaoUtils.getInstance().getImageDetailInfoDao();
     }
 
-    private static JokePicInfoDao getJokePicDb() {
+    public static JokePicInfoDao getJokePicDb() {
         return GreenDaoUtils.getInstance().getJokePicInfoDao();
     }
 
-    private static JokeTextInfoDao getJokeTextDb() {
+    public static JokeTextInfoDao getJokeTextDb() {
         return GreenDaoUtils.getInstance().getJokeTextInfoDao();
     }
 

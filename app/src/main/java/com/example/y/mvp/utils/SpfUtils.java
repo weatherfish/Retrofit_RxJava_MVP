@@ -1,4 +1,4 @@
-package com.example.y.mvp.utils.theme;
+package com.example.y.mvp.utils;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -8,55 +8,56 @@ import android.os.Build;
 /**
  * SharedPreferences管理类
  */
-@SuppressWarnings("ALL")
-public class SharedPreferencesMgr {
+public class SpfUtils {
 
     private static SharedPreferences sharedPreferences;
+    private static final String SHAREDPREFERENCES_NAME = "example";
     private static final String THEME = "theme";
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private static void initSharePreferences(Context context) {
-        sharedPreferences = context.getSharedPreferences("derson", Context.MODE_ENABLE_WRITE_AHEAD_LOGGING);
+        sharedPreferences = context.getSharedPreferences(SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
     public static void init(Context context) {
         initSharePreferences(context);
     }
 
-    public static String fileName;
-
-    public static int getInt() {
-        return sharedPreferences.getInt(THEME, 0);
+    public static boolean isNull() {
+        return sharedPreferences == null;
     }
 
-    public static void setInt(int value) {
-        sharedPreferences.edit().putInt(THEME, value).apply();
+
+    public static boolean isTheme(boolean defaultValue) {
+        if (isNull()) {
+            return defaultValue;
+        }
+        return sharedPreferences.getBoolean(THEME, defaultValue);
     }
 
-    public static boolean getBoolean(String key, boolean defaultValue) {
-        return sharedPreferences.getBoolean(key, defaultValue);
-    }
-
-    public static void setBoolean(String key, boolean value) {
-        sharedPreferences.edit().putBoolean(key, value).apply();
+    public static void setTheme(boolean value) {
+        if (isNull()) {
+            return;
+        }
+        sharedPreferences.edit().putBoolean(THEME, value).apply();
     }
 
     public static String getString(String key, String defaultValue) {
-        if (sharedPreferences == null) {
+        if (isNull()) {
             return defaultValue;
         }
         return sharedPreferences.getString(key, defaultValue);
     }
 
     public static void setString(String key, String value) {
-        if (sharedPreferences == null) {
+        if (isNull()) {
             return;
         }
         sharedPreferences.edit().putString(key, value).apply();
     }
 
     public static void clearAll() {
-        if (sharedPreferences == null) {
+        if (isNull()) {
             return;
         }
         sharedPreferences.edit().clear().apply();

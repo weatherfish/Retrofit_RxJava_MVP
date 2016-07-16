@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.y.mvp.utils.theme.widget.ThemeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/main_bg">
+    android:background="?attr/backgroundColor">
 
-    <com.example.y.mvp.utils.theme.widget.ThemeTextView
+    <TextView
         android:id="@+id/tv_menu_item"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="?attr/main_textcolor" />
+        android:textColor="?attr/textColor" />
 
 
-</com.example.y.mvp.utils.theme.widget.ThemeLinearLayout>
+</LinearLayout>

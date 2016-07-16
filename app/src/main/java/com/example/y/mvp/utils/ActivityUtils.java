@@ -1,11 +1,16 @@
 package com.example.y.mvp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -69,7 +74,7 @@ public class ActivityUtils {
             try {
                 InputMethodManager inputMethodManager = (InputMethodManager) UIUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(UIUtils.getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }catch (Exception e){
+            } catch (Exception e) {
                 Toast(UIUtils.getString(R.string.closeSyskeyBroad));
             }
 
@@ -116,6 +121,90 @@ public class ActivityUtils {
             mFile.mkdirs();
         }
         return mFile.getAbsoluteFile();
+    }
+
+    //获取整个屏幕的截图
+    public static Bitmap captureContent(ViewGroup viewGroup) {
+        viewGroup.setDrawingCacheEnabled(false);
+        viewGroup.setDrawingCacheEnabled(true);
+        return viewGroup.getDrawingCache();
+    }
+
+    /**
+     * 获得屏幕高度
+     */
+    public static int getScreenWidth() {
+        WindowManager wm = (WindowManager) UIUtils.getContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.widthPixels;
+    }
+
+    /**
+     * 获得屏幕宽度
+     */
+    public static int getScreenHeight() {
+        WindowManager wm = (WindowManager) UIUtils.getContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.heightPixels;
+    }
+
+
+    /**
+     * 获取当前屏幕截图，包含状态栏
+     */
+    public static Bitmap snapShotWithStatusBar() {
+        View view = UIUtils.getActivity().getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bmp = view.getDrawingCache();
+        Bitmap bp = null;
+        bp = Bitmap.createBitmap(bmp, 0, 0, getScreenWidth(), getScreenHeight());
+        view.destroyDrawingCache();
+        return bp;
+
+    }
+
+
+    /**
+     * 截图
+     */
+    public static Bitmap captureContent(Activity activity) {
+        //View是你需要截图的View
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap b1 = view.getDrawingCache();
+        // 获取状态栏高度 /
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+        // 获取屏幕长和高
+        int width = activity.getWindowManager().getDefaultDisplay().getWidth();
+        int height = activity.getWindowManager().getDefaultDisplay().getHeight();
+        // 去掉标题栏
+        Bitmap b = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height - statusBarHeight);
+        view.destroyDrawingCache();
+        return b;
+    }
+
+
+    /**
+     * 获取当前屏幕截图，不包含状态栏
+     */
+    public static Bitmap snapShotWithoutStatusBar() {
+        View view = UIUtils.getActivity().getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bmp = view.getDrawingCache();
+        Rect frame = new Rect();
+        UIUtils.getActivity().getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+        Bitmap bp = null;
+        bp = Bitmap.createBitmap(bmp, 0, statusBarHeight, getScreenWidth(), getScreenHeight() - statusBarHeight);
+        view.destroyDrawingCache();
+        return bp;
     }
 
     public static void share(String message) {

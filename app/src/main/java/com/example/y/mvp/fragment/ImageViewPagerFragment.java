@@ -1,6 +1,7 @@
 package com.example.y.mvp.fragment;
 
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -12,7 +13,6 @@ import com.example.y.mvp.mvp.presenter.TabNamePresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeTabLayout;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class ImageViewPagerFragment extends BaseFragment implements BaseView.TabNameView {
 
-    private ThemeTabLayout tabLayout;
+    private TabLayout tabLayout;
     private ViewPager viewPager;
 
     private TabNameAdapter tabNameAdapter;

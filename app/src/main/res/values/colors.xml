@@ -4,20 +4,37 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
 
-    <color name="bg_main_day">#ffffff</color>
-    <color name="textcolor_main_day">#ff737373</color>
-    <color name="bg_toolbar_day">#3F51B5</color>
-    <color name="bg_tab_day">#3F51B5</color>
-    <color name="bg_head_day">#3F51B5</color>
-    <color name="color_view_head_day">#ff737373</color>
+    <color name="text_color_day">#777</color>
+    <color name="text_color_night">#ccc</color>
 
-    <color name="bg_main_night">#ff737373</color>
-    <color name="textcolor_main_night">#ffffff</color>
-    <color name="bg_toolbar_night">#303F9F</color>
-    <color name="bg_tab_night">#303F9F</color>
-    <color name="bg_head_night">#ff737373</color>
-    <color name="color_view_head_night">#3F51B5</color>
+    <color name="background_color_day">#fff</color>
+    <color name="background_color_night">#2b2b2b</color>
+
+    <color name="toolbar_text_color_day">#ccc</color>
+    <color name="toolbar_text_color_night">#ccc</color>
+
+    <color name="toolbar_background_color_day">#3F51B5</color>
+    <color name="toolbar_background_color_night">#DD000000</color>
+
+    <color name="tab_text_color_day">#ccc</color>
+    <color name="tab_text_color_night">#777</color>
+
+    <color name="tab_background_color_day">#3F51B5</color>
+    <color name="tab_background_color_night">#DD000000</color>
+
+    <color name="tab_selected_color_day">#DD000000</color>
+    <color name="tab_selected_color_night">#ccc</color>
+
+    <color name="tab_indicatro_color_day">#FF4081</color>
+    <color name="tab_indicatro_color_night">#777</color>
+
+    <color name="head_view_color_day">#000</color>
+    <color name="head_view_color_night">#ccc</color>
+
+
+    <color name="night_mask">#90000000</color>
+
 </resources>

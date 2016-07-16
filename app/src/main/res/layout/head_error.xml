@@ -2,15 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="?attr/main_bg">
+    android:layout_height="100dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/main_textcolor"
         android:gravity="center"
         android:text="not found headLayout"
+        android:textColor="?attr/textColor"
         android:textSize="30sp"
         tools:ignore="HardcodedText" />
 

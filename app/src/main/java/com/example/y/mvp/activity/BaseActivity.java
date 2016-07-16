@@ -3,60 +3,64 @@ package com.example.y.mvp.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.y.mvp.BuildConfig;
-import com.example.y.mvp.R;
 import com.example.y.mvp.data.Constant;
 import com.example.y.mvp.utils.ActivityCollector;
 import com.example.y.mvp.utils.RxUtil;
-import com.example.y.mvp.utils.theme.SharedPreferencesMgr;
+import com.example.y.mvp.utils.SpfUtils;
+import com.example.y.mvp.utils.swipeback.SwipeBackActivity;
+import com.example.y.mvp.utils.swipeback.SwipeBackLayout;
 import com.socks.library.KLog;
 
 /**
  * by y on 2016/4/28.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends SwipeBackActivity {
 
-    private static Context context;
     private static Activity activity;
+    private static Context context;
+    protected SwipeBackLayout swipeBackLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
+        initTheme();
         setContentView(getLayoutId());
+        init();
         initById();
         setStatusBar();
-//        KLog.i(getClass().getSimpleName());
+        swipeBackLayout = getSwipeBackLayout();
+        swipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         ActivityCollector.addActivity(this);
+//        KLog.i(getClass().getSimpleName());
+    }
+
+    private void init() {
+        activity = this;
+        context = getApplicationContext();
+        SpfUtils.init(context);
+        KLog.init(BuildConfig.LOG_DEBUG, Constant.K_LOG);
+    }
+
+    protected void initTheme() {
+        if (SpfUtils.isTheme(Constant.DAY)) {
+            setTheme(Constant.DAY_STYLES);
+        } else {
+            setTheme(Constant.NIGHT_STYLES);
+        }
     }
 
     protected void setStatusBar() {
     }
 
-    protected abstract void initById();
-
-
-    private void init() {
-        context = getApplicationContext();
-        activity = this;
-        SharedPreferencesMgr.init(context);
-        if (SharedPreferencesMgr.getInt() == Constant.DAY) {
-            setTheme(R.style.Theme_Day);
-        } else {
-            setTheme(R.style.Theme_Night);
-        }
-        KLog.init(BuildConfig.LOG_DEBUG, Constant.K_LOG);
+    public static Activity getActivity() {
+        return activity;
     }
 
     public static Context getContext() {
         return context;
-    }
-
-    public static Activity getActivity() {
-        return activity;
     }
 
     <T extends View> T getView(int id) {
@@ -64,11 +68,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         return (T) findViewById(id);
     }
 
+    protected abstract void initById();
+
+    protected abstract int getLayoutId();
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         RxUtil.unsubscribe();
     }
-
-    protected abstract int getLayoutId();
 }

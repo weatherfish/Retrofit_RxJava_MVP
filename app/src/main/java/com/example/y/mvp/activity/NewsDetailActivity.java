@@ -8,7 +8,6 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,14 +23,15 @@ import com.example.y.mvp.utils.ImageLoaderUtils;
 import com.example.y.mvp.utils.StatusBarUtil;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.utils.db.NewsDetailDbUtils;
+import com.example.y.mvp.widget.MImageView;
 
 /**
  * by 12406 on 2016/5/30.
  */
-public class NewsDetailActivity extends BaseActivity
+public class NewsDetailActivity extends DarkViewActivity
         implements BaseView.NewsDetailView, BaseView.ToolBarItemView {
 
-    private ImageView image;
+    private MImageView image;
     private CollapsingToolbarLayout collapsingToolbar;
     private ProgressBar progressBar;
     private TextView content;
@@ -60,7 +60,7 @@ public class NewsDetailActivity extends BaseActivity
     @Override
     public void setStatusBar() {
         super.setStatusBar();
-        StatusBarUtil.setTranslucentForImageView(this,image);
+        StatusBarUtil.setTranslucentForImageView(this, image);
     }
 
     @Override
@@ -73,6 +73,7 @@ public class NewsDetailActivity extends BaseActivity
     }
 
     private void init() {
+        swipeBackLayout.setEdgeDp(100);
         Presenter.NewsDetailPresenter newsDetailPresenter = new NewsDetailPresenterImpl(this);
         toolBarItemPresenter = new ToolBarItemPresenterImpl(this);
         newsDetailPresenter.requestNetWork(id);

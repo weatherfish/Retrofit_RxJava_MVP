@@ -10,11 +10,11 @@
 
         <include layout="@layout/toolbar" />
 
-        <com.example.y.mvp.utils.theme.widget.ThemeFrameLayout
+        <FrameLayout
             android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/main_bg"
+            android:background="?attr/backgroundColor"
             android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

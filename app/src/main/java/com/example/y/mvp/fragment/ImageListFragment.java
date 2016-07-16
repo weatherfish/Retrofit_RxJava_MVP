@@ -17,7 +17,7 @@ import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.utils.theme.widget.ThemeRecyclerView;
+import com.example.y.mvp.widget.MRecyclerView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,9 +26,9 @@ import java.util.List;
  * by y on 2016/4/28.
  */
 public class ImageListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        ThemeRecyclerView.LoadingData, BaseRecyclerViewAdapter.OnItemClickListener<ImageListInfo>, BaseView.ImageListView {
+        MRecyclerView.LoadingData, BaseRecyclerViewAdapter.OnItemClickListener<ImageListInfo>, BaseView.ImageListView {
 
-    private ThemeRecyclerView recyclerView;
+    private MRecyclerView recyclerView;
     private SwipeRefreshLayout srfLayout;
 
     private boolean isPrepared;

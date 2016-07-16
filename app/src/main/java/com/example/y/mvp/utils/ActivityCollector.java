@@ -9,7 +9,6 @@ import java.util.List;
  * by y on 2016/5/17.
  * Activity管理类
  */
-@SuppressWarnings("ALL")
 public class ActivityCollector {
 
 
@@ -33,4 +32,9 @@ public class ActivityCollector {
         }
     }
 
+    public static void refreshAllActivity() {
+        for (Activity activity : list) {
+            activity.recreate();
+        }
+    }
 }
