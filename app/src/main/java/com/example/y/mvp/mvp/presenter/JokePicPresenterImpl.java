@@ -8,7 +8,7 @@ import com.example.y.mvp.network.NetWorkRequest;
 /**
  * by y on 2016/5/30.
  */
-public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView, JokePicBean>
+public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView>
         implements Presenter.JokePicPresenter {
 
 
@@ -25,12 +25,13 @@ public class JokePicPresenterImpl extends BasePresenterImpl<BaseView.JokePicView
                 view.showFoot();
             }
         }
-        NetWorkRequest.jokePicList(page, new MySubscriber<JokePicBean>());
-    }
-
-    @Override
-    protected void onNetWorkSuccess(JokePicBean jokePicBean) {
-        view.setData(jokePicBean.getShowapi_res_body().getContentlist());
+        NetWorkRequest.jokePicList(page, new MySubscriber<JokePicBean>() {
+            @Override
+            public void onNext(JokePicBean jokePicBean) {
+                super.onNext(jokePicBean);
+                view.setData(jokePicBean.getShowapi_res_body().getContentlist());
+            }
+        });
     }
 
     @Override

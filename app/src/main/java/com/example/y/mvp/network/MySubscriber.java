@@ -30,7 +30,6 @@ public class MySubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onNext(T t) {
-        RxBus.getInstance().sendNetWork(t);
     }
 
 

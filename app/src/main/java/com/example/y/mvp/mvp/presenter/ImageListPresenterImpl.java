@@ -7,12 +7,11 @@ import com.example.y.mvp.mvp.model.BaseBean;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.network.MySubscriber;
 import com.example.y.mvp.network.NetWorkRequest;
-import com.socks.library.KLog;
 
 /**
  * by y on 2016/4/29.
  */
-public class ImageListPresenterImpl extends BasePresenterImpl<BaseView.ImageListView, BaseBean.ImageListBean>
+public class ImageListPresenterImpl extends BasePresenterImpl<BaseView.ImageListView>
         implements Presenter.ImageListPresenter {
 
 
@@ -29,18 +28,19 @@ public class ImageListPresenterImpl extends BasePresenterImpl<BaseView.ImageList
                 view.showFoot();
             }
         }
-        NetWorkRequest.imageList(id, page, new MySubscriber<BaseBean.ImageListBean>());
+        NetWorkRequest.imageList(id, page, new MySubscriber<BaseBean.ImageListBean>() {
+            @Override
+            public void onNext(BaseBean.ImageListBean imageListBean) {
+                super.onNext(imageListBean);
+                //noinspection unchecked
+                view.setData(imageListBean.getTngou());
+            }
+        });
     }
 
     @Override
     public void onClick(ImageListInfo info) {
         ImageDetailActivity.startIntent(info.getId(), info.getTitle());
-    }
-
-    @Override
-    protected void onNetWorkSuccess(BaseBean.ImageListBean imageListBean) {
-        //noinspection unchecked
-        view.setData(imageListBean.getTngou());
     }
 
     @Override

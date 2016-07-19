@@ -6,7 +6,7 @@ import com.example.y.mvp.mvp.view.BaseView;
 /**
  * by 12406 on 2016/5/1.
  */
-public class MainViewPresenterImpl extends BasePresenterImpl<BaseView.MainView, Object>
+public class MainViewPresenterImpl extends BasePresenterImpl<BaseView.MainView>
         implements Presenter.MainViewPresenter {
 
 
@@ -34,10 +34,6 @@ public class MainViewPresenterImpl extends BasePresenterImpl<BaseView.MainView, 
                 view.switchAbout();
                 break;
         }
-    }
-
-    @Override
-    protected void onNetWorkSuccess(Object o) {
     }
 
     @Override

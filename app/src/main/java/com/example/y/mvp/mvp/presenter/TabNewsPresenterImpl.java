@@ -9,7 +9,7 @@ import com.example.y.mvp.network.NetWorkRequest;
 /**
  * by 12406 on 2016/5/14.
  */
-public class TabNewsPresenterImpl extends BasePresenterImpl<BaseView.TabNewsView, BaseBean.TabNewsBean>
+public class TabNewsPresenterImpl extends BasePresenterImpl<BaseView.TabNewsView>
         implements Presenter.TabNewsPresenter {
 
 
@@ -19,13 +19,14 @@ public class TabNewsPresenterImpl extends BasePresenterImpl<BaseView.TabNewsView
 
     @Override
     public void requestNetWork() {
-        NetWorkRequest.tabNews(new MySubscriber<BaseBean.TabNewsBean>());
-    }
-
-    @Override
-    protected void onNetWorkSuccess(BaseBean.TabNewsBean tabNewsBean) {
-        //noinspection unchecked
-        view.setData(tabNewsBean.getTngou());
+        NetWorkRequest.tabNews(new MySubscriber<BaseBean.TabNewsBean>() {
+            @Override
+            public void onNext(BaseBean.TabNewsBean tabNewsBean) {
+                super.onNext(tabNewsBean);
+                //noinspection unchecked
+                view.setData(tabNewsBean.getTngou());
+            }
+        });
     }
 
     @Override

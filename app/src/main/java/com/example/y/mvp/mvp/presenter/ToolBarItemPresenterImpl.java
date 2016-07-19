@@ -6,16 +6,11 @@ import com.example.y.mvp.mvp.view.BaseView;
 /**
  * by y on 2016/6/12.
  */
-public class ToolBarItemPresenterImpl extends BasePresenterImpl<BaseView.ToolBarItemView, Object>
+public class ToolBarItemPresenterImpl extends BasePresenterImpl<BaseView.ToolBarItemView>
         implements Presenter.ToolBarItemPresenter {
 
     public ToolBarItemPresenterImpl(BaseView.ToolBarItemView view) {
         super(view);
-    }
-
-    @Override
-    protected void onNetWorkSuccess(Object object) {
-        
     }
 
     @Override

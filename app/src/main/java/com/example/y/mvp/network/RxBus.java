@@ -1,7 +1,6 @@
 package com.example.y.mvp.network;
 
 import rx.Observable;
-import rx.functions.Func1;
 import rx.subjects.PublishSubject;
 import rx.subjects.SerializedSubject;
 import rx.subjects.Subject;
@@ -13,7 +12,7 @@ import rx.subjects.Subject;
  */
 public class RxBus {
 
-    private final Subject rxBus;
+    private Subject rxBus;
 
     private RxBus() {
         rxBus = new SerializedSubject<>(PublishSubject.create());
@@ -27,19 +26,21 @@ public class RxBus {
         private static final RxBus rxBus = new RxBus();
     }
 
-    public void sendNetWork(Object data) {
+    public void sendNetWork(Object object) {
         //noinspection unchecked
-        rxBus.onNext(data);
+        rxBus.onNext(object);
     }
 
     public <T> Observable<T> toObserverable(final Class<T> eventType) {
         //noinspection unchecked
-        return rxBus.filter(new Func1<Object, Boolean>() {
-            @Override
-            public Boolean call(Object object) {
-                return eventType.isInstance(object);
-            }
-        }).cast(eventType);
+        return rxBus.ofType(eventType);
+//        return rxBus.filter(new Func1<Object, Boolean>() {
+//            @Override
+//            public Boolean call(Object object) {
+//                return eventType.isInstance(object);
+//            }
+//        }).cast(eventType);
+
     }
 
 }

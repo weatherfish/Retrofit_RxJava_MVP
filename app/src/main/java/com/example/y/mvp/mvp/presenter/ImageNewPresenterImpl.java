@@ -16,7 +16,7 @@ import com.example.y.mvp.utils.UIUtils;
 /**
  * by y on 2016/4/29.
  */
-public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewView, BaseBean.ImageNewBean>
+public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewView>
         implements Presenter.ImageNewPresenter {
 
 
@@ -37,7 +37,14 @@ public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewVi
             if (ActivityUtils.syskeyBroadStatus()) {
                 ActivityUtils.closeSyskeyBroad();
             }
-            NetWorkRequest.imageNew(Integer.valueOf(id), Integer.valueOf(rows), new MySubscriber<BaseBean.ImageNewBean>());
+            NetWorkRequest.imageNew(Integer.valueOf(id), Integer.valueOf(rows), new MySubscriber<BaseBean.ImageNewBean>() {
+                @Override
+                public void onNext(BaseBean.ImageNewBean imageNewBean) {
+                    super.onNext(imageNewBean);
+                    //noinspection unchecked
+                    view.setData(imageNewBean.getTngou());
+                }
+            });
         }
     }
 
@@ -49,12 +56,6 @@ public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewVi
     @Override
     protected void onNetWorkStart() {
         view.showProgress();
-    }
-
-    @Override
-    protected void onNetWorkSuccess(BaseBean.ImageNewBean imageNewBean) {
-        //noinspection unchecked
-        view.setData(imageNewBean.getTngou());
     }
 
     @Override

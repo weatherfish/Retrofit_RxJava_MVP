@@ -10,7 +10,7 @@ import com.example.y.mvp.network.NetWorkRequest;
 /**
  * by 12406 on 2016/5/15.
  */
-public class NewsListPresenterImpl extends BasePresenterImpl<BaseView.NewsListView, BaseBean.NewsListBean>
+public class NewsListPresenterImpl extends BasePresenterImpl<BaseView.NewsListView>
         implements Presenter.NewsListPresenter {
 
 
@@ -19,7 +19,7 @@ public class NewsListPresenterImpl extends BasePresenterImpl<BaseView.NewsListVi
     }
 
     @Override
-    public void requestNetWork(int id, int page, boolean isNull) {
+    public void requestNetWork(final int id, final int page, boolean isNull) {
         if (page == 1) {
             view.showProgress();
         } else {
@@ -27,17 +27,19 @@ public class NewsListPresenterImpl extends BasePresenterImpl<BaseView.NewsListVi
                 view.showFoot();
             }
         }
-        NetWorkRequest.newsList(id, page, new MySubscriber<BaseBean.NewsListBean>());
+        NetWorkRequest.newsList(id, page, new MySubscriber<BaseBean.NewsListBean>() {
+            @Override
+            public void onNext(BaseBean.NewsListBean newsListBean) {
+                super.onNext(newsListBean);
+                //noinspection unchecked
+                view.setData(newsListBean.getTngou());
+            }
+        });
     }
 
     @Override
     public void onClick(NewsListInfo info) {
         NewsDetailActivity.startIntent(info.getId());
-    }
-
-    @Override
-    protected void onNetWorkSuccess(BaseBean.NewsListBean newsListBean) {
-        view.setData(newsListBean.getTngou());
     }
 
     @Override

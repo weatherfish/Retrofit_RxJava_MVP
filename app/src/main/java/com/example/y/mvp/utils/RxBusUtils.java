@@ -25,9 +25,6 @@ public class RxBusUtils {
                     case Constant.ON_ERROR:
                         rxBusNetWork.onError();
                         break;
-                    default:
-                        rxBusNetWork.onNext(o);
-                        break;
                 }
             }
         }, new Action1<Throwable>() {
@@ -41,8 +38,6 @@ public class RxBusUtils {
 
     public interface RxBusNetWork {
         void onStart();
-
-        void onNext(Object o);
 
         void onCompleted();
 

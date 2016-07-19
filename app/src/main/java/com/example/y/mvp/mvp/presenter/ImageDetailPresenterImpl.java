@@ -15,7 +15,7 @@ import com.example.y.mvp.utils.UIUtils;
 /**
  * by y on 2016/4/29.
  */
-public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDetailView, BaseBean.ImageDetailBean>
+public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDetailView>
         implements Presenter.ImageDetailPresenter {
 
 
@@ -25,7 +25,14 @@ public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDe
 
     @Override
     public void requestNetWork(int id) {
-        NetWorkRequest.imageDetail(id, new MySubscriber<BaseBean.ImageDetailBean>());
+        NetWorkRequest.imageDetail(id, new MySubscriber<BaseBean.ImageDetailBean>() {
+            @Override
+            public void onNext(BaseBean.ImageDetailBean imageDetailBean) {
+                super.onNext(imageDetailBean);
+                //noinspection unchecked
+                view.setData(imageDetailBean.getList());
+            }
+        });
     }
 
 
@@ -43,12 +50,6 @@ public class ImageDetailPresenterImpl extends BasePresenterImpl<BaseView.ImageDe
     @Override
     public int getBundle() {
         return UIUtils.getActivity().getIntent().getExtras().getInt("id");
-    }
-
-    @Override
-    protected void onNetWorkSuccess(BaseBean.ImageDetailBean imageDetailBean) {
-        //noinspection unchecked
-        view.setData(imageDetailBean.getList());
     }
 
     @Override

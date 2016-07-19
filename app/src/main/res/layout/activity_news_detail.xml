@@ -20,6 +20,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
+
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <com.example.y.mvp.widget.MImageView
@@ -32,9 +33,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/toolbarbackgroundColor"
-                app:layout_collapseMode="pin"
-                app:titleTextColor="?attr/toolbarTextColor" />
+                app:layout_collapseMode="pin" />
         </android.support.design.widget.CollapsingToolbarLayout>
 
 

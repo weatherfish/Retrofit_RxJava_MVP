@@ -8,7 +8,7 @@ import com.example.y.mvp.network.NetWorkRequest;
 /**
  * by y on 2016/5/30.
  */
-public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextView, JokeTextBean>
+public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextView>
         implements Presenter.JokeTextPresenter {
 
 
@@ -25,12 +25,13 @@ public class JokeTextPresenterImpl extends BasePresenterImpl<BaseView.JokeTextVi
                 view.showFoot();
             }
         }
-        NetWorkRequest.jokeTextList(page, new MySubscriber<JokeTextBean>());
-    }
-
-    @Override
-    protected void onNetWorkSuccess(JokeTextBean jokeTextBean) {
-        view.setData(jokeTextBean.getShowapi_res_body().getContentlist());
+        NetWorkRequest.jokeTextList(page, new MySubscriber<JokeTextBean>() {
+            @Override
+            public void onNext(JokeTextBean jokeTextBean) {
+                super.onNext(jokeTextBean);
+                view.setData(jokeTextBean.getShowapi_res_body().getContentlist());
+            }
+        });
     }
 
     @Override
