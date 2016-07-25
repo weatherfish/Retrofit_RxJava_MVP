@@ -9,19 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.y.mvp.utils.RxUtil;
-import com.socks.library.KLog;
 
 /**
  * by y on 2016/4/28.
  */
 public abstract class BaseFragment extends Fragment {
 
-    boolean isVisible;
-    static final String FRAGMENT_INDEX = "fragment_index";
-    int index = 0;
-    int page = 1;
-    boolean isNull = false;
-    View view;
+    protected boolean isLoad;
+    protected boolean isPrepared;
+    protected boolean isVisible;
+    protected static final String FRAGMENT_INDEX = "fragment_index";
+    protected int index = 0;
+    protected int page = 1;
+    protected boolean isNull = false;
+    protected View view;
 
 
     @Override
@@ -36,8 +37,10 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = initView();
-//        KLog.i(getClass().getSimpleName());
+        if (view == null) {
+            view = initView(savedInstanceState);
+            isPrepared = true;
+        }
         initById();
         return view;
     }
@@ -69,11 +72,15 @@ public abstract class BaseFragment extends Fragment {
         initData();
     }
 
-    protected abstract View initView();
+    protected abstract View initView(Bundle savedInstanceState);
 
     protected abstract void initById();
 
     protected abstract void initData();
+
+    protected void setLoad() {
+        isLoad = true;
+    }
 
     @Override
     public void onDestroyView() {

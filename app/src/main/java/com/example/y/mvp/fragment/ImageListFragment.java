@@ -30,8 +30,6 @@ public class ImageListFragment extends BaseFragment implements SwipeRefreshLayou
 
     private MRecyclerView recyclerView;
     private SwipeRefreshLayout srfLayout;
-
-    private boolean isPrepared;
     private boolean isLoad;
     private ImageListAdapter adapter;
     private Presenter.ImageListPresenter imageListPresenter;
@@ -46,12 +44,8 @@ public class ImageListFragment extends BaseFragment implements SwipeRefreshLayou
 
 
     @Override
-    protected View initView() {
-        if (view == null) {
-            view = View.inflate(UIUtils.getActivity(), R.layout.fragment_main, null);
-            isPrepared = true;
-        }
-        return view;
+    protected View initView(Bundle savedInstanceState) {
+        return View.inflate(UIUtils.getActivity(), R.layout.fragment_main, null);
     }
 
     @Override
@@ -62,7 +56,6 @@ public class ImageListFragment extends BaseFragment implements SwipeRefreshLayou
 
     @Override
     protected void initData() {
-
         if (!isPrepared || !isVisible || isLoad) {
             return;
         }
@@ -88,7 +81,6 @@ public class ImageListFragment extends BaseFragment implements SwipeRefreshLayou
                 onRefresh();
             }
         });
-        isLoad = true;
 
     }
 

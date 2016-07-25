@@ -16,7 +16,7 @@ public class UIUtils {
 
 
     public static Context getContext() {
-        return BaseActivity.getContext();
+        return AppUtils.getContext();
     }
 
     public static Activity getActivity() {

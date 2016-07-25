@@ -23,8 +23,8 @@ import com.example.y.mvp.fragment.NewsViewPagerFragment;
 import com.example.y.mvp.mvp.presenter.MainViewPresenterImpl;
 import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;
-import com.example.y.mvp.utils.ActivityCollector;
 import com.example.y.mvp.utils.ActivityUtils;
+import com.example.y.mvp.utils.AppUtils;
 import com.example.y.mvp.utils.StatusBarUtil;
 import com.example.y.mvp.utils.UIUtils;
 import com.example.y.mvp.widget.MRecyclerView;
@@ -43,10 +43,8 @@ public class MainActivity extends DarkViewActivity
 
     private Presenter.MainViewPresenter mainViewPresenter;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initCreate(Bundle savedInstanceState) {
         toolBar.setTitle(UIUtils.getString(R.string.list_menu_news));
         setSupportActionBar(toolBar);
         mainViewPresenter = new MainViewPresenterImpl(this);
@@ -94,7 +92,7 @@ public class MainActivity extends DarkViewActivity
         } else {
             if (Constant.BACK_EXIT) {
                 super.onBackPressed();
-                ActivityCollector.removeAllActivity();
+                AppUtils.getInstance().exit();
                 return;
             }
             Constant.BACK_EXIT = true;

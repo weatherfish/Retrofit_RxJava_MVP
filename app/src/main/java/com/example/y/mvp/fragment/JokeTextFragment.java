@@ -1,5 +1,6 @@
 package com.example.y.mvp.fragment;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -30,20 +31,13 @@ public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout
     private MRecyclerView recyclerView;
     private SwipeRefreshLayout srfLayout;
 
-    private boolean isPrepared;
-    private boolean isLoad;
-
     private Presenter.JokeTextPresenter jokePresenter;
     private JokeTextAdapter adapter;
 
 
     @Override
-    protected View initView() {
-        if (view == null) {
-            view = View.inflate(UIUtils.getActivity(), R.layout.fragment_joke_text, null);
-            isPrepared = true;
-        }
-        return view;
+    protected View initView(Bundle savedInstanceState) {
+        return View.inflate(UIUtils.getActivity(), R.layout.fragment_joke_text, null);
     }
 
     @Override
@@ -79,7 +73,8 @@ public class JokeTextFragment extends BaseFragment implements SwipeRefreshLayout
                 onRefresh();
             }
         });
-        isLoad = true;
+
+        setLoad();
     }
 
     @Override

@@ -11,8 +11,8 @@ import android.widget.ImageView;
 
 import com.example.y.mvp.R;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.utils.ActivityCollector;
 import com.example.y.mvp.utils.ActivityUtils;
+import com.example.y.mvp.utils.AppUtils;
 import com.example.y.mvp.utils.CacheUitls;
 
 /**
@@ -44,7 +44,7 @@ public class TransitionActivity extends Activity {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
-                ActivityCollector.refreshAllActivity();
+                AppUtils.getInstance().refreshAllActivity();
             }
 
             @Override

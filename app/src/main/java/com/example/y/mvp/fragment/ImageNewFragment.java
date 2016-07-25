@@ -1,6 +1,7 @@
 package com.example.y.mvp.fragment;
 
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -43,7 +44,7 @@ public class ImageNewFragment extends BaseFragment implements
     private Presenter.ImageNewPresenter imageNewPresenter;
 
     @Override
-    public View initView() {
+    public View initView(Bundle savedInstanceState) {
         return View.inflate(UIUtils.getActivity(), R.layout.fragment_new_image, null);
     }
 

@@ -1,5 +1,6 @@
 package com.example.y.mvp.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -20,7 +21,7 @@ public class JokeMainPagerFragment extends BaseFragment {
     private ViewPager viewPager;
 
     @Override
-    protected View initView() {
+    protected View initView(Bundle savedInstanceState) {
         return View.inflate(UIUtils.getActivity(), R.layout.fragment_joke_viewpager, null);
     }
 

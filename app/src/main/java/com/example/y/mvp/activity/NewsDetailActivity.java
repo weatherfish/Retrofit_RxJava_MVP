@@ -49,13 +49,11 @@ public class NewsDetailActivity extends DarkViewActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initCreate(Bundle savedInstanceState) {
         setSupportActionBar(toolbar);
         getBundle();
         init();
     }
-
 
     @Override
     public void setStatusBar() {

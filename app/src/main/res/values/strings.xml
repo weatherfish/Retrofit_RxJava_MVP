@@ -55,6 +55,4 @@
         com.github.zhaokaiqiang.klog:library:1.5.0 \n
         org.greenrobot:greendao:2.2.0 \n
     </string>
-    <string name="theme_start">开始切换使用模式</string>
-    <string name="theme_yes">切换成功</string>
 </resources>

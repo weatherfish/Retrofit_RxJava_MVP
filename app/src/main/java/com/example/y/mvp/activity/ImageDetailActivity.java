@@ -48,8 +48,7 @@ public class ImageDetailActivity extends DarkViewActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initCreate(Bundle savedInstanceState) {
         setSupportActionBar(toolBar);
         CompetenceUtils.Storage();
         init();

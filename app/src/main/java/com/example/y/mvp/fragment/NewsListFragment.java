@@ -13,8 +13,8 @@ import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.NewsListAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.presenter.NewsListPresenterImpl;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
@@ -31,10 +31,6 @@ public class NewsListFragment extends BaseFragment implements SwipeRefreshLayout
 
     private SwipeRefreshLayout srfLayout;
     private MRecyclerView recyclerView;
-
-    private boolean isPrepared;
-    private boolean isLoad;
-
     private NewsListAdapter adapter;
     private Presenter.NewsListPresenter newsListPresenter;
 
@@ -47,12 +43,8 @@ public class NewsListFragment extends BaseFragment implements SwipeRefreshLayout
     }
 
     @Override
-    protected View initView() {
-        if (view == null) {
-            view = View.inflate(UIUtils.getActivity(), R.layout.fragment_news, null);
-            isPrepared = true;
-        }
-        return view;
+    protected View initView(Bundle savedInstanceState) {
+        return View.inflate(UIUtils.getActivity(), R.layout.fragment_news, null);
     }
 
     @Override
@@ -87,7 +79,7 @@ public class NewsListFragment extends BaseFragment implements SwipeRefreshLayout
             }
         });
 
-        isLoad = true;
+        setLoad();
     }
 
 

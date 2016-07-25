@@ -1,6 +1,7 @@
 package com.example.y.mvp.fragment;
 
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -29,7 +30,7 @@ public class ImageViewPagerFragment extends BaseFragment implements BaseView.Tab
     private List<ImageTabNameInfo> data;
 
     @Override
-    public View initView() {
+    public View initView(Bundle savedInstanceState) {
         return View.inflate(UIUtils.getActivity(), R.layout.fragment_viewpager, null);
     }
 

@@ -1,6 +1,7 @@
 package com.example.y.mvp.fragment;
 
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -10,8 +11,8 @@ import com.example.y.mvp.JokePicInfo;
 import com.example.y.mvp.R;
 import com.example.y.mvp.adapter.JokePicAdapter;
 import com.example.y.mvp.data.Constant;
-import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.presenter.JokePicPresenterImpl;
+import com.example.y.mvp.mvp.presenter.Presenter;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
@@ -30,20 +31,13 @@ public class JokePicFragment extends BaseFragment
     private MRecyclerView recyclerView;
     private SwipeRefreshLayout srfLayout;
 
-    private boolean isPrepared;
-    private boolean isLoad;
-
     private Presenter.JokePicPresenter jokePresenter;
     private JokePicAdapter adapter;
 
 
     @Override
-    protected View initView() {
-        if (view == null) {
-            view = View.inflate(UIUtils.getActivity(), R.layout.fragment_joke_pic, null);
-            isPrepared = true;
-        }
-        return view;
+    protected View initView(Bundle savedInstanceState) {
+        return View.inflate(UIUtils.getActivity(), R.layout.fragment_joke_pic, null);
     }
 
     @Override
@@ -77,7 +71,8 @@ public class JokePicFragment extends BaseFragment
                 onRefresh();
             }
         });
-        isLoad = true;
+
+        setLoad();
     }
 
     @Override
