@@ -38,7 +38,7 @@ public class TransitionActivity extends Activity {
 
 
     private void startAnimation() {
-        ValueAnimator animator = ValueAnimator.ofFloat(1f).setDuration(1500);
+        ValueAnimator animator = ValueAnimator.ofFloat(1f).setDuration(200);
         animator.addListener(new AnimatorListenerAdapter() {
 
             @Override
