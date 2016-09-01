@@ -1,6 +1,7 @@
 package com.example.y.mvp.mvp.presenter;
 
 
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.example.y.mvp.R;
@@ -26,17 +27,14 @@ public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewVi
 
     @Override
     public void requestNetWork(String id, String rows) {
-
-        if (id.isEmpty()) {
+        if (TextUtils.isEmpty(id)) {
             view.hideProgress();
             Toast.makeText(UIUtils.getContext(), UIUtils.getString(R.string.image_new_id), Toast.LENGTH_LONG).show();
         } else {
-            if (rows.isEmpty()) {
+            if (TextUtils.isEmpty(rows)) {
                 rows = "20";
             }
-            if (ActivityUtils.syskeyBroadStatus()) {
-                ActivityUtils.closeSyskeyBroad();
-            }
+            ActivityUtils.closeSyskeyBroad();
             NetWorkRequest.imageNew(Integer.valueOf(id), Integer.valueOf(rows), new MySubscriber<BaseBean.ImageNewBean>() {
                 @Override
                 public void onNext(BaseBean.ImageNewBean imageNewBean) {

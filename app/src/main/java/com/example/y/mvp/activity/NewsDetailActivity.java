@@ -88,7 +88,7 @@ public class NewsDetailActivity extends DarkViewActivity
 
     private void getBundle() {
         Bundle bundle = getIntent().getExtras();
-        if (!bundle.isEmpty()) {
+        if (null != bundle && !bundle.isEmpty()) {
             id = bundle.getInt("id");
         }
     }

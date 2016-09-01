@@ -70,15 +70,8 @@ public class ActivityUtils {
 
     // 收起软键盘
     public static void closeSyskeyBroad() {
-        if (UIUtils.getContext() != null) {
-            try {
-                InputMethodManager inputMethodManager = (InputMethodManager) UIUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(UIUtils.getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            } catch (Exception e) {
-                Toast(UIUtils.getString(R.string.closeSyskeyBroad));
-            }
-
-        }
+        InputMethodManager inputMethodManager = (InputMethodManager) UIUtils.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     //检测键盘的状态
