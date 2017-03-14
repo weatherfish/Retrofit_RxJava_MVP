@@ -11,7 +11,6 @@ import com.example.y.mvp.mvp.model.BaseDataBridge;
 import com.example.y.mvp.mvp.model.BaseModel;
 import com.example.y.mvp.mvp.model.ImageNewModelImpl;
 import com.example.y.mvp.mvp.view.BaseView;
-import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.UIUtils;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class ImageNewPresenterImpl extends BasePresenterImpl<BaseView.ImageNewVi
             if (TextUtils.isEmpty(rows)) {
                 rows = "20";
             }
-            ActivityUtils.offKeyboard();
+            view.offKeyBoard();
             view.showProgress();
             imageNewModel.netWorkNew(Integer.valueOf(id), Integer.valueOf(rows), this);
         }

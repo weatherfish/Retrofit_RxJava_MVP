@@ -21,6 +21,7 @@ import com.example.y.mvp.network.Api;
 import com.example.y.mvp.utils.ActivityUtils;
 import com.example.y.mvp.utils.ImageLoaderUtils;
 import com.example.y.mvp.utils.UIUtils;
+import com.example.y.mvp.widget.BaseActivity;
 
 import butterknife.Bind;
 
@@ -30,19 +31,19 @@ import butterknife.Bind;
 public class NewsDetailActivity extends BaseActivity
         implements BaseView.NewsDetailView, BaseView.ToolBarItemView {
 
-    @SuppressWarnings("unused")
+
     @Bind(R.id.image)
     ImageView image;
-    @SuppressWarnings("unused")
+
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-    @SuppressWarnings("unused")
+
     @Bind(R.id.progressBar)
     ProgressBar progressBar;
-    @SuppressWarnings("unused")
+
     @Bind(R.id.content)
     TextView content;
-    @SuppressWarnings("unused")
+
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
@@ -70,13 +71,14 @@ public class NewsDetailActivity extends BaseActivity
         toolBarItemPresenter = new ToolBarItemPresenterImpl(this);
         newsDetailPresenter.requestNetWork(id);
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                toolBarItemPresenter.switchId(item.getItemId());
-                return true;
-            }
+        toolbar.setOnMenuItemClickListener(item -> {
+            toolBarItemPresenter.switchId(item.getItemId());
+            return true;
         });
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
     }
 
@@ -93,10 +95,17 @@ public class NewsDetailActivity extends BaseActivity
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void setData(NewsDetailInfo datas) {
-        ImageLoaderUtils.display(getApplicationContext(), image, Api.IMAGER_URL + datas.getImg());
+        ImageLoaderUtils.display(image, Api.IMAGER_URL + datas.getImg());
         content.setText(Html.fromHtml(datas.getMessage()));
         collapsingToolbar.setTitle(datas.getTitle());
         message = String.valueOf(Html.fromHtml(datas.getMessage()));
@@ -104,7 +113,7 @@ public class NewsDetailActivity extends BaseActivity
 
     @Override
     public void switchShare() {
-        ActivityUtils.share(message);
+        ActivityUtils.share(this, message);
     }
 
     @Override

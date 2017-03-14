@@ -11,48 +11,38 @@ import android.util.AttributeSet;
 /**
  * by 12406 on 2016/4/30.
  */
-public class MyRecyclerView extends RecyclerView {
+public class LoadMoreRecyclerView extends RecyclerView {
 
-
-    public enum LAYOUT_MANAGER_TYPE {
-        LINEAR,
-        GRID,
-        STAGGERED_GRID
-    }
 
     private LAYOUT_MANAGER_TYPE layoutManagerType;
-
     /**
      * 最后一个的位置
      */
     private int[] lastPositions;
-
     /**
      * 最后一个可见的item的位置
      */
     private int lastVisibleItemPosition;
+    private LoadMoreListener loadingData;
 
-    private LoadingData loadingData;
-
-
-    public void setLoadingData(LoadingData loadingData) {
-        this.loadingData = loadingData;
-    }
-
-
-    public MyRecyclerView(Context context) {
+    public LoadMoreRecyclerView(Context context) {
         super(context);
     }
 
-    public MyRecyclerView(Context context, AttributeSet attrs) {
+
+    public LoadMoreRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
     }
 
-    public MyRecyclerView(Context context, AttributeSet attrs, int defStyle) {
+
+    public LoadMoreRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
+    public void setLoadingData(LoadMoreListener loadingData) {
+        this.loadingData = loadingData;
+    }
 
     @Override
     public void onScrolled(int dx, int dy) {
@@ -60,7 +50,9 @@ public class MyRecyclerView extends RecyclerView {
 
         RecyclerView.LayoutManager layoutManager = getLayoutManager();
         if (layoutManagerType == null) {
-            if (layoutManager instanceof LinearLayoutManager) {
+            if (layoutManager instanceof GridLayoutManager) {
+                layoutManagerType = LAYOUT_MANAGER_TYPE.GRID;
+            } else if (layoutManager instanceof LinearLayoutManager) {
                 layoutManagerType = LAYOUT_MANAGER_TYPE.LINEAR;
             } else if (layoutManager instanceof StaggeredGridLayoutManager) {
                 layoutManagerType = LAYOUT_MANAGER_TYPE.STAGGERED_GRID;
@@ -69,7 +61,6 @@ public class MyRecyclerView extends RecyclerView {
                         "Unsupported LayoutManager used. Valid ones are LinearLayoutManager, GridLayoutManager and StaggeredGridLayoutManager");
             }
         }
-
         switch (layoutManagerType) {
             case LINEAR:
                 lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
@@ -88,14 +79,13 @@ public class MyRecyclerView extends RecyclerView {
         }
     }
 
-
     @Override
     public void onScrollStateChanged(int state) {
         super.onScrollStateChanged(state);
         RecyclerView.LayoutManager layoutManager = getLayoutManager();
         int visibleItemCount = layoutManager.getChildCount();
         int totalItemCount = layoutManager.getItemCount();
-        if (visibleItemCount > 0 && state == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition == totalItemCount - 1) {
+        if (loadingData != null && visibleItemCount > 0 && state == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition == totalItemCount - 1) {
             loadingData.onLoadMore();
         }
     }
@@ -110,8 +100,13 @@ public class MyRecyclerView extends RecyclerView {
         return max;
     }
 
-    public interface LoadingData {
+    private enum LAYOUT_MANAGER_TYPE {
+        LINEAR,
+        GRID,
+        STAGGERED_GRID
+    }
 
+    public interface LoadMoreListener {
         void onLoadMore();
 
     }

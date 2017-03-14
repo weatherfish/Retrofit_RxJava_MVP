@@ -9,7 +9,7 @@ import java.util.List;
  * by y on 2016/5/17.
  * Activity管理类
  */
-@SuppressWarnings("ALL")
+
 public class ActivityCollector {
 
 
@@ -26,11 +26,7 @@ public class ActivityCollector {
 
     public static void removeAllActivity() {
 
-        for (Activity activity : list) {
-            if (!activity.isFinishing()) {
-                activity.finish();
-            }
-        }
+        list.stream().filter(activity -> !activity.isFinishing()).forEach(Activity::finish);
     }
 
 }

@@ -1,7 +1,5 @@
-package com.example.y.mvp.activity;
+package com.example.y.mvp.widget;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -17,30 +15,18 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private static Context context;
-    private static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getApplicationContext();
-        activity = this;
         setContentView(getLayoutId());
         LogUtils.i("BaseActivity", getClass().getSimpleName());
         ButterKnife.bind(this);
         ActivityCollector.addActivity(this);
     }
 
-    void Toast(String content) {
+    protected void Toast(String content) {
         Toast.makeText(this, content, Toast.LENGTH_LONG).show();
-    }
-
-    public static Context getContext() {
-        return context;
-    }
-
-    public static Activity getActivity() {
-        return activity;
     }
 
     protected abstract int getLayoutId();
@@ -48,6 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RxUtils.unsubscribe();
+        ActivityCollector.removeActivity(this);
+        RxUtils.getInstance().unSubscription();
     }
 }

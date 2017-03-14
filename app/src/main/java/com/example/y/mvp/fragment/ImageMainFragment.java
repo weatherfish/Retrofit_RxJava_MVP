@@ -3,12 +3,10 @@ package com.example.y.mvp.fragment;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.example.y.mvp.R;
-import com.example.y.mvp.adapter.BaseRecyclerViewAdapter;
 import com.example.y.mvp.adapter.ImageListAdapter;
 import com.example.y.mvp.constant.Constant;
 import com.example.y.mvp.mvp.Bean.ImageListInfo;
@@ -16,22 +14,26 @@ import com.example.y.mvp.mvp.presenter.BasePresenter;
 import com.example.y.mvp.mvp.presenter.ImageListPresenterImpl;
 import com.example.y.mvp.mvp.view.BaseView;
 import com.example.y.mvp.utils.UIUtils;
-import com.example.y.mvp.widget.MyRecyclerView;
+import com.example.y.mvp.widget.LoadMoreAdapter;
+import com.example.y.mvp.widget.LoadMoreRecyclerView;
+import com.example.y.mvp.widget.MVPLazyFragment;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.Bind;
+
 /**
  * by y on 2016/4/28.
  */
-public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        MyRecyclerView.LoadingData, BaseRecyclerViewAdapter.OnItemClickListener<ImageListInfo>, BaseView.ImageListView {
+public class ImageMainFragment extends MVPLazyFragment implements SwipeRefreshLayout.OnRefreshListener,
+        LoadMoreRecyclerView.LoadMoreListener, LoadMoreAdapter.OnItemClickListener<ImageListInfo>, BaseView.ImageListView {
 
-    private MyRecyclerView recyclerView;
-    private SwipeRefreshLayout srfLayout;
+    @Bind(R.id.recyclerView)
+    LoadMoreRecyclerView recyclerView;
+    @Bind(R.id.srf_layout)
+    SwipeRefreshLayout srfLayout;
 
-    private boolean isPrepared;
-    private boolean isLoad;
     private ImageListAdapter adapter;
     private BasePresenter.ImageListPresenter imageListPresenter;
 
@@ -45,18 +47,7 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
 
 
     @Override
-    protected View initView() {
-        if (view == null) {
-            view = View.inflate(UIUtils.getActivity(), R.layout.fragment_main, null);
-            recyclerView = (MyRecyclerView) view.findViewById(R.id.recyclerView);
-            srfLayout = (SwipeRefreshLayout) view.findViewById(R.id.srf_layout);
-            isPrepared = true;
-        }
-        return view;
-    }
-
-    @Override
-    protected void initData() {
+    protected void initActivityCreated() {
 
         if (!isPrepared || !isVisible || isLoad) {
             return;
@@ -73,26 +64,22 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLoadingData(this);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(Constant.RECYCLERVIEW_GRIDVIEW, LinearLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(Constant.RECYCLERVIEW_GRIDVIEW, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        srfLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                onRefresh();
-            }
-        });
-        isLoad = true;
+        srfLayout.post(this::onRefresh);
+        setLoad();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_main;
     }
 
 
     @Override
     public void setData(List<ImageListInfo> t) {
-        if (t.isEmpty()) {
-            isNull = true;
-        } else {
-            adapter.addAll(t);
-        }
+        adapter.addAll(t);
     }
 
 
@@ -100,14 +87,14 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
     public void onRefresh() {
         page = 1;
         adapter.removeAll();
-        imageListPresenter.requestNetWork(index + 1, page, isNull);
+        imageListPresenter.requestNetWork(index + 1, page);
     }
 
     @Override
     public void onLoadMore() {
         if (!srfLayout.isRefreshing()) {
             ++page;
-            imageListPresenter.requestNetWork(index + 1, page, isNull);
+            imageListPresenter.requestNetWork(index + 1, page);
         }
     }
 
@@ -119,25 +106,23 @@ public class ImageMainFragment extends BaseFragment implements SwipeRefreshLayou
 
     @Override
     public void showProgress() {
-        if (!srfLayout.isRefreshing()) {
+        if (srfLayout != null)
             srfLayout.setRefreshing(true);
-        }
     }
 
     @Override
     public void hideProgress() {
-        if (srfLayout.isRefreshing()) {
+        if (srfLayout != null)
             srfLayout.setRefreshing(false);
-        }
     }
 
     @Override
     public void showFoot() {
-        adapter.isShowFooter(true);
+        adapter.showFooter();
     }
 
     public void hideFoot() {
-        adapter.isShowFooter(false);
+        adapter.hideFooter();
     }
 
     @Override
